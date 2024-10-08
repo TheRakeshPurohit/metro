@@ -927,16 +927,18 @@ class MemoryFs {
     });
   };
 
-  rmSync: (filePath: FilePath, options?: {recursive?: boolean}) => void = (
+  rmSync: (
     filePath: FilePath,
-    options,
-  ) => {
+    options?: {recursive?: boolean, force?: boolean},
+  ) => void = (filePath: FilePath, options) => {
     filePath = pathStr(filePath);
     const {dirNode, node, basename} = this._resolve(filePath, {
       keepFinalSymlink: true,
     });
     if (node == null) {
-      throw makeError('ENOENT', filePath, 'no such file or directory');
+      if (options?.force !== true) {
+        throw makeError('ENOENT', filePath, 'no such file or directory');
+      }
     } else if (node.type === 'directory') {
       if (options && options.recursive) {
         // NOTE: File watchers won't be informed of recursive deletions
@@ -1214,6 +1216,7 @@ class MemoryFs {
     if (spec == null) {
       throw new Error(`flags not supported: \`${flags.toString()}\``);
     }
+    // $FlowFixMe[incompatible-type]
     const {writable = false, readable = false} = spec;
     const {exclusive, mustExist, truncate} = spec;
     let {dirNode, node, basename, dirPath} = this._resolve(filePath);
@@ -1711,6 +1714,7 @@ class FSWatcher extends EventEmitter {
   close() {
     this._node.watchers.splice(this._node.watchers.indexOf(this._nodeWatcher));
     clearInterval(this._persistIntervalId);
+    this.emit('close');
   }
 
   _listener = (eventType: 'change' | 'rename', filePath: string) => {

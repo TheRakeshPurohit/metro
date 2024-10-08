@@ -21,7 +21,7 @@ import type {
   CustomResolver,
   DoesFileExist,
   FileCandidates,
-  GetRealPath,
+  FileSystemLookup,
   Resolution,
   ResolveAsset,
 } from 'metro-resolver';
@@ -66,6 +66,7 @@ type Options<TPackage> = $ReadOnly<{
   doesFileExist: DoesFileExist,
   emptyModulePath: string,
   extraNodeModules: ?Object,
+  fileSystemLookup: FileSystemLookup,
   getHasteModulePath: (name: string, platform: ?string) => ?string,
   getHastePackagePath: (name: string, platform: ?string) => ?string,
   mainFields: $ReadOnlyArray<string>,
@@ -82,7 +83,6 @@ type Options<TPackage> = $ReadOnly<{
     [platform: string]: $ReadOnlyArray<string>,
   }>,
   unstable_enablePackageExports: boolean,
-  unstable_getRealPath: ?GetRealPath,
 }>;
 
 class ModuleResolver<TPackage: Packageish> {
@@ -142,6 +142,7 @@ class ModuleResolver<TPackage: Packageish> {
       disableHierarchicalLookup,
       doesFileExist,
       extraNodeModules,
+      fileSystemLookup,
       mainFields,
       nodeModulesPaths,
       preferNativePlatform,
@@ -151,7 +152,6 @@ class ModuleResolver<TPackage: Packageish> {
       unstable_conditionNames,
       unstable_conditionsByPlatform,
       unstable_enablePackageExports,
-      unstable_getRealPath,
     } = this._options;
 
     try {
@@ -164,6 +164,7 @@ class ModuleResolver<TPackage: Packageish> {
             disableHierarchicalLookup,
             doesFileExist,
             extraNodeModules,
+            fileSystemLookup,
             mainFields,
             nodeModulesPaths,
             preferNativePlatform,
@@ -173,7 +174,6 @@ class ModuleResolver<TPackage: Packageish> {
             unstable_conditionNames,
             unstable_conditionsByPlatform,
             unstable_enablePackageExports,
-            unstable_getRealPath,
             unstable_logWarning: this._logWarning,
             customResolverOptions: resolverOptions.customResolverOptions ?? {},
             originModulePath: fromModule.path,

@@ -28,16 +28,54 @@ type MockFileMap = $ReadOnly<{
  * consuming tests.
  */
 export function createResolutionContext(
-  fileMap: MockFileMap,
-  {enableSymlinks}: $ReadOnly<{enableSymlinks?: boolean}> = {},
+  fileMap: MockFileMap = {},
 ): $Diff<ResolutionContext, {originModulePath: string}> {
+  const directorySet = new Set<string>();
+  for (const filePath of Object.keys(fileMap)) {
+    let currentDir = filePath;
+    let prevDir;
+    do {
+      prevDir = currentDir;
+      currentDir = path.dirname(currentDir);
+      directorySet.add(currentDir);
+    } while (currentDir !== prevDir);
+  }
+
   return {
     dev: true,
     allowHaste: true,
     assetExts: new Set(['jpg', 'png']),
     customResolverOptions: {},
     disableHierarchicalLookup: false,
+    doesFileExist: (filePath: string) =>
+      // Should return false unless realpath(filePath) exists. We mock shallow
+      // dereferencing.
+      fileMap[filePath] != null &&
+      (typeof fileMap[filePath] === 'string' ||
+        typeof fileMap[filePath].realPath === 'string'),
     extraNodeModules: null,
+    fileSystemLookup: inputPath => {
+      // Normalise and remove any trailing slash.
+      const filePath = path.resolve(inputPath);
+      const candidate = fileMap[filePath];
+      if (typeof candidate === 'string') {
+        return {exists: true, type: 'f', realPath: filePath};
+      }
+      if (candidate == null) {
+        if (directorySet.has(filePath)) {
+          return {exists: true, type: 'd', realPath: filePath};
+        }
+        return {exists: false};
+      }
+      if (candidate.realPath == null) {
+        return {exists: false};
+      }
+      return {
+        exists: true,
+        type: 'f',
+        realPath: candidate.realPath,
+      };
+    },
     mainFields: ['browser', 'main'],
     nodeModulesPaths: [],
     preferNativePlatform: false,
@@ -53,24 +91,6 @@ export function createResolutionContext(
     unstable_enablePackageExports: false,
     unstable_logWarning: () => {},
     ...createPackageAccessors(fileMap),
-    ...(enableSymlinks === true
-      ? {
-          doesFileExist: (filePath: string) =>
-            // Should return false unless realpath(filePath) exists. We mock shallow
-            // dereferencing.
-            fileMap[filePath] != null &&
-            (typeof fileMap[filePath] === 'string' ||
-              typeof fileMap[filePath].realPath === 'string'),
-          unstable_getRealPath: filePath =>
-            typeof fileMap[filePath] === 'string'
-              ? filePath
-              : fileMap[filePath]?.realPath,
-        }
-      : {
-          doesFileExist: (filePath: string) =>
-            typeof fileMap[filePath] === 'string',
-          unstable_getRealPath: null,
-        }),
   };
 }
 

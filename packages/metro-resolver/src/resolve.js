@@ -85,13 +85,22 @@ function resolve(
     return result.resolution;
   }
 
-  if (context.allowHaste && !isDirectImport) {
+  /**
+   * At this point, realModuleName is not a "direct" (absolute or relative)
+   * import, so it's either Haste name or a package specifier.
+   */
+
+  if (context.allowHaste) {
     const normalizedName = normalizePath(realModuleName);
     const result = resolveHasteName(context, normalizedName, platform);
     if (result.type === 'resolved') {
       return result.resolution;
     }
   }
+
+  /**
+   * realModuleName is now a package specifier.
+   */
 
   const {disableHierarchicalLookup} = context;
 
@@ -102,7 +111,10 @@ function resolve(
     let candidate;
     do {
       candidate = next;
-      nodeModulesPaths.push(path.join(candidate, 'node_modules'));
+      const nodeModulesPath = candidate.endsWith(path.sep)
+        ? candidate + 'node_modules'
+        : candidate + path.sep + 'node_modules';
+      nodeModulesPaths.push(nodeModulesPath);
       next = path.dirname(candidate);
     } while (candidate !== next);
   }
@@ -111,25 +123,36 @@ function resolve(
   nodeModulesPaths.push(...context.nodeModulesPaths);
 
   const extraPaths = [];
+
+  const parsedSpecifier = parsePackageSpecifier(realModuleName);
+
   const {extraNodeModules} = context;
-  if (extraNodeModules) {
-    let bits = path.normalize(moduleName).split(path.sep);
-    let packageName;
-    // Normalize packageName and bits for scoped modules
-    if (bits.length >= 2 && bits[0].startsWith('@')) {
-      packageName = bits.slice(0, 2).join('/');
-      bits = bits.slice(1);
-    } else {
-      packageName = bits[0];
-    }
-    if (extraNodeModules[packageName]) {
-      bits[0] = extraNodeModules[packageName];
-      extraPaths.push(path.join.apply(path, bits));
-    }
+  if (extraNodeModules && extraNodeModules[parsedSpecifier.packageName]) {
+    const newPackageName = extraNodeModules[parsedSpecifier.packageName];
+    extraPaths.push(path.join(newPackageName, parsedSpecifier.posixSubpath));
   }
 
   const allDirPaths = nodeModulesPaths
-    .map(nodeModulePath => path.join(nodeModulePath, realModuleName))
+    .map(nodeModulePath => {
+      let lookupResult = null;
+      // Insight: The module can only exist if there is a `node_modules` at
+      // this path. Redirections cannot succeed, because we will never look
+      // beyond a node_modules path segment for finding the closest
+      // package.json. Moreover, if the specifier contains a '/' separator,
+      // the first part *must* be a real directory, because it is the
+      // shallowest path that can possibly contain a redirecting package.json.
+      const mustBeDirectory =
+        parsedSpecifier.posixSubpath !== '.' ||
+        parsedSpecifier.packageName.length > parsedSpecifier.firstPart.length
+          ? nodeModulePath + path.sep + parsedSpecifier.firstPart
+          : nodeModulePath;
+      lookupResult = context.fileSystemLookup(mustBeDirectory);
+      if (!lookupResult.exists || lookupResult.type !== 'd') {
+        return null;
+      }
+      return path.join(nodeModulePath, realModuleName);
+    })
+    .filter(Boolean)
     .concat(extraPaths);
   for (let i = 0; i < allDirPaths.length; ++i) {
     const candidate = context.redirectModulePath(allDirPaths[i]);
@@ -149,6 +172,40 @@ function resolve(
   throw new FailedToResolveNameError(nodeModulesPaths, extraPaths);
 }
 
+function parsePackageSpecifier(specifier: string) {
+  const normalized =
+    path.sep === '/' ? specifier : specifier.replaceAll('\\', '/');
+  const firstSepIdx = normalized.indexOf('/');
+  if (normalized.startsWith('@') && firstSepIdx !== -1) {
+    const secondSepIdx = normalized.indexOf('/', firstSepIdx + 1);
+    if (secondSepIdx === -1) {
+      return {
+        firstPart: normalized.slice(0, firstSepIdx),
+        packageName: normalized,
+        posixSubpath: '.',
+      };
+    }
+    return {
+      firstPart: normalized.slice(0, firstSepIdx),
+      packageName: normalized.slice(0, secondSepIdx),
+      posixSubpath: '.' + normalized.slice(secondSepIdx),
+    };
+  }
+  if (firstSepIdx === -1) {
+    return {
+      firstPart: normalized,
+      packageName: normalized,
+      posixSubpath: '.',
+    };
+  }
+  const packageName = normalized.slice(0, firstSepIdx);
+  return {
+    firstPart: packageName,
+    packageName,
+    posixSubpath: '.' + normalized.slice(firstSepIdx),
+  };
+}
+
 /**
  * Resolve any kind of module path, whether it's a file or a directory.
  * For example we may want to resolve './foobar'. The closest
@@ -161,8 +218,11 @@ function resolveModulePath(
   toModuleName: string,
   platform: string | null,
 ): Result<Resolution, FileAndDirCandidates> {
+  // System-separated absolute path
   const modulePath = path.isAbsolute(toModuleName)
-    ? resolveWindowsPath(toModuleName)
+    ? path.sep === '/'
+      ? toModuleName
+      : toModuleName.replaceAll('/', '\\')
     : path.join(path.dirname(context.originModulePath), toModuleName);
   const redirectedPath = context.redirectModulePath(modulePath);
   if (redirectedPath === false) {
@@ -336,6 +396,15 @@ function resolvePackageEntryPoint(
   packagePath: string,
   platform: string | null,
 ): Result<Resolution, FileCandidates> {
+  const dirLookup = context.fileSystemLookup(packagePath);
+  if (dirLookup.exists == false || dirLookup.type !== 'd') {
+    return failedFor({
+      type: 'sourceFile',
+      filePathPrefix: packagePath,
+      candidateExts: [],
+    });
+  }
+
   const packageJsonPath = path.join(packagePath, 'package.json');
 
   if (!context.doesFileExist(packageJsonPath)) {
@@ -500,26 +569,12 @@ function resolveSourceFileForExt(
   if (redirectedPath === false) {
     return {type: 'empty'};
   }
-  if (context.unstable_getRealPath) {
-    const maybeRealPath = context.unstable_getRealPath(redirectedPath);
-    if (maybeRealPath != null) {
-      return maybeRealPath;
-    }
-  } else if (context.doesFileExist(redirectedPath)) {
-    return redirectedPath;
+  const lookupResult = context.fileSystemLookup(redirectedPath);
+  if (lookupResult.exists && lookupResult.type === 'f') {
+    return lookupResult.realPath;
   }
   context.candidateExts.push(extension);
   return null;
-}
-
-// HasteFS stores paths with backslashes on Windows, this ensures the path is in
-// the proper format. Will also add drive letter if not present so `/root` will
-// resolve to `C:\root`. Noop on other platforms.
-function resolveWindowsPath(modulePath: string) {
-  if (path.sep !== '\\') {
-    return modulePath;
-  }
-  return path.resolve(modulePath);
 }
 
 function isRelativeImport(filePath: string) {
