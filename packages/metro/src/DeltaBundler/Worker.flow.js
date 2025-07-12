@@ -12,7 +12,7 @@
 'use strict';
 
 import type {TransformResult} from './types.flow';
-import type {LogEntry} from 'metro-core/src/Logger';
+import type {LogEntry} from 'metro-core/private/Logger';
 import type {
   JsTransformerConfig,
   JsTransformOptions,
@@ -109,7 +109,7 @@ async function transformFile(
     transformerConfig.transformerPath,
   );
 
-  const transformFileStartLogEntry = {
+  const transformFileStartLogEntry: LogEntry = {
     action_name: 'Transforming file',
     action_phase: 'start',
     file_name: filename,

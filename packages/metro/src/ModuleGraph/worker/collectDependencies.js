@@ -15,7 +15,7 @@ import type {CallExpression, Identifier, StringLiteral} from '@babel/types';
 import type {
   AllowOptionalDependencies,
   AsyncDependencyType,
-} from 'metro/src/DeltaBundler/types.flow.js';
+} from 'metro/private/DeltaBundler/types.flow';
 
 import {isProgram} from '@babel/types';
 
@@ -766,6 +766,8 @@ const DefaultDependencyTransformer: DependencyTransformer = {
         ? {MODULE_NAME: createModuleNameLiteral(dependency)}
         : null),
     };
+    /* $FlowFixMe[incompatible-call] Natural Inference rollout. See
+     * https://fburl.com/gdoc/y8dn025u */
     path.replaceWith(makeNode(opts));
   },
 
@@ -787,6 +789,8 @@ const DefaultDependencyTransformer: DependencyTransformer = {
         ? {MODULE_NAME: createModuleNameLiteral(dependency)}
         : null),
     };
+    /* $FlowFixMe[incompatible-call] Natural Inference rollout. See
+     * https://fburl.com/gdoc/y8dn025u */
     path.replaceWith(makeNode(opts));
   },
 
@@ -808,6 +812,8 @@ const DefaultDependencyTransformer: DependencyTransformer = {
         ? {MODULE_NAME: createModuleNameLiteral(dependency)}
         : null),
     };
+    /* $FlowFixMe[incompatible-call] Natural Inference rollout. See
+     * https://fburl.com/gdoc/y8dn025u */
     path.replaceWith(makeNode(opts));
   },
 

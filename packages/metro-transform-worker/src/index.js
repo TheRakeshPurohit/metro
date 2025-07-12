@@ -28,12 +28,12 @@ import type {
   InlinePluginOptions,
   InlineRequiresPluginOptions,
 } from 'metro-transform-plugins';
-import type {TransformResultDependency} from 'metro/src/DeltaBundler';
-import type {AllowOptionalDependencies} from 'metro/src/DeltaBundler/types.flow.js';
+import type {TransformResultDependency} from 'metro/private/DeltaBundler';
+import type {AllowOptionalDependencies} from 'metro/private/DeltaBundler/types.flow';
 import type {
   DependencyTransformer,
   DynamicRequiresBehavior,
-} from 'metro/src/ModuleGraph/worker/collectDependencies';
+} from 'metro/private/ModuleGraph/worker/collectDependencies';
 
 const getMinifier = require('./utils/getMinifier');
 const {transformFromAstSync} = require('@babel/core');
@@ -41,7 +41,7 @@ const generate = require('@babel/generator').default;
 const babylon = require('@babel/parser');
 const types = require('@babel/types');
 const {stableHash} = require('metro-cache');
-const getCacheKey = require('metro-cache-key');
+const {getCacheKey} = require('metro-cache-key');
 const {
   fromRawMappings,
   functionMapBabelPlugin,
@@ -49,16 +49,16 @@ const {
   toSegmentTuple,
 } = require('metro-source-map');
 const metroTransformPlugins = require('metro-transform-plugins');
-const collectDependencies = require('metro/src/ModuleGraph/worker/collectDependencies');
+const collectDependencies = require('metro/private/ModuleGraph/worker/collectDependencies');
 const {
   InvalidRequireCallError: InternalInvalidRequireCallError,
-} = require('metro/src/ModuleGraph/worker/collectDependencies');
-const generateImportNames = require('metro/src/ModuleGraph/worker/generateImportNames');
+} = require('metro/private/ModuleGraph/worker/collectDependencies');
+const generateImportNames = require('metro/private/ModuleGraph/worker/generateImportNames');
 const {
   importLocationsPlugin,
   locToKey,
-} = require('metro/src/ModuleGraph/worker/importLocationsPlugin');
-const JsFileWrapping = require('metro/src/ModuleGraph/worker/JsFileWrapping');
+} = require('metro/private/ModuleGraph/worker/importLocationsPlugin');
+const JsFileWrapping = require('metro/private/ModuleGraph/worker/JsFileWrapping');
 const nullthrows = require('nullthrows');
 
 type MinifierConfig = $ReadOnly<{[string]: mixed, ...}>;
@@ -129,6 +129,7 @@ export type JsTransformOptions = $ReadOnly<{
   unstable_disableES6Transforms?: boolean,
   unstable_memoizeInlineRequires?: boolean,
   unstable_nonMemoizedInlineRequires?: $ReadOnlyArray<string>,
+  unstable_staticHermesOptimizedRequire?: boolean,
   unstable_transformProfile: TransformProfile,
 }>;
 
@@ -429,6 +430,12 @@ async function transformJS(
         // release. It should be made non-optional in ConfigT or removed in
         // future.
         config.unstable_renameRequire === false,
+        {
+          unstable_useStaticHermesModuleFactory: Boolean(
+            options.customTransformOptions
+              ?.unstable_staticHermesOptimizedRequire,
+          ),
+        },
       ));
     }
   }
@@ -572,7 +579,14 @@ async function transformJSON(
   let code =
     config.unstable_disableModuleWrapping === true
       ? JsFileWrapping.jsonToCommonJS(file.code)
-      : JsFileWrapping.wrapJson(file.code, config.globalPrefix);
+      : JsFileWrapping.wrapJson(
+          file.code,
+          config.globalPrefix,
+          Boolean(
+            options.customTransformOptions
+              ?.unstable_staticHermesOptimizedRequire,
+          ),
+        );
   let map: Array<MetroSourceMapSegmentTuple> = [];
 
   // TODO: When we can reuse transformJS for JSON, we should not derive `minify` separately.
@@ -654,13 +668,22 @@ module.exports = {
     };
     const sourceCode = data.toString('utf8');
 
-    const {unstable_dependencyMapReservedName} = config;
-    if (unstable_dependencyMapReservedName != null) {
-      const position = sourceCode.indexOf(unstable_dependencyMapReservedName);
+    const reservedStrings = [];
+    if (
+      options.customTransformOptions?.unstable_staticHermesOptimizedRequire ==
+      true
+    ) {
+      reservedStrings.push('_$$_METRO_MODULE_ID');
+    }
+    if (config.unstable_dependencyMapReservedName != null) {
+      reservedStrings.push(config.unstable_dependencyMapReservedName);
+    }
+    for (const reservedString of reservedStrings) {
+      const position = sourceCode.indexOf(reservedString);
       if (position > -1) {
         throw new SyntaxError(
           'Source code contains the reserved string `' +
-            unstable_dependencyMapReservedName +
+            reservedString +
             '` at character offset ' +
             position,
         );
@@ -709,8 +732,8 @@ module.exports = {
       require.resolve(minifierPath),
       require.resolve('./utils/getMinifier'),
       require.resolve('./utils/assetTransformer'),
-      require.resolve('metro/src/ModuleGraph/worker/generateImportNames'),
-      require.resolve('metro/src/ModuleGraph/worker/JsFileWrapping'),
+      require.resolve('metro/private/ModuleGraph/worker/generateImportNames'),
+      require.resolve('metro/private/ModuleGraph/worker/JsFileWrapping'),
       ...metroTransformPlugins.getTransformPluginCacheKeyFiles(),
     ]);
 

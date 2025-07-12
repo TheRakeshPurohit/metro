@@ -14,6 +14,7 @@
 import type {AssetData} from './Assets';
 import type {ReadOnlyGraph} from './DeltaBundler';
 import type {ServerOptions} from './Server';
+import type {BuildOptions} from './shared/types.flow';
 import type {OutputOptions, RequestOptions} from './shared/types.flow.js';
 import type {HandleFunction} from 'connect';
 import type {Server as HttpServer} from 'http';
@@ -35,6 +36,7 @@ const makeServeCommand = require('./commands/serve');
 const MetroHmrServer = require('./HmrServer');
 const IncrementalBundler = require('./IncrementalBundler');
 const createWebsocketServer = require('./lib/createWebsocketServer');
+const JsonReporter = require('./lib/JsonReporter');
 const TerminalReporter = require('./lib/TerminalReporter');
 const MetroServer = require('./Server');
 const outputBundle = require('./shared/output/bundle');
@@ -83,6 +85,10 @@ export type RunServerOptions = $ReadOnly<{
   }>,
 }>;
 
+export type RunServerResult = {
+  httpServer: HttpServer | HttpsServer,
+};
+
 type BuildGraphOptions = {
   entries: $ReadOnlyArray<string>,
   customTransformOptions?: CustomTransformOptions,
@@ -108,9 +114,11 @@ export type RunBuildOptions = {
     build: (
       MetroServer,
       RequestOptions,
+      void | BuildOptions,
     ) => Promise<{
       code: string,
       map: string,
+      assets?: $ReadOnlyArray<AssetData>,
       ...
     }>,
     save: (
@@ -143,6 +151,7 @@ type BuildCommandOptions = {} | null;
 type ServeCommandOptions = {} | null;
 
 exports.Terminal = Terminal;
+exports.JsonReporter = JsonReporter;
 exports.TerminalReporter = TerminalReporter;
 
 export type {AssetData} from './Assets';
@@ -265,7 +274,7 @@ exports.runServer = async (
     websocketEndpoints = {},
     watch,
   }: RunServerOptions = {},
-): Promise<HttpServer | HttpsServer> => {
+): Promise<RunServerResult> => {
   await earlyPortCheck(host, config.server.port);
 
   if (secure != null || secureCert != null || secureKey != null) {
@@ -314,73 +323,68 @@ exports.runServer = async (
   } else {
     httpServer = http.createServer(serverApp);
   }
-  return new Promise(
-    (
-      resolve: (result: HttpServer | HttpsServer) => void,
-      reject: mixed => mixed,
-    ) => {
-      httpServer.on('error', error => {
-        endMiddleware().finally(() => {
-          onError?.(error);
-          reject(error);
-        });
+  return new Promise((resolve, reject) => {
+    httpServer.on('error', error => {
+      endMiddleware().finally(() => {
+        onError?.(error);
+        reject(error);
+      });
+    });
+
+    httpServer.listen(config.server.port, host, () => {
+      const {address, port, family} = httpServer.address();
+      config.reporter.update({
+        type: 'server_listening',
+        address,
+        port, // Assigned port if configured with port 0
+        family,
       });
 
-      httpServer.listen(config.server.port, host, () => {
-        const {address, port, family} = httpServer.address();
-        config.reporter.update({
-          type: 'server_listening',
-          address,
-          port, // Assigned port if configured with port 0
-          family,
-        });
+      websocketEndpoints = {
+        ...websocketEndpoints,
+        '/hot': createWebsocketServer({
+          websocketServer: new MetroHmrServer(
+            metroServer.getBundler(),
+            metroServer.getCreateModuleId(),
+            config,
+          ),
+        }),
+      };
 
-        websocketEndpoints = {
-          ...websocketEndpoints,
-          '/hot': createWebsocketServer({
-            websocketServer: new MetroHmrServer(
-              metroServer.getBundler(),
-              metroServer.getCreateModuleId(),
-              config,
-            ),
-          }),
-        };
-
-        httpServer.on('upgrade', (request, socket, head) => {
-          const {pathname} = parse(request.url);
-          if (pathname != null && websocketEndpoints[pathname]) {
-            websocketEndpoints[pathname].handleUpgrade(
-              request,
-              socket,
-              head,
-              ws => {
-                websocketEndpoints[pathname].emit('connection', ws, request);
-              },
-            );
-          } else {
-            socket.destroy();
-          }
-        });
-
-        if (onReady) {
-          onReady(httpServer);
+      httpServer.on('upgrade', (request, socket, head) => {
+        const {pathname} = parse(request.url);
+        if (pathname != null && websocketEndpoints[pathname]) {
+          websocketEndpoints[pathname].handleUpgrade(
+            request,
+            socket,
+            head,
+            ws => {
+              websocketEndpoints[pathname].emit('connection', ws, request);
+            },
+          );
+        } else {
+          socket.destroy();
         }
-
-        resolve(httpServer);
       });
 
-      // Disable any kind of automatic timeout behavior for incoming
-      // requests in case it takes the packager more than the default
-      // timeout of 120 seconds to respond to a request.
-      httpServer.timeout = 0;
+      if (onReady) {
+        onReady(httpServer);
+      }
 
-      httpServer.on('close', () => {
-        endMiddleware()?.finally(() => {
-          onClose?.();
-        });
+      resolve({httpServer});
+    });
+
+    // Disable any kind of automatic timeout behavior for incoming
+    // requests in case it takes the packager more than the default
+    // timeout of 120 seconds to respond to a request.
+    httpServer.timeout = 0;
+
+    httpServer.on('close', () => {
+      endMiddleware()?.finally(() => {
+        onClose?.();
       });
-    },
-  );
+    });
+  });
 };
 
 exports.runBuild = async (
@@ -428,10 +432,12 @@ exports.runBuild = async (
       onBegin();
     }
 
-    const metroBundle = await output.build(metroServer, requestOptions);
+    const metroBundle = await output.build(metroServer, requestOptions, {
+      withAssets: assets,
+    });
     const result: RunBuildResult = {...metroBundle};
 
-    if (assets) {
+    if (assets && result.assets == null) {
       result.assets = await metroServer.getAssets({
         ...MetroServer.DEFAULT_BUNDLE_OPTIONS,
         ...requestOptions,

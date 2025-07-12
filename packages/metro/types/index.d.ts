@@ -14,9 +14,10 @@ export * from './ModuleGraph/worker/collectDependencies';
 export * from './Server';
 export * from './lib/reporting';
 
+import type {AssetData} from './Asset';
 import type {ReadOnlyGraph} from './DeltaBundler/types';
 import type {ServerOptions, default as MetroServer} from './Server';
-import type {OutputOptions, RequestOptions} from './shared/types';
+import type {BuildOptions, OutputOptions, RequestOptions} from './shared/types';
 import type {HandleFunction} from 'connect';
 import type {EventEmitter} from 'events';
 import type {IncomingMessage, Server as HttpServer} from 'http';
@@ -29,8 +30,7 @@ import type {
   Middleware,
 } from 'metro-config';
 import type {Duplex} from 'stream';
-
-import Yargs = require('yargs');
+import type Yargs from 'yargs';
 
 export {loadConfig, mergeConfig, resolveConfig} from 'metro-config';
 export {Terminal} from 'metro-core';
@@ -82,6 +82,10 @@ export interface RunServerOptions {
   };
 }
 
+export interface RunServerResult {
+  httpServer: HttpServer | HttpsServer;
+}
+
 export interface RunBuildOptions {
   entry: string;
   dev?: boolean;
@@ -93,10 +97,12 @@ export interface RunBuildOptions {
   output?: {
     build: (
       server: MetroServer,
-      options: RequestOptions,
+      requestOptions: RequestOptions,
+      buildOptions?: BuildOptions,
     ) => Promise<{
       code: string;
       map: string;
+      assets?: ReadonlyArray<AssetData>;
     }>;
     save: (
       entry: {
@@ -137,7 +143,7 @@ export function createConnectMiddleware(
 export function runServer(
   config: ConfigT,
   options: RunServerOptions,
-): Promise<HttpServer | HttpsServer>;
+): Promise<RunServerResult>;
 
 export function runBuild(
   config: ConfigT,
@@ -159,6 +165,6 @@ interface AttachMetroCLIOptions {
 }
 
 export function attachMetroCli(
-  yargs: typeof Yargs,
+  yargs: Yargs.Argv,
   options?: AttachMetroCLIOptions,
-): typeof Yargs;
+): Yargs.Argv;
