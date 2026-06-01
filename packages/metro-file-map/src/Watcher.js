@@ -71,11 +71,13 @@ export type HealthCheckResult =
 export class Watcher extends EventEmitter {
   #activeWatcher: ?string;
   #backends: ReadonlyArray<WatcherBackend> = [];
-  +#instanceId: number;
+  readonly #instanceId: number;
   #nextHealthCheckId: number = 0;
-  +#options: WatcherOptions;
-  +#pendingHealthChecks: Map</* basename */ string, /* resolve */ () => void> =
-    new Map();
+  readonly #options: WatcherOptions;
+  readonly #pendingHealthChecks: Map<
+    /* basename */ string,
+    /* resolve */ () => void,
+  > = new Map();
 
   constructor(options: WatcherOptions) {
     super();

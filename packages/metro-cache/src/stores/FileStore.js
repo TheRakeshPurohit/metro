@@ -20,7 +20,7 @@ export type Options = Readonly<{
 }>;
 
 export default class FileStore<T> {
-  +#root: string;
+  readonly #root: string;
 
   constructor(options: Options) {
     this.#root = options.root;

@@ -55,19 +55,19 @@ export type HasteMapOptions = Readonly<{
 export default class HastePlugin
   implements HasteMap, FileMapPlugin<null, string | null>
 {
-  +name: 'haste' = 'haste';
+  readonly name: 'haste' = 'haste';
 
-  +#console: ?Console;
-  +#duplicates: DuplicatesIndex = new Map();
-  +#enableHastePackages: boolean;
-  +#failValidationOnConflicts: boolean;
+  readonly #console: ?Console;
+  readonly #duplicates: DuplicatesIndex = new Map();
+  readonly #enableHastePackages: boolean;
+  readonly #failValidationOnConflicts: boolean;
   #getModuleNameByPath: string => ?string;
-  +#hasteImplModulePath: ?string;
-  +#map: Map<string, HasteMapItem> = new Map();
-  +#pathUtils: RootPathUtils;
-  +#perfLogger: ?PerfLogger;
-  +#platforms: ReadonlySet<string>;
-  +#rootDir: Path;
+  readonly #hasteImplModulePath: ?string;
+  readonly #map: Map<string, HasteMapItem> = new Map();
+  readonly #pathUtils: RootPathUtils;
+  readonly #perfLogger: ?PerfLogger;
+  readonly #platforms: ReadonlySet<string>;
+  readonly #rootDir: Path;
 
   constructor(options: HasteMapOptions) {
     this.#console = options.console ?? global.console;

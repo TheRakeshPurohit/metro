@@ -20,18 +20,18 @@ import {getJsOutput} from './js';
 export default function getSourceMapInfo(
   module: Module<>,
   options: {
-    +excludeSource: boolean,
-    +shouldAddToIgnoreList: (Module<>) => boolean,
+    readonly excludeSource: boolean,
+    readonly shouldAddToIgnoreList: (Module<>) => boolean,
     getSourceUrl: ?(module: Module<>) => string,
   },
 ): {
-  +map: Array<MetroSourceMapSegmentTuple>,
-  +functionMap: ?FBSourceFunctionMap,
-  +code: string,
-  +path: string,
-  +source: string,
-  +lineCount: number,
-  +isIgnored: boolean,
+  readonly map: Array<MetroSourceMapSegmentTuple>,
+  readonly functionMap: ?FBSourceFunctionMap,
+  readonly code: string,
+  readonly path: string,
+  readonly source: string,
+  readonly lineCount: number,
+  readonly isIgnored: boolean,
 } {
   return {
     ...getJsOutput(module).data,

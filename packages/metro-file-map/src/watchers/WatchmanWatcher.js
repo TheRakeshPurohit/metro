@@ -41,12 +41,12 @@ const SUB_PREFIX = 'metro-file-map';
  */
 export default class WatchmanWatcher extends AbstractWatcher {
   #client: Client;
-  +subscriptionName: string;
+  readonly subscriptionName: string;
   #watchProjectInfo: ?Readonly<{
     relativePath: string,
     root: string,
   }>;
-  +#watchmanDeferStates: ReadonlyArray<string>;
+  readonly #watchmanDeferStates: ReadonlyArray<string>;
   #deferringStates: ?Set<string> = null;
 
   constructor(dir: string, opts: WatcherOptions) {

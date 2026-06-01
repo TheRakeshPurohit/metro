@@ -17,7 +17,7 @@ import {getJsOutput, isJsModule} from './helpers/js';
 import path from 'path';
 
 type Options = {
-  +processModuleFilter: (module: Module<>) => boolean,
+  readonly processModuleFilter: (module: Module<>) => boolean,
   assetPlugins: ReadonlyArray<string>,
   platform: ?string,
   projectRoot: string,

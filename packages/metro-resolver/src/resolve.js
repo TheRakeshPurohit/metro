@@ -483,10 +483,10 @@ class MissingFileInHastePackageError extends Error {
   pathInModule: string;
 
   constructor(opts: {
-    +candidates: FileAndDirCandidates,
-    +moduleName: string,
-    +packageName: string,
-    +pathInModule: string,
+    readonly candidates: FileAndDirCandidates,
+    readonly moduleName: string,
+    readonly packageName: string,
+    readonly pathInModule: string,
   }) {
     super(
       `While resolving module \`${opts.moduleName}\`, ` +

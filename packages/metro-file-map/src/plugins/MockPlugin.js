@@ -39,13 +39,13 @@ export type MockMapOptions = Readonly<{
 export default class MockPlugin
   implements FileMapPlugin<RawMockMap, void>, IMockMap
 {
-  +name: 'mocks' = 'mocks';
+  readonly name: 'mocks' = 'mocks';
 
-  +#mocksPattern: RegExp;
+  readonly #mocksPattern: RegExp;
   #raw: RawMockMap;
-  +#rootDir: Path;
-  +#pathUtils: RootPathUtils;
-  +#console: typeof console;
+  readonly #rootDir: Path;
+  readonly #pathUtils: RootPathUtils;
+  readonly #console: typeof console;
   #throwOnModuleCollision: boolean;
 
   constructor({

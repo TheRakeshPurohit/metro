@@ -18,16 +18,16 @@ import type {
 import {getJsOutput, isJsModule} from './helpers/js';
 
 export type ExplodedSourceMap = ReadonlyArray<{
-  +map: Array<MetroSourceMapSegmentTuple>,
-  +firstLine1Based: number,
-  +functionMap: ?FBSourceFunctionMap,
-  +path: string,
+  readonly map: Array<MetroSourceMapSegmentTuple>,
+  readonly firstLine1Based: number,
+  readonly functionMap: ?FBSourceFunctionMap,
+  readonly path: string,
 }>;
 
 export function getExplodedSourceMap(
   modules: ReadonlyArray<Module<>>,
   options: {
-    +processModuleFilter: (module: Module<>) => boolean,
+    readonly processModuleFilter: (module: Module<>) => boolean,
   },
 ): ExplodedSourceMap {
   const modulesToProcess = modules

@@ -41,11 +41,11 @@ type OtherOptions = Readonly<{
 
 export type GraphRevision = {
   // Identifies the last computed revision.
-  +id: RevisionId,
-  +date: Date,
-  +graphId: GraphId,
-  +graph: OutputGraph,
-  +prepend: ReadonlyArray<Module<>>,
+  readonly id: RevisionId,
+  readonly date: Date,
+  readonly graphId: GraphId,
+  readonly graph: OutputGraph,
+  readonly prepend: ReadonlyArray<Module<>>,
 };
 
 export type IncrementalBundlerOptions = Readonly<{
@@ -199,7 +199,10 @@ export default class IncrementalBundler {
       shallow: false,
       lazy: false,
     },
-  ): Promise<{+graph: OutputGraph, +prepend: ReadonlyArray<Module<>>}> {
+  ): Promise<{
+    readonly graph: OutputGraph,
+    readonly prepend: ReadonlyArray<Module<>>,
+  }> {
     const graph = await this.buildGraphForEntries(
       [entryFile],
       transformOptions,

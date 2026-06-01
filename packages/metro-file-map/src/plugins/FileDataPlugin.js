@@ -32,7 +32,7 @@ export default class FileDataPlugin<
   in PerFileData extends void | V8Serializable = void | V8Serializable,
 > implements FileMapPlugin<null, PerFileData>
 {
-  +name: string;
+  readonly name: string;
 
   #worker: FileMapPluginWorker;
   #cacheKey: string;

@@ -42,12 +42,13 @@ const DELETE_EVENT = common.DELETE_EVENT;
 const DEBOUNCE_MS = 100;
 
 export default class FallbackWatcher extends AbstractWatcher {
-  +#changeTimers: Map<string, TimeoutID> = new Map();
-  +#dirRegistry: {
+  readonly #changeTimers: Map<string, TimeoutID> = new Map();
+  readonly #dirRegistry: {
     [directory: string]: {[file: string]: true, __proto__: null},
     __proto__: null,
   } = Object.create(null);
-  +#watched: {[key: string]: FSWatcher, __proto__: null} = Object.create(null);
+  readonly #watched: {[key: string]: FSWatcher, __proto__: null} =
+    Object.create(null);
 
   async startWatching(): Promise<void> {
     this.#watchdir(this.root);

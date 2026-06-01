@@ -91,7 +91,7 @@ export const transform = (
 };
 
 export type Worker = {
-  +transform: typeof transform,
+  readonly transform: typeof transform,
 };
 
 async function transformFile(

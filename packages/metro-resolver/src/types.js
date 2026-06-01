@@ -12,10 +12,10 @@
 import type {TransformResultDependency} from 'metro/private/DeltaBundler/types';
 
 export type Result<out TResolution, out TCandidates> =
-  | {+type: 'resolved', +resolution: TResolution}
-  | {+type: 'failed', +candidates: TCandidates};
+  | {readonly type: 'resolved', readonly resolution: TResolution}
+  | {readonly type: 'failed', readonly candidates: TCandidates};
 
-export type Resolution = FileResolution | {+type: 'empty'};
+export type Resolution = FileResolution | {readonly type: 'empty'};
 
 export type SourceFileResolution = Readonly<{
   type: 'sourceFile',
@@ -29,8 +29,8 @@ export type AssetResolution = Readonly<{
 export type FileResolution = AssetResolution | SourceFileResolution;
 
 export type FileAndDirCandidates = {
-  +dir: ?FileCandidates,
-  +file: ?FileCandidates,
+  readonly dir: ?FileCandidates,
+  readonly file: ?FileCandidates,
 };
 
 /**
@@ -40,14 +40,14 @@ export type FileAndDirCandidates = {
  */
 export type FileCandidates =
   // We only tried to resolve a specific asset.
-  | {+type: 'asset', +name: string}
+  | {readonly type: 'asset', readonly name: string}
   // We attempted to resolve a name as being a source file (ex. JavaScript,
   // JSON...), in which case there can be several extensions we tried, for
   // example `/js/foo.ios.js`, `/js/foo.js`, etc. for a single prefix '/js/foo'.
   | {
-      +type: 'sourceFile',
+      readonly type: 'sourceFile',
       filePathPrefix: string,
-      +candidateExts: ReadonlyArray<string>,
+      readonly candidateExts: ReadonlyArray<string>,
     };
 
 export type ExportsLikeMap = Readonly<{
@@ -239,6 +239,6 @@ export type CustomResolver = (
 
 export type CustomResolverOptions = {
   __proto__: null,
-  +[string]: unknown,
+  readonly [string]: unknown,
   ...
 };

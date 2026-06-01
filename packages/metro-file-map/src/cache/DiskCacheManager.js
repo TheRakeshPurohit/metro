@@ -42,8 +42,8 @@ const DEFAULT_DIRECTORY = tmpdir();
 const DEFAULT_AUTO_SAVE_DEBOUNCE_MS = 5000;
 
 export class DiskCacheManager implements CacheManager {
-  +#autoSaveOpts: ?AutoSaveOptions;
-  +#cachePath: string;
+  readonly #autoSaveOpts: ?AutoSaveOptions;
+  readonly #cachePath: string;
   #debounceTimeout: ?Timeout = null;
   #writePromise: Promise<void> = Promise.resolve();
   #hasUnwrittenChanges: boolean = false;

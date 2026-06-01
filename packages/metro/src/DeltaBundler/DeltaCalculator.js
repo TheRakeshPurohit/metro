@@ -182,7 +182,7 @@ export default class DeltaCalculator<T> extends EventEmitter {
 
   #shouldReset(
     canonicalPath: string,
-    metadata: {+isSymlink: boolean, ...},
+    metadata: {readonly isSymlink: boolean, ...},
   ): boolean {
     if (metadata.isSymlink) {
       return true;

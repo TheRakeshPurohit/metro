@@ -88,8 +88,8 @@ export default class DependencyGraph extends EventEmitter {
   constructor(
     config: ConfigT,
     options?: {
-      +hasReducedPerformance?: boolean,
-      +watch?: boolean,
+      readonly hasReducedPerformance?: boolean,
+      readonly watch?: boolean,
     },
   ) {
     super();

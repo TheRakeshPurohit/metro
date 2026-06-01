@@ -153,7 +153,7 @@ type TransformerConfigT = {
   ...JsTransformerConfig,
   getTransformOptions: GetTransformOptions,
   // TODO(moti): Remove this Meta-internal option from Metro's public config
-  transformVariants: {+[name: string]: Partial<ExtraTransformOptions>},
+  transformVariants: {readonly [name: string]: Partial<ExtraTransformOptions>},
   publicPath: string,
   unstable_workerThreads: boolean,
 };
@@ -197,12 +197,14 @@ type ServerConfigT = {
 
 type SymbolicatorConfigT = {
   customizeFrame: ({
-    +file: ?string,
-    +lineNumber: ?number,
-    +column: ?number,
-    +methodName: ?string,
+    readonly file: ?string,
+    readonly lineNumber: ?number,
+    readonly column: ?number,
+    readonly methodName: ?string,
     ...
-  }) => ?{+collapse?: boolean} | Promise<?{+collapse?: boolean}>,
+  }) =>
+    | ?{readonly collapse?: boolean}
+    | Promise<?{readonly collapse?: boolean}>,
   customizeStack: (
     Array<IntermediateStackFrame>,
     unknown,

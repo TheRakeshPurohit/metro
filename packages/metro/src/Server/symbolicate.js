@@ -20,10 +20,10 @@ import {greatestLowerBound} from 'metro-source-map/private/Consumer/search';
 import {SourceMetadataMapConsumer} from 'metro-symbolicate/private/Symbolication';
 
 export type StackFrameInput = {
-  +file: ?string,
-  +lineNumber: ?number,
-  +column: ?number,
-  +methodName: ?string,
+  readonly file: ?string,
+  readonly lineNumber: ?number,
+  readonly column: ?number,
+  readonly methodName: ?string,
   ...
 };
 export type IntermediateStackFrame = {
@@ -33,7 +33,7 @@ export type IntermediateStackFrame = {
 };
 export type StackFrameOutput = Readonly<IntermediateStackFrame>;
 type ExplodedSourceMapModule = ExplodedSourceMap[number];
-type Position = {+line1Based: number, column0Based: number};
+type Position = {readonly line1Based: number, column0Based: number};
 
 function createFunctionNameGetter(
   module: ExplodedSourceMapModule,
@@ -68,10 +68,10 @@ export default async function symbolicate(
   }
   const functionNameGetters = new Map<
     {
-      +firstLine1Based: number,
-      +functionMap: ?FBSourceFunctionMap,
-      +map: Array<MetroSourceMapSegmentTuple>,
-      +path: string,
+      readonly firstLine1Based: number,
+      readonly functionMap: ?FBSourceFunctionMap,
+      readonly map: Array<MetroSourceMapSegmentTuple>,
+      readonly path: string,
     },
     (Position) => ?string,
   >();
@@ -138,10 +138,10 @@ export default async function symbolicate(
   function findFunctionName(
     originalPos: Position,
     module: {
-      +firstLine1Based: number,
-      +functionMap: ?FBSourceFunctionMap,
-      +map: Array<MetroSourceMapSegmentTuple>,
-      +path: string,
+      readonly firstLine1Based: number,
+      readonly functionMap: ?FBSourceFunctionMap,
+      readonly map: Array<MetroSourceMapSegmentTuple>,
+      readonly path: string,
     },
   ): ?string {
     if (module.functionMap) {

@@ -22,7 +22,7 @@ import serializeError from 'serialize-error';
 
 export type CustomError = Error &
   interface {
-    +type?: string,
+    readonly type?: string,
     filename?: string,
     lineNumber?: number,
     errors?: Array<{

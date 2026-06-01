@@ -13,13 +13,13 @@ import {clearInterval, setInterval} from 'timers';
 import ws from 'ws';
 
 type WebsocketServiceInterface<T> = interface {
-  +onClientConnect: (
+  readonly onClientConnect: (
     url: string,
     sendFn: (data: string) => void,
   ) => Promise<?T>,
-  +onClientDisconnect?: (client: T) => unknown,
-  +onClientError?: (client: T, e: Error) => unknown,
-  +onClientMessage?: (
+  readonly onClientDisconnect?: (client: T) => unknown,
+  readonly onClientError?: (client: T, e: Error) => unknown,
+  readonly onClientMessage?: (
     client: T,
     message: string | Buffer | ArrayBuffer | Array<Buffer>,
     sendFn: (data: string) => void,

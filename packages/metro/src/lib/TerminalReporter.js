@@ -100,7 +100,7 @@ export default class TerminalReporter {
   };
   _prevHealthCheckResult: ?HealthCheckResult;
 
-  +terminal: Terminal;
+  readonly terminal: Terminal;
 
   constructor(terminal: Terminal) {
     this._activeBundles = new Map();

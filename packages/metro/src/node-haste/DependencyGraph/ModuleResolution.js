@@ -291,7 +291,7 @@ export class UnableToResolveError extends Error {
   /**
    * Fixed type field in common with other Metro build errors.
    */
-  +type: 'UnableToResolveError' = 'UnableToResolveError';
+  readonly type: 'UnableToResolveError' = 'UnableToResolveError';
 
   constructor(
     originModulePath: string,

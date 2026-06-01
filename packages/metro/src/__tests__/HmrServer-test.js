@@ -695,6 +695,6 @@ describe('HmrServer', () => {
 });
 
 class TransformError extends SyntaxError {
-  +type: string = 'TransformError';
+  readonly type: string = 'TransformError';
   filename: string;
 }

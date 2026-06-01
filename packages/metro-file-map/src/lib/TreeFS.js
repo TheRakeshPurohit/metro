@@ -124,11 +124,13 @@ type MetadataIteratorOptions = Readonly<{
  *   a trailing slash
  */
 export default class TreeFS implements MutableFileSystem {
-  +#cachedNormalSymlinkTargets: WeakMap<FileNode, NormalizedSymlinkTarget> =
-    new WeakMap();
-  +#pathUtils: RootPathUtils;
-  +#processFile: ProcessFileFunction;
-  +#rootDir: Path;
+  readonly #cachedNormalSymlinkTargets: WeakMap<
+    FileNode,
+    NormalizedSymlinkTarget,
+  > = new WeakMap();
+  readonly #pathUtils: RootPathUtils;
+  readonly #processFile: ProcessFileFunction;
+  readonly #rootDir: Path;
   #rootNode: DirectoryNode = new Map();
 
   constructor(opts: TreeFSOptions) {

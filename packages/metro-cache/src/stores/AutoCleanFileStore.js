@@ -30,9 +30,9 @@ type CleanOptions = Readonly<{
  * custom Metro cache that uses watches, hooks get/set, and/or implements LRU.
  */
 export default class AutoCleanFileStore<T> extends FileStore<T> {
-  +#intervalMs: number;
-  +#cleanupThresholdMs: number;
-  +#root: string;
+  readonly #intervalMs: number;
+  readonly #cleanupThresholdMs: number;
+  readonly #root: string;
 
   constructor(opts: CleanOptions) {
     super({root: opts.root});

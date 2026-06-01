@@ -100,26 +100,26 @@ export type BundleMetadata = {
 
 type ProcessStartContext = {
   ...SplitBundleOptions,
-  +buildNumber: number,
-  +bundleOptions: BundleOptions,
-  +graphId: GraphId,
-  +graphOptions: GraphOptions,
-  +mres: MultipartResponse | ServerResponse,
-  +req: IncomingMessage,
-  +revisionId?: ?RevisionId,
-  +bundlePerfLogger: RootPerfLogger,
-  +requestStartTimestamp: number,
+  readonly buildNumber: number,
+  readonly bundleOptions: BundleOptions,
+  readonly graphId: GraphId,
+  readonly graphOptions: GraphOptions,
+  readonly mres: MultipartResponse | ServerResponse,
+  readonly req: IncomingMessage,
+  readonly revisionId?: ?RevisionId,
+  readonly bundlePerfLogger: RootPerfLogger,
+  readonly requestStartTimestamp: number,
 };
 
 type ProcessDeleteContext = {
-  +graphId: GraphId,
-  +req: IncomingMessage,
-  +res: ServerResponse,
+  readonly graphId: GraphId,
+  readonly req: IncomingMessage,
+  readonly res: ServerResponse,
 };
 
 type ProcessEndContext<T> = {
   ...ProcessStartContext,
-  +result: T,
+  readonly result: T,
 };
 
 export type ServerOptions = Readonly<{
@@ -446,10 +446,10 @@ export default class Server {
   }
 
   async getOrderedDependencyPaths(options: {
-    +dev: boolean,
-    +entryFile: string,
-    +minify: boolean,
-    +platform: ?string,
+    readonly dev: boolean,
+    readonly entryFile: string,
+    readonly minify: boolean,
+    readonly platform: ?string,
     ...
   }): Promise<Array<string>> {
     const {
@@ -768,14 +768,16 @@ export default class Server {
     delete: deleteFn,
     finish,
   }: {
-    +bundleType: 'assets' | 'bundle' | 'map',
-    +createStartEntry: (context: ProcessStartContext) => ActionLogEntryData,
-    +createEndEntry: (
+    readonly bundleType: 'assets' | 'bundle' | 'map',
+    readonly createStartEntry: (
+      context: ProcessStartContext,
+    ) => ActionLogEntryData,
+    readonly createEndEntry: (
       context: ProcessEndContext<T>,
     ) => Partial<ActionStartLogEntry>,
-    +build: (context: ProcessStartContext) => Promise<T>,
-    +delete?: (context: ProcessDeleteContext) => Promise<void>,
-    +finish: (context: ProcessEndContext<T>) => void,
+    readonly build: (context: ProcessStartContext) => Promise<T>,
+    readonly delete?: (context: ProcessDeleteContext) => Promise<void>,
+    readonly finish: (context: ProcessEndContext<T>) => void,
   }): (
     req: IncomingMessage,
     res: ServerResponse,

@@ -40,8 +40,8 @@ type ProcessFileRequest = Readonly<{
 }>;
 
 interface AsyncWorker {
-  +processFile: WorkerMessage => Promise<WorkerMetadata>;
-  +end: () => Promise<void>;
+  readonly processFile: WorkerMessage => Promise<WorkerMetadata>;
+  readonly end: () => Promise<void>;
 }
 
 interface MaybeCodedError extends Error {

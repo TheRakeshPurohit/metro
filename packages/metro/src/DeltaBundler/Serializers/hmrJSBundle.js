@@ -148,9 +148,9 @@ export default function hmrJSBundle(
   graph: ReadOnlyGraph<>,
   options: Options,
 ): {
-  +added: ReadonlyArray<HmrModule>,
-  +deleted: ReadonlyArray<number>,
-  +modified: ReadonlyArray<HmrModule>,
+  readonly added: ReadonlyArray<HmrModule>,
+  readonly deleted: ReadonlyArray<number>,
+  readonly modified: ReadonlyArray<HmrModule>,
 } {
   return {
     added: generateModules(delta.added.values(), graph, options),

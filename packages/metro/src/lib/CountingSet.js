@@ -11,7 +11,7 @@
 
 export interface ReadOnlyCountingSet<T> extends Iterable<T> {
   has(item: T): boolean;
-  +size: number;
+  readonly size: number;
   count(item: T): number;
   forEach<ThisT>(
     callbackFn: (

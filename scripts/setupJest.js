@@ -22,3 +22,10 @@ jest.mock('prettier', () => {
   const module = jest.requireActual('module');
   return module.prototype.require(require.resolve('prettier'));
 });
+
+jest.mock('prettier-plugin-hermes-parser', () => {
+  const module = jest.requireActual('module');
+  return module.prototype.require(
+    require.resolve('prettier-plugin-hermes-parser'),
+  );
+});

@@ -18,8 +18,8 @@ import type {JsTransformOptions} from 'metro-transform-worker';
 import CountingSet from '../lib/CountingSet';
 
 export type MixedOutput = {
-  +data: unknown,
-  +type: string,
+  readonly data: unknown,
+  readonly type: string,
 };
 
 export type AsyncDependencyType = 'async' | 'maybeSync' | 'prefetch' | 'weak';
@@ -106,10 +106,10 @@ export type GraphInputOptions = Readonly<{
 }>;
 
 export interface ReadOnlyGraph<T = MixedOutput> {
-  +entryPoints: ReadonlySet<string>;
+  readonly entryPoints: ReadonlySet<string>;
   // Unused in core but useful for custom serializers / experimentalSerializerHook
-  +transformOptions: Readonly<TransformInputOptions>;
-  +dependencies: ReadOnlyDependencies<T>;
+  readonly transformOptions: Readonly<TransformInputOptions>;
+  readonly dependencies: ReadOnlyDependencies<T>;
 }
 
 export type {Graph};
@@ -136,7 +136,7 @@ export type ResolveFn = (
 ) => BundlerResolution;
 
 export type AllowOptionalDependenciesWithOptions = {
-  +exclude: Array<string>,
+  readonly exclude: Array<string>,
 };
 export type AllowOptionalDependencies =
   | boolean
@@ -160,10 +160,10 @@ export type Options<T = MixedOutput> = Readonly<{
 }>;
 
 export type DeltaResult<T = MixedOutput> = {
-  +added: Map<string, Module<T>>,
-  +modified: Map<string, Module<T>>,
-  +deleted: Set<string>,
-  +reset: boolean,
+  readonly added: Map<string, Module<T>>,
+  readonly modified: Map<string, Module<T>>,
+  readonly deleted: Set<string>,
+  readonly reset: boolean,
 };
 
 export type SerializerOptions = Readonly<{

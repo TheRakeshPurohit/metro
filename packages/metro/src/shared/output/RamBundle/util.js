@@ -135,8 +135,10 @@ function combineMaps(
   return sections;
 }
 
-const joinModules = (modules: ReadonlyArray<{+code: string, ...}>): string =>
-  modules.map((m: {+code: string, ...}) => m.code).join('\n');
+const joinModules = (
+  modules: ReadonlyArray<{readonly code: string, ...}>,
+): string =>
+  modules.map((m: {readonly code: string, ...}) => m.code).join('\n');
 
 export {
   combineSourceMaps,

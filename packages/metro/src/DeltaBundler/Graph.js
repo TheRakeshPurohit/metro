@@ -130,10 +130,10 @@ function isWeakOrLazy<T>(
 }
 
 export class Graph<T = MixedOutput> {
-  +entryPoints: ReadonlySet<string>;
-  +transformOptions: TransformInputOptions;
-  +dependencies: Dependencies<T> = new Map();
-  +#importBundleNodes: Map<
+  readonly entryPoints: ReadonlySet<string>;
+  readonly transformOptions: TransformInputOptions;
+  readonly dependencies: Dependencies<T> = new Map();
+  readonly #importBundleNodes: Map<
     string,
     Readonly<{
       inverseDependencies: CountingSet<string>,
@@ -141,9 +141,9 @@ export class Graph<T = MixedOutput> {
   > = new Map();
 
   /// GC state for nodes in the graph (this.dependencies)
-  +#gc: {
-    +color: Map<string, NodeColor>,
-    +possibleCycleRoots: Set<string>,
+  readonly #gc: {
+    readonly color: Map<string, NodeColor>,
+    readonly possibleCycleRoots: Set<string>,
   } = {
     color: new Map(),
     possibleCycleRoots: new Set(),

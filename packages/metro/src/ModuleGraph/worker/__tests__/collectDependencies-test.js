@@ -1754,7 +1754,10 @@ function formatDependencyLocs(
   );
 }
 
-function adjustPosForCodeFrame(pos: {+column: number, +line: number}) {
+function adjustPosForCodeFrame(pos: {
+  readonly column: number,
+  readonly line: number,
+}) {
   return pos ? {...pos, column: pos.column + 1} : pos;
 }
 

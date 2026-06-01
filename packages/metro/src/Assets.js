@@ -20,34 +20,34 @@ import getImageSize from 'image-size';
 import path from 'path';
 
 export type AssetInfo = {
-  +files: Array<string>,
-  +hash: string,
-  +name: string,
-  +scales: Array<number>,
-  +type: string,
+  readonly files: Array<string>,
+  readonly hash: string,
+  readonly name: string,
+  readonly scales: Array<number>,
+  readonly type: string,
 };
 
 export type AssetDataWithoutFiles = {
-  +__packager_asset: boolean,
-  +fileSystemLocation: string,
-  +hash: string,
-  +height: ?number,
-  +httpServerLocation: string,
-  +name: string,
-  +scales: Array<number>,
-  +type: string,
-  +width: ?number,
+  readonly __packager_asset: boolean,
+  readonly fileSystemLocation: string,
+  readonly hash: string,
+  readonly height: ?number,
+  readonly httpServerLocation: string,
+  readonly name: string,
+  readonly scales: Array<number>,
+  readonly type: string,
+  readonly width: ?number,
   ...
 };
 export type AssetDataFiltered = {
-  +__packager_asset: boolean,
-  +hash: string,
-  +height: ?number,
-  +httpServerLocation: string,
-  +name: string,
-  +scales: Array<number>,
-  +type: string,
-  +width: ?number,
+  readonly __packager_asset: boolean,
+  readonly hash: string,
+  readonly height: ?number,
+  readonly httpServerLocation: string,
+  readonly name: string,
+  readonly scales: Array<number>,
+  readonly type: string,
+  readonly width: ?number,
   ...
 };
 
@@ -74,7 +74,7 @@ export function getAssetSize(
   type: string,
   content: Buffer,
   filePath: string,
-): ?{+width: number, +height: number} {
+): ?{readonly width: number, readonly height: number} {
   if (!isAssetTypeAnImage(type)) {
     return null;
   }
@@ -85,7 +85,10 @@ export function getAssetSize(
   return {width, height};
 }
 
-export type AssetData = AssetDataWithoutFiles & {+files: Array<string>, ...};
+export type AssetData = AssetDataWithoutFiles & {
+  readonly files: Array<string>,
+  ...
+};
 
 export type AssetDataPlugin = (
   assetData: AssetData,

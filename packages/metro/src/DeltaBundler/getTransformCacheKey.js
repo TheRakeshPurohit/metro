@@ -26,9 +26,9 @@ type CacheKeyProvider = {
 };
 
 export default function getTransformCacheKey(opts: {
-  +cacheVersion: string,
-  +projectRoot: string,
-  +transformerConfig: TransformerConfig,
+  readonly cacheVersion: string,
+  readonly projectRoot: string,
+  readonly transformerConfig: TransformerConfig,
 }): string {
   const {transformerPath, transformerConfig} = opts.transformerConfig;
 

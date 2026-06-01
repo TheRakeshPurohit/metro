@@ -248,18 +248,18 @@ const WATCHMAN_REQUIRED_CAPABILITIES = [
  */
 export default class FileMap extends EventEmitter {
   #buildPromise: ?Promise<BuildResult>;
-  +#cacheManager: CacheManager;
+  readonly #cacheManager: CacheManager;
   #canUseWatchmanPromise: Promise<boolean>;
   #changeID: number;
   #changeInterval: ?IntervalID;
-  +#console: Console;
-  +#crawlerAbortController: AbortController;
-  +#fileProcessor: FileProcessor;
+  readonly #console: Console;
+  readonly #crawlerAbortController: AbortController;
+  readonly #fileProcessor: FileProcessor;
   #healthCheckInterval: ?IntervalID;
-  +#options: InternalOptions;
-  +#pathUtils: RootPathUtils;
-  +#plugins: ReadonlyArray<IndexedPlugin>;
-  +#startupPerfLogger: ?PerfLogger;
+  readonly #options: InternalOptions;
+  readonly #pathUtils: RootPathUtils;
+  readonly #plugins: ReadonlyArray<IndexedPlugin>;
+  readonly #startupPerfLogger: ?PerfLogger;
   #watcher: ?Watcher;
 
   static create(options: InputOptions): FileMap {

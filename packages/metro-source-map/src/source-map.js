@@ -40,8 +40,8 @@ export type HermesFunctionOffsets = {[number]: ReadonlyArray<number>, ...};
 export type FBSourcesArray = ReadonlyArray<?FBSourceMetadata>;
 export type FBSourceMetadata = [?FBSourceFunctionMap];
 export type FBSourceFunctionMap = {
-  +names: ReadonlyArray<string>,
-  +mappings: string,
+  readonly names: ReadonlyArray<string>,
+  readonly mappings: string,
 };
 
 export type BabelSourceMapSegment = Readonly<{
@@ -55,19 +55,19 @@ export type BabelSourceMapSegment = Readonly<{
 export type FBSegmentMap = {[id: string]: MixedSourceMap, ...};
 
 export type BasicSourceMap = {
-  +file?: string,
-  +mappings: string,
-  +names: Array<string>,
-  +sourceRoot?: string,
-  +sources: Array<string>,
-  +sourcesContent?: Array<?string>,
-  +version: number,
-  +x_facebook_offsets?: Array<number>,
-  +x_metro_module_paths?: Array<string>,
-  +x_facebook_sources?: FBSourcesArray,
-  +x_facebook_segments?: FBSegmentMap,
-  +x_hermes_function_offsets?: HermesFunctionOffsets,
-  +x_google_ignoreList?: Array<number>,
+  readonly file?: string,
+  readonly mappings: string,
+  readonly names: Array<string>,
+  readonly sourceRoot?: string,
+  readonly sources: Array<string>,
+  readonly sourcesContent?: Array<?string>,
+  readonly version: number,
+  readonly x_facebook_offsets?: Array<number>,
+  readonly x_metro_module_paths?: Array<string>,
+  readonly x_facebook_sources?: FBSourcesArray,
+  readonly x_facebook_segments?: FBSegmentMap,
+  readonly x_hermes_function_offsets?: HermesFunctionOffsets,
+  readonly x_google_ignoreList?: Array<number>,
 };
 
 export type IndexMapSection = {
@@ -81,17 +81,17 @@ export type IndexMapSection = {
 };
 
 export type IndexMap = {
-  +file?: string,
-  +mappings?: void, // avoids SourceMap being a disjoint union
-  +sourcesContent?: void,
-  +sections: Array<IndexMapSection>,
-  +version: number,
-  +x_facebook_offsets?: Array<number>,
-  +x_metro_module_paths?: Array<string>,
-  +x_facebook_sources?: void,
-  +x_facebook_segments?: FBSegmentMap,
-  +x_hermes_function_offsets?: HermesFunctionOffsets,
-  +x_google_ignoreList?: void,
+  readonly file?: string,
+  readonly mappings?: void, // avoids SourceMap being a disjoint union
+  readonly sourcesContent?: void,
+  readonly sections: Array<IndexMapSection>,
+  readonly version: number,
+  readonly x_facebook_offsets?: Array<number>,
+  readonly x_metro_module_paths?: Array<string>,
+  readonly x_facebook_sources?: void,
+  readonly x_facebook_segments?: FBSegmentMap,
+  readonly x_hermes_function_offsets?: HermesFunctionOffsets,
+  readonly x_google_ignoreList?: void,
 };
 
 export type MixedSourceMap = IndexMap | BasicSourceMap;
@@ -109,13 +109,13 @@ function fromRawMappingsImpl(
   isBlocking: boolean,
   onDone: Generator => void,
   modules: ReadonlyArray<{
-    +map: ?ReadonlyArray<MetroSourceMapSegmentTuple>,
-    +functionMap: ?FBSourceFunctionMap,
-    +path: string,
-    +source: string,
-    +code: string,
-    +isIgnored: boolean,
-    +lineCount?: number,
+    readonly map: ?ReadonlyArray<MetroSourceMapSegmentTuple>,
+    readonly functionMap: ?FBSourceFunctionMap,
+    readonly path: string,
+    readonly source: string,
+    readonly code: string,
+    readonly isIgnored: boolean,
+    readonly lineCount?: number,
   }>,
   offsetLines: number,
 ): void {
@@ -180,13 +180,13 @@ function fromRawMappingsImpl(
  */
 function fromRawMappings(
   modules: ReadonlyArray<{
-    +map: ?ReadonlyArray<MetroSourceMapSegmentTuple>,
-    +functionMap: ?FBSourceFunctionMap,
-    +path: string,
-    +source: string,
-    +code: string,
-    +isIgnored: boolean,
-    +lineCount?: number,
+    readonly map: ?ReadonlyArray<MetroSourceMapSegmentTuple>,
+    readonly functionMap: ?FBSourceFunctionMap,
+    readonly path: string,
+    readonly source: string,
+    readonly code: string,
+    readonly isIgnored: boolean,
+    readonly lineCount?: number,
   }>,
   offsetLines: number = 0,
 ): Generator {
@@ -207,13 +207,13 @@ function fromRawMappings(
 
 async function fromRawMappingsNonBlocking(
   modules: ReadonlyArray<{
-    +map: ?ReadonlyArray<MetroSourceMapSegmentTuple>,
-    +functionMap: ?FBSourceFunctionMap,
-    +path: string,
-    +source: string,
-    +code: string,
-    +isIgnored: boolean,
-    +lineCount?: number,
+    readonly map: ?ReadonlyArray<MetroSourceMapSegmentTuple>,
+    readonly functionMap: ?FBSourceFunctionMap,
+    readonly path: string,
+    readonly source: string,
+    readonly code: string,
+    readonly isIgnored: boolean,
+    readonly lineCount?: number,
   }>,
   offsetLines: number = 0,
 ): Promise<Generator> {
@@ -283,13 +283,13 @@ function addMappingsForFile(
   generator: Generator,
   mappings: Array<MetroSourceMapSegmentTuple>,
   module: {
-    +code: string,
-    +functionMap: ?FBSourceFunctionMap,
-    +map: ?Array<MetroSourceMapSegmentTuple>,
-    +path: string,
-    +source: string,
-    +isIgnored: boolean,
-    +lineCount?: number,
+    readonly code: string,
+    readonly functionMap: ?FBSourceFunctionMap,
+    readonly map: ?Array<MetroSourceMapSegmentTuple>,
+    readonly path: string,
+    readonly source: string,
+    readonly isIgnored: boolean,
+    readonly lineCount?: number,
   },
   carryOver: number,
 ) {

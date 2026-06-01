@@ -30,12 +30,12 @@ export {
 };
 
 export interface MetroCache {
-  +AutoCleanFileStore: typeof AutoCleanFileStore;
-  +Cache: typeof Cache;
-  +FileStore: typeof FileStore;
-  +HttpGetStore: typeof HttpGetStore;
-  +HttpStore: typeof HttpStore;
-  +stableHash: typeof stableHash;
+  readonly AutoCleanFileStore: typeof AutoCleanFileStore;
+  readonly Cache: typeof Cache;
+  readonly FileStore: typeof FileStore;
+  readonly HttpGetStore: typeof HttpGetStore;
+  readonly HttpStore: typeof HttpStore;
+  readonly stableHash: typeof stableHash;
 }
 
 /**

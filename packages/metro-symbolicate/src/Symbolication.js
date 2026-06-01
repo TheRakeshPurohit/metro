@@ -30,11 +30,11 @@ type SingleMapModuleIds = {
 };
 
 type ContextOptionsInput = {
-  +nameSource?: 'function_names' | 'identifier_names',
-  +inputLineStart?: number,
-  +inputColumnStart?: number,
-  +outputLineStart?: number,
-  +outputColumnStart?: number,
+  readonly nameSource?: 'function_names' | 'identifier_names',
+  readonly inputLineStart?: number,
+  readonly inputColumnStart?: number,
+  readonly outputLineStart?: number,
+  readonly outputColumnStart?: number,
   ...
 };
 
@@ -65,7 +65,9 @@ type ChromeTrace = {
 };
 
 type HermesMinidumpCrashInfo = {
-  +callstack: ReadonlyArray<HermesMinidumpStackFrame | NativeCodeStackFrame>,
+  readonly callstack: ReadonlyArray<
+    HermesMinidumpStackFrame | NativeCodeStackFrame,
+  >,
   ...
 };
 
@@ -81,7 +83,7 @@ type HermesMinidumpStackFrame = Readonly<{
 }>;
 
 type HermesCoverageInfo = {
-  +executedFunctions: ReadonlyArray<HermesCoverageStackFrame>,
+  readonly executedFunctions: ReadonlyArray<HermesCoverageStackFrame>,
 };
 
 type HermesCoverageStackFrame = Readonly<{
@@ -114,12 +116,12 @@ const UNKNOWN_MODULE_IDS: SingleMapModuleIds = {
 };
 
 class SymbolicationContext<ModuleIdsT> {
-  +options: {
-    +nameSource: 'function_names' | 'identifier_names',
-    +inputLineStart: number,
-    +inputColumnStart: number,
-    +outputLineStart: number,
-    +outputColumnStart: number,
+  readonly options: {
+    readonly nameSource: 'function_names' | 'identifier_names',
+    readonly inputLineStart: number,
+    readonly inputColumnStart: number,
+    readonly outputLineStart: number,
+    readonly outputColumnStart: number,
     ...
   };
 
@@ -496,20 +498,20 @@ class SymbolicationContext<ModuleIdsT> {
 }
 
 class SingleMapSymbolicationContext extends SymbolicationContext<SingleMapModuleIds> {
-  +_segments: {
-    +[id: string]: {
+  readonly _segments: {
+    readonly [id: string]: {
       // $FlowFixMe[value-as-type]
-      +consumer: SourceMapConsumer,
-      +moduleOffsets: ReadonlyArray<number>,
-      +sourceFunctionsConsumer: ?SourceMetadataMapConsumer,
-      +hermesOffsets: ?HermesFunctionOffsets,
-      +googleIgnoreListConsumer: GoogleIgnoreListConsumer,
+      readonly consumer: SourceMapConsumer,
+      readonly moduleOffsets: ReadonlyArray<number>,
+      readonly sourceFunctionsConsumer: ?SourceMetadataMapConsumer,
+      readonly hermesOffsets: ?HermesFunctionOffsets,
+      readonly googleIgnoreListConsumer: GoogleIgnoreListConsumer,
     },
     ...
   };
-  +_legacyFormat: boolean;
+  readonly _legacyFormat: boolean;
   // $FlowFixMe[value-as-type]
-  +_SourceMapConsumer: SourceMapConsumer;
+  readonly _SourceMapConsumer: SourceMapConsumer;
 
   constructor(
     // $FlowFixMe[value-as-type]
@@ -726,10 +728,10 @@ class SingleMapSymbolicationContext extends SymbolicationContext<SingleMapModule
 }
 
 class DirectorySymbolicationContext extends SymbolicationContext<string> {
-  +_fileMaps: Map<string, SingleMapSymbolicationContext>;
-  +_rootDir: string;
+  readonly _fileMaps: Map<string, SingleMapSymbolicationContext>;
+  readonly _rootDir: string;
   // $FlowFixMe[value-as-type]
-  +_SourceMapConsumer: SourceMapConsumer;
+  readonly _SourceMapConsumer: SourceMapConsumer;
 
   constructor(
     // $FlowFixMe[value-as-type]

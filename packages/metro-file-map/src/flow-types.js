@@ -181,13 +181,13 @@ export type FileMapPluginInitOptions<
     ): Iterable<{
       baseName: string,
       canonicalPath: string,
-      +pluginData: ?PerFileData,
+      readonly pluginData: ?PerFileData,
     }>,
     lookup(
       mixedPath: string,
     ):
       | {exists: false}
-      | {exists: true, type: 'f', +pluginData: PerFileData}
+      | {exists: true, type: 'f', readonly pluginData: PerFileData}
       | {exists: true, type: 'd'},
   }>,
   pluginState: ?SerializableState,
@@ -215,7 +215,7 @@ export interface FileMapPlugin<
   in SerializableState extends void | V8Serializable = void | V8Serializable,
   in PerFileData extends void | V8Serializable = void | V8Serializable,
 > {
-  +name: string;
+  readonly name: string;
   initialize(
     initOptions: FileMapPluginInitOptions<SerializableState, PerFileData>,
   ): Promise<void>;
@@ -460,12 +460,12 @@ export interface FileSystemListener {
 }
 
 export interface ReadonlyFileSystemChanges<out T = FileMetadata> {
-  +addedDirectories: Iterable<CanonicalPath>;
-  +removedDirectories: Iterable<CanonicalPath>;
+  readonly addedDirectories: Iterable<CanonicalPath>;
+  readonly removedDirectories: Iterable<CanonicalPath>;
 
-  +addedFiles: Iterable<Readonly<[CanonicalPath, T]>>;
-  +modifiedFiles: Iterable<Readonly<[CanonicalPath, T]>>;
-  +removedFiles: Iterable<Readonly<[CanonicalPath, T]>>;
+  readonly addedFiles: Iterable<Readonly<[CanonicalPath, T]>>;
+  readonly modifiedFiles: Iterable<Readonly<[CanonicalPath, T]>>;
+  readonly removedFiles: Iterable<Readonly<[CanonicalPath, T]>>;
 }
 
 export interface MutableFileSystem extends FileSystem {
