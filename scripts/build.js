@@ -24,12 +24,10 @@
 
 const getPackages = require('./_getPackages');
 const babel = require('@babel/core');
-const chalk = require('chalk');
 const fs = require('fs');
-const micromatch = require('micromatch');
 const path = require('path');
 const prettier = require('prettier');
-const {globSync} = require('tinyglobby');
+const {styleText} = require('util');
 
 const SRC_DIR = 'src';
 const TYPES_DIR = 'types';
@@ -43,7 +41,7 @@ const fixedWidth = function (str /*: string*/) {
   const strs = str.match(new RegExp(`(.{1,${WIDTH}})`, 'g')) || [str];
   let lastString = strs[strs.length - 1];
   if (lastString.length < WIDTH) {
-    lastString += Array(WIDTH - lastString.length).join(chalk.dim('.'));
+    lastString += Array(WIDTH - lastString.length).join(styleText('dim', '.'));
   }
   return strs.slice(0, -1).concat(lastString).join('\n');
 };
@@ -67,11 +65,16 @@ function buildPackage(p /*: string */) {
   const srcDir = path.resolve(p, SRC_DIR);
   const typesDir = path.resolve(p, TYPES_DIR);
   const buildDir = path.resolve(p, BUILD_DIR);
-  const pattern = path.resolve(srcDir, '**/*');
-  const files = globSync(pattern, {absolute: true, onlyFiles: true});
-  const typescriptDefs = globSync(path.join(typesDir, '**/*.d.ts'), {
-    absolute: true,
-  });
+  const files = fs
+    .globSync(path.join(srcDir, '**/*'), {withFileTypes: true /*:: as true */})
+    .filter(d => d.isFile())
+    .map(d => path.join(d.parentPath, d.name.toString()));
+  const typescriptDefs = fs
+    .globSync(path.join(typesDir, '**/*.d.ts'), {
+      withFileTypes: true /*:: as true */,
+    })
+    .filter(d => d.isFile())
+    .map(d => path.join(d.parentPath, d.name.toString()));
 
   process.stdout.write(fixedWidth(`${path.basename(p)}\n`));
 
@@ -80,27 +83,27 @@ function buildPackage(p /*: string */) {
     fs.copyFileSync(file, file.replace(typesDir, buildDir)),
   );
 
-  process.stdout.write(`[  ${chalk.green('OK')}  ]\n`);
+  process.stdout.write(`[  ${styleText('green', 'OK')}  ]\n`);
 }
 
 async function buildFile(file /*: string */, silent /*: number | boolean */) {
   const destPath = getBuildPath(file, BUILD_DIR);
 
   fs.mkdirSync(path.dirname(destPath), {recursive: true});
-  if (micromatch.isMatch(file, IGNORE_PATTERN)) {
+  if (path.matchesGlob(file, IGNORE_PATTERN)) {
     silent ||
       process.stdout.write(
-        chalk.dim('  \u2022 ') +
+        styleText('dim', '  \u2022 ') +
           path.relative(PACKAGES_DIR, file) +
           ' (ignore)\n',
       );
-  } else if (!micromatch.isMatch(file, JS_FILES_PATTERN)) {
+  } else if (!path.matchesGlob(file, JS_FILES_PATTERN)) {
     fs.createReadStream(file).pipe(fs.createWriteStream(destPath));
     silent ||
       process.stdout.write(
-        chalk.red('  \u2022 ') +
+        styleText('red', '  \u2022 ') +
           path.relative(PACKAGES_DIR, file) +
-          chalk.red(' \u21D2 ') +
+          styleText('red', ' \u21D2 ') +
           path.relative(PACKAGES_DIR, destPath) +
           ' (copy)' +
           '\n',
@@ -119,9 +122,9 @@ async function buildFile(file /*: string */, silent /*: number | boolean */) {
     }
     silent ||
       process.stdout.write(
-        chalk.green('  \u2022 ') +
+        styleText('green', '  \u2022 ') +
           path.relative(PACKAGES_DIR, file) +
-          chalk.green(' \u21D2 ') +
+          styleText('green', ' \u21D2 ') +
           path.relative(PACKAGES_DIR, destPath) +
           '\n',
       );
@@ -134,7 +137,7 @@ if (files.length) {
   files.forEach(buildFile);
 } else {
   process.stdout.write(
-    chalk.bold.inverse('Building packages') +
+    styleText(['bold', 'inverse'], 'Building packages') +
       ' (using Babel v' +
       babel.version +
       ')\n',

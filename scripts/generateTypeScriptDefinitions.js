@@ -21,8 +21,6 @@ import path from 'path';
 import * as prettier from 'prettier';
 // $FlowFixMe[untyped-import] in OSS only
 import SignedSource from 'signedsource';
-// $FlowFixMe[untyped-import] in OSS only
-import {globSync} from 'tinyglobby';
 
 const WORKSPACE_ROOT = path.resolve(__dirname, '..');
 
@@ -32,18 +30,18 @@ const SRC_DIR = 'src';
 export const AUTO_GENERATED_PATTERNS: ReadonlyArray<string> = ['packages/**'];
 
 // Globs of paths for which we do not generate TypeScript definitions,
-// matched against candidate .js files
+// matched during glob traversal. A directory match ignores all contents.
 const IGNORED_PATTERNS = [
-  '**/__tests__/**',
-  '**/__flowtests__/**',
-  '**/__mocks__/**',
-  '**/__fixtures__/**',
-  '**/node_modules/**',
-  'packages/metro-babel-register/**',
-  'packages/*/build/**',
+  '**/__tests__',
+  '**/__flowtests__',
+  '**/__mocks__',
+  '**/__fixtures__',
+  '**/node_modules',
+  'packages/metro-babel-register',
+  'packages/*/build',
   'packages/metro/src/cli.js',
-  'packages/**/third-party/**',
-  'packages/metro/src/integration_tests/**',
+  'packages/**/third-party',
+  'packages/metro/src/integration_tests',
   'packages/metro-runtime/**/!(types*).js',
 ];
 
@@ -78,13 +76,30 @@ export async function generateTsDefsForJsGlobs(
     Array.from(
       globPatterns
         .flatMap(pattern =>
-          globSync(pattern, {
-            ignore: IGNORED_PATTERNS,
-            cwd: WORKSPACE_ROOT,
-          }),
+          fs
+            .globSync(pattern, {
+              exclude: dirent =>
+                IGNORED_PATTERNS.some(ignorePattern =>
+                  path.matchesGlob(
+                    path.relative(
+                      WORKSPACE_ROOT,
+                      path.resolve(dirent.parentPath, dirent.name.toString()),
+                    ),
+                    ignorePattern,
+                  ),
+                ),
+              cwd: WORKSPACE_ROOT,
+              withFileTypes: true as true,
+            })
+            .filter(dirent => dirent.isFile())
+            .map(dirent =>
+              path.relative(
+                WORKSPACE_ROOT,
+                path.resolve(dirent.parentPath, dirent.name.toString()),
+              ),
+            ),
         )
-        .reduce((toProcess, posixFilePath) => {
-          const filePath = path.normalize(posixFilePath);
+        .reduce((toProcess, filePath) => {
           if (filePath.endsWith('.flow.js')) {
             // For .flow.js files, record the `.flow.js` as the source for the
             // corresponding `.js` file, which is enforced to be a transparent
