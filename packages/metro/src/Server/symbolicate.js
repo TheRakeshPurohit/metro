@@ -37,15 +37,22 @@ export type StackFrameOutput = Readonly<IntermediateStackFrame>;
 type ExplodedSourceMapModule = ExplodedSourceMap[number];
 type Position = {readonly line1Based: number, column0Based: number};
 
+// Cache of per-line indices, keyed on the VlqMap held by the module graph. A
+// WeakMap lets an index outlive the request that built it, so later requests
+// resolving frames in the same module reuse it, and releases it automatically
+// when the module leaves the graph. The index references the graph's existing
+// mappings string and adds only O(lines) integers, so retaining it alongside
+// the graph stays cheap.
+const lineIndexCache: WeakMap<VlqMap, LineIndexedMappings> = new WeakMap();
+
 // Resolve a generated (line, column) within a module to its original position.
 // Tuple-backed modules keep their decoded segments, so we search them directly;
-// VLQ-backed modules go through a compact per-line `LineIndexedMappings` (cached
-// for the request) that decodes only the target line. Byte-identical either way.
+// VLQ-backed modules go through a compact per-line `LineIndexedMappings` that
+// decodes only the target line. Byte-identical either way.
 function originalPositionInModule(
   map: Array<MetroSourceMapSegmentTuple> | VlqMap,
   generatedLine1Based: number,
   generatedColumn0Based: number,
-  decodedMapCache: Map<VlqMap, LineIndexedMappings>,
 ): ?Position {
   if (Array.isArray(map)) {
     return originalPositionInTuples(
@@ -54,10 +61,10 @@ function originalPositionInModule(
       generatedColumn0Based,
     );
   }
-  let decoded = decodedMapCache.get(map);
+  let decoded = lineIndexCache.get(map);
   if (decoded == null) {
     decoded = new LineIndexedMappings(map.mappings);
-    decodedMapCache.set(map, decoded);
+    lineIndexCache.set(map, decoded);
   }
   return decoded.originalPositionFor(
     generatedLine1Based,
@@ -140,11 +147,6 @@ export default async function symbolicate(
     (Position) => ?string,
   >();
 
-  // Dedupes VLQ decoding across frames that resolve to the same module. Scoped
-  // to this request so decoded maps are released once it completes, rather than
-  // being retained alongside the long-lived module graph.
-  const decodedMapCache = new Map<VlqMap, LineIndexedMappings>();
-
   function findModule(frame: StackFrameInput): ?ExplodedSourceMapModule {
     const map = mapsByUrl.get(frame.file);
     if (!map || frame.lineNumber == null) {
@@ -174,7 +176,6 @@ export default async function symbolicate(
       module.map,
       lineNumber - module.firstLine1Based + 1,
       column,
-      decodedMapCache,
     );
   }
 
