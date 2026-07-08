@@ -16,6 +16,9 @@ module.exports = {
     escapeString: true,
     printBasicPrototype: true,
   },
+  moduleNameMapper: {
+    '^prettier$': '<rootDir>/scripts/nativePrettier.js',
+  },
   testEnvironment: 'node',
   testRegex: '/__tests__/.*-test\\.js$',
   fakeTimers: {
