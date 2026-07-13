@@ -79,7 +79,11 @@ declare class Clients {
 }
 
 type ServiceWorkerState =
-  'installing' | 'installed' | 'activating' | 'activated' | 'redundant';
+  | 'installing'
+  | 'installed'
+  | 'activating'
+  | 'activated'
+  | 'redundant';
 
 declare class ServiceWorker extends EventTarget {
   scriptURL: string;

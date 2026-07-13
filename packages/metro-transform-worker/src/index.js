@@ -82,7 +82,8 @@ export type MinifierResult = {
 };
 
 export type Minifier = MinifierOptions =>
-  MinifierResult | Promise<MinifierResult>;
+  | MinifierResult
+  | Promise<MinifierResult>;
 
 export type Type = 'script' | 'module' | 'asset';
 

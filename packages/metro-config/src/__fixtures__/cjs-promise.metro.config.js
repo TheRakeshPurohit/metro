@@ -12,8 +12,6 @@
 import type {InputConfigT} from '../types';
 */
 
-const config /*: Promise<InputConfigT> */ = Promise.resolve({
+module.exports = Promise.resolve({
   cacheVersion: 'cjs-promise-config',
-});
-
-module.exports = config;
+}) /*:: as Promise<InputConfigT> */;

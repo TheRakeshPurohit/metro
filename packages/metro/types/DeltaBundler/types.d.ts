@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<c7dc27c87dd93b6c07980e669cc74d03>>
+ * @generated SignedSource<<feddf9cb00d4a097d348531773c9f0bd>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/types.js
@@ -62,7 +62,8 @@ export type ResolvedDependency = Readonly<{
   data: TransformResultDependency;
 }>;
 export type Dependency =
-  ResolvedDependency | Readonly<{data: TransformResultDependency}>;
+  | ResolvedDependency
+  | Readonly<{data: TransformResultDependency}>;
 export type Module<T = MixedOutput> = Readonly<{
   dependencies: Map<string, Dependency>;
   inverseDependencies: CountingSet<string>;
@@ -119,7 +120,8 @@ export type AllowOptionalDependenciesWithOptions = {
   readonly exclude: Array<string>;
 };
 export type AllowOptionalDependencies =
-  boolean | AllowOptionalDependenciesWithOptions;
+  | boolean
+  | AllowOptionalDependenciesWithOptions;
 export type BundlerResolution = Readonly<{
   type: 'sourceFile';
   filePath: string;
@@ -129,7 +131,9 @@ export type Options<T = MixedOutput> = Readonly<{
   transform: TransformFn<T>;
   transformOptions: TransformInputOptions;
   onProgress:
-    null | undefined | ((numProcessed: number, total: number) => unknown);
+    | null
+    | undefined
+    | ((numProcessed: number, total: number) => unknown);
   lazy: boolean;
   unstable_allowRequireContext: boolean;
   unstable_enablePackageExports: boolean;

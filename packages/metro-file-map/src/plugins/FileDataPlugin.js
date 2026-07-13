@@ -30,7 +30,8 @@ export type FileDataPluginOptions = Readonly<{
  */
 export default class FileDataPlugin<
   in PerFileData extends void | V8Serializable = void | V8Serializable,
-> implements FileMapPlugin<null, PerFileData> {
+> implements FileMapPlugin<null, PerFileData>
+{
   readonly name: string;
 
   #worker: FileMapPluginWorker;

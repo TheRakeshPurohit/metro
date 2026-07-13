@@ -20,7 +20,6 @@ import type {MetadataWorker, WorkerMessage, V8Serializable, DependencyExtractor}
 */
 
 module.exports = class DependencyExtractorWorker /*:: implements MetadataWorker */ {
-  // prettier-ignore
   /*:: readonly  */ #dependencyExtractor /*: ?DependencyExtractor['extract'] */;
 
   constructor(

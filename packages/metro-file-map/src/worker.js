@@ -31,7 +31,6 @@ function sha1hex(content /*: string | Buffer */) /*: string */ {
 }
 
 class Worker {
-  // prettier-ignore
   #plugins /*: ReadonlyArray<MetadataWorker> */;
 
   constructor({plugins = []} /*: WorkerSetupArgs */) {
@@ -45,8 +44,8 @@ class Worker {
   }
 
   processFile(data /*: WorkerMessage */) /*: WorkerMetadata */ {
-    let content;
-    let sha1;
+    let content /*: ?Buffer */;
+    let sha1 /*: WorkerMetadata['sha1'] */;
 
     const {computeSha1, filePath, pluginsToRun} = data;
 

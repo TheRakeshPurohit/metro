@@ -202,7 +202,8 @@ type SymbolicatorConfigT = {
     readonly methodName: ?string,
     ...
   }) =>
-    ?{readonly collapse?: boolean} | Promise<?{readonly collapse?: boolean}>,
+    | ?{readonly collapse?: boolean}
+    | Promise<?{readonly collapse?: boolean}>,
   customizeStack: (
     Array<IntermediateStackFrame>,
     unknown,

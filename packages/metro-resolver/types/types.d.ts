@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<b47b1c8f5d68be3fecc0c79b3922976c>>
+ * @generated SignedSource<<771e92888a5ac88992a2bea81426ad71>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-resolver/src/types.js
@@ -21,7 +21,9 @@ export type Result<TResolution, TCandidates> =
   | {readonly type: 'resolved'; readonly resolution: TResolution}
   | {readonly type: 'failed'; readonly candidates: TCandidates};
 export type Resolution =
-  FileResolution | VirtualResolution | {readonly type: 'empty'};
+  | FileResolution
+  | VirtualResolution
+  | {readonly type: 'empty'};
 export type SourceFileResolution = Readonly<{
   type: 'sourceFile';
   filePath: string;
@@ -61,7 +63,8 @@ export type ExportsLikeMap = Readonly<{
 /** "exports" mapping where values may be legacy Node.js <13.7 array format. */
 export type ExportMapWithFallbacks = Readonly<{
   [subpath: string]:
-    ExportsLikeMap[keyof ExportsLikeMap] | ExportValueWithFallback;
+    | ExportsLikeMap[keyof ExportsLikeMap]
+    | ExportValueWithFallback;
 }>;
 /** "exports" subpath value when in legacy Node.js <13.7 array format. */
 export type ExportValueWithFallback =

@@ -22,7 +22,8 @@ declare module 'jest-worker' {
   declare export var PARENT_MESSAGE_MEM_USAGE: 4;
 
   declare export type PARENT_MESSAGE_ERROR =
-    typeof PARENT_MESSAGE_CLIENT_ERROR | typeof PARENT_MESSAGE_SETUP_ERROR;
+    | typeof PARENT_MESSAGE_CLIENT_ERROR
+    | typeof PARENT_MESSAGE_SETUP_ERROR;
 
   declare export type WorkerPoolOptions = Readonly<{
     setupArgs: ReadonlyArray<unknown>,
@@ -186,12 +187,18 @@ declare module 'jest-worker' {
      */
     on?: {
       'state-change':
-        OnStateChangeHandler | ReadonlyArray<OnStateChangeHandler>,
+        | OnStateChangeHandler
+        | ReadonlyArray<OnStateChangeHandler>,
     },
   }>;
 
   declare export type WorkerState =
-    'starting' | 'ok' | 'oom' | 'restarting' | 'shutting-down' | 'shut-down';
+    | 'starting'
+    | 'ok'
+    | 'oom'
+    | 'restarting'
+    | 'shutting-down'
+    | 'shut-down';
 
   declare export type OnStateChangeHandler = (
     state: WorkerState,

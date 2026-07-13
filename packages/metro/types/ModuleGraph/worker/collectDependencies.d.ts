@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<029e6f78b37b3e313b3026a478ba5065>>
+ * @generated SignedSource<<f072a86187014259ece27c02d9abfd6a>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/ModuleGraph/worker/collectDependencies.js
@@ -62,7 +62,9 @@ export type State = {
   /** Enable `require.context` statements which can be used to import multiple files in a directory. */
   unstable_allowRequireContext: boolean;
   unstable_isESMImportAtSource:
-    null | undefined | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
+    | null
+    | undefined
+    | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
 };
 export type Options = Readonly<{
   asyncRequireModulePath: string;
@@ -75,7 +77,9 @@ export type Options = Readonly<{
   /** Enable `require.context` statements which can be used to import multiple files in a directory. */
   unstable_allowRequireContext: boolean;
   unstable_isESMImportAtSource?:
-    null | undefined | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
+    | null
+    | undefined
+    | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
 }>;
 export type CollectedDependencies = Readonly<{
   ast: BabelNodeFile;

@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<025143e35fec82a72904b125f7ebdd1e>>
+ * @generated SignedSource<<6ff16bb65883df0a1cb70e6ca94461eb>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/flow-types.js
@@ -439,7 +439,8 @@ export type WatcherBackendOptions = Readonly<{
   dot: boolean;
 }>;
 export type WatchmanClockSpec =
-  string | Readonly<{scm: Readonly<{'mergebase-with': string}>}>;
+  | string
+  | Readonly<{scm: Readonly<{'mergebase-with': string}>}>;
 export type WatchmanClocks = Map<Path, WatchmanClockSpec>;
 export type WorkerMessage = Readonly<{
   computeSha1: boolean;
