@@ -66,7 +66,7 @@ export interface CacheManager {
 }
 
 export interface CacheManagerEventSource {
-  onChange(listener: () => void): () => void /* unsubscribe */;
+  onChange(listener: () => void): () => void; /* unsubscribe */
 }
 
 export type CacheManagerFactory = (
@@ -550,8 +550,7 @@ export type WatcherBackendOptions = Readonly<{
 }>;
 
 export type WatchmanClockSpec =
-  | string
-  | Readonly<{scm: Readonly<{'mergebase-with': string}>}>;
+  string | Readonly<{scm: Readonly<{'mergebase-with': string}>}>;
 export type WatchmanClocks = Map<Path, WatchmanClockSpec>;
 
 export type WorkerMessage = Readonly<{

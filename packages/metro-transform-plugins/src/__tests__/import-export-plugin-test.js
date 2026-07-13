@@ -15,9 +15,9 @@ import collectDependencies from 'metro/private/ModuleGraph/worker/collectDepende
 
 const {compare, transformToAst} = require('../__mocks__/test-helpers');
 const importExportPlugin = require('../import-export-plugin');
-const generate = require('@babel/generator').default;
 // $FlowFixMe[untyped-import] @babel/code-frame
 const {codeFrameColumns} = require('@babel/code-frame');
+const generate = require('@babel/generator').default;
 const vm = require('vm');
 
 const opts = {

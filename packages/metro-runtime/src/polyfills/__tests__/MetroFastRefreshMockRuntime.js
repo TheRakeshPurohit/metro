@@ -10,7 +10,7 @@
  */
 
 import type {DefineFn, RequireFn} from '../require';
-import type * as ReactModule from 'react';
+import typeof * as ReactModule from 'react';
 import typeof ReactRefreshRuntime from 'react-refresh/runtime';
 import typeof ReactTestRenderer from 'react-test-renderer';
 
@@ -47,7 +47,7 @@ export class Runtime {
    * The instance of React running in this runtime. Conceptually equivalent to
    * require('react').
    */
-  React: typeof ReactModule;
+  React: ReactModule;
 
   /**
    * The React renderer running in this runtime. Conceptually equivalent to

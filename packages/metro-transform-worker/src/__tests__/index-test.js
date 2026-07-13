@@ -35,9 +35,8 @@ import typeof FSType from 'fs';
 const {Buffer} = require('buffer');
 const path = require('path');
 
-const babelTransformerPath = require.resolve(
-  '@react-native/metro-babel-transformer',
-);
+const babelTransformerPath =
+  require.resolve('@react-native/metro-babel-transformer');
 
 const transformerContents = (() =>
   require('fs').readFileSync(babelTransformerPath))();

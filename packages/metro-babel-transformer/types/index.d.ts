@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<346524f1f00a1d545b2f71e3afa6df07>>
+ * @generated SignedSource<<3081ffd627e019f64266e1e753c9993c>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-babel-transformer/src/index.js
@@ -63,9 +63,7 @@ export type MetroBabelFileMetadata = Omit<
       | {
           functionMap?: null | undefined | BabelFileFunctionMapMetadata;
           unstable_importDeclarationLocs?:
-            | null
-            | undefined
-            | BabelFileImportLocsMetadata;
+            null | undefined | BabelFileImportLocsMetadata;
         };
   }
 > & {
@@ -75,9 +73,7 @@ export type MetroBabelFileMetadata = Omit<
     | {
         functionMap?: null | undefined | BabelFileFunctionMapMetadata;
         unstable_importDeclarationLocs?:
-          | null
-          | undefined
-          | BabelFileImportLocsMetadata;
+          null | undefined | BabelFileImportLocsMetadata;
       };
 };
 export type BabelTransformerCacheKeyOptions = Readonly<{

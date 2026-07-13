@@ -57,16 +57,14 @@ type RangeMapping = {
 };
 type FunctionMapVisitor = {
   enter: (
-    path:
-      | NodePath<BabelNodeProgram>
-      | NodePath<BabelNodeFunction>
-      | NodePath<BabelNodeClass>,
+    path: | NodePath<BabelNodeProgram>
+    | NodePath<BabelNodeFunction>
+    | NodePath<BabelNodeClass>,
   ) => void,
   exit: (
-    path:
-      | NodePath<BabelNodeProgram>
-      | NodePath<BabelNodeFunction>
-      | NodePath<BabelNodeClass>,
+    path: | NodePath<BabelNodeProgram>
+    | NodePath<BabelNodeFunction>
+    | NodePath<BabelNodeClass>,
   ) => void,
 };
 export type Context = {filename?: ?string, ...};

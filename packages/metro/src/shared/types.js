@@ -25,8 +25,7 @@ import type {
 } from 'metro-transform-worker';
 
 type MetroSourceMapOrMappings =
-  | MixedSourceMap
-  | Array<MetroSourceMapSegmentTuple>;
+  MixedSourceMap | Array<MetroSourceMapSegmentTuple>;
 
 export enum SourcePathsMode {
   /* Use absolute paths for source files in source maps (default). */

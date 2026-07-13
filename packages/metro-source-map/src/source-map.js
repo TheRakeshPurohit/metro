@@ -32,9 +32,7 @@ type SourceMapping = [number, number, number, number];
 type SourceMappingWithName = [number, number, number, number, string];
 
 export type MetroSourceMapSegmentTuple =
-  | SourceMappingWithName
-  | SourceMapping
-  | GeneratedCodeMapping;
+  SourceMappingWithName | SourceMapping | GeneratedCodeMapping;
 
 // A single segment of a standard "decoded" source map (as produced by
 // `@babel/generator`'s `result.decodedMap` / `@jridgewell/gen-mapping`),

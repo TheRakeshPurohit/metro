@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<a3a499a683d5ea557e429489802510ae>>
+ * @generated SignedSource<<fb542fb95c8411d277b0af7e6f17c436>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/source-map.js
@@ -32,9 +32,7 @@ type GeneratedCodeMapping = [number, number];
 type SourceMapping = [number, number, number, number];
 type SourceMappingWithName = [number, number, number, number, string];
 export type MetroSourceMapSegmentTuple =
-  | SourceMappingWithName
-  | SourceMapping
-  | GeneratedCodeMapping;
+  SourceMappingWithName | SourceMapping | GeneratedCodeMapping;
 type BabelDecodedMapSegment =
   | [number]
   | [number, number, number, number]
@@ -98,8 +96,7 @@ export type IndexMap = {
 export type MixedSourceMap = IndexMap | BasicSourceMap;
 export type RawMappingsModule = {
   readonly map:
-    | (null | undefined | ReadonlyArray<MetroSourceMapSegmentTuple>)
-    | VlqMap;
+    (null | undefined | ReadonlyArray<MetroSourceMapSegmentTuple>) | VlqMap;
   readonly functionMap: null | undefined | FBSourceFunctionMap;
   readonly path: string;
   readonly source: string;

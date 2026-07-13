@@ -38,9 +38,8 @@ const getDefaultValues = (projectRoot: ?string): ConfigT => ({
     blockList: exclusionList(),
     dependencyExtractor: undefined,
     disableHierarchicalLookup: false,
-    emptyModulePath: require.resolve(
-      'metro-runtime/src/modules/empty-module.js',
-    ),
+    emptyModulePath:
+      require.resolve('metro-runtime/src/modules/empty-module.js'),
     enableGlobalPackages: false,
     extraNodeModules: {},
     hasteImplModulePath: undefined,

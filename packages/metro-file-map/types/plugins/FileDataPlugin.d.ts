@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<8833f226ec9fa3a4c96370862ca4d59f>>
+ * @generated SignedSource<<730f440d8875cfd344bcc54a629cc016>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/plugins/FileDataPlugin.js
@@ -36,8 +36,7 @@ export type FileDataPluginOptions = Readonly<
  */
 declare class FileDataPlugin<
   PerFileData extends void | V8Serializable = void | V8Serializable,
-> implements FileMapPlugin<null, PerFileData>
-{
+> implements FileMapPlugin<null, PerFileData> {
   readonly name: string;
   constructor($$PARAM_0$$: FileDataPluginOptions);
   initialize(
