@@ -80,18 +80,9 @@ export default class CountingSet<T> implements ReadOnlyCountingSet<T> {
   }
 
   // Iterate over unique entries
-  // $FlowFixMe[unsupported-syntax]
   [Symbol.iterator](): Iterator<T> {
     return this.values();
   }
-
-  /*::
-  // For Flow's benefit
-  // $FlowFixMe[duplicate-class-member]
-  @@iterator(): Iterator<T> {
-    return this.values();
-  }
-  */
 
   // Number of unique entries
   // $FlowFixMe[unsafe-getters-setters]
