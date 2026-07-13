@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<ef37054bf63dff008ccc8b58a2411597>>
+ * @generated SignedSource<<0dfc033acd242f254f12c9134902361a>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/ModuleGraph/worker/JsFileWrapping.js
@@ -16,15 +16,13 @@
 
 import type {File as BabelNodeFile} from '@babel/types';
 
-declare const WRAP_NAME: '$$_REQUIRE';
 declare function wrapModule(
   fileAst: BabelNodeFile,
   importDefaultName: string,
   importAllName: string,
   dependencyMapName: string,
   globalPrefix: string,
-  skipRequireRename: boolean,
-  $$PARAM_6$$?: Readonly<{unstable_useStaticHermesModuleFactory?: boolean}>,
+  $$PARAM_5$$?: Readonly<{unstable_useStaticHermesModuleFactory?: boolean}>,
 ): {ast: BabelNodeFile; requireName: string};
 declare function wrapPolyfill(fileAst: BabelNodeFile): BabelNodeFile;
 declare function jsonToCommonJS(source: string): string;
@@ -33,4 +31,4 @@ declare function wrapJson(
   globalPrefix: string,
   unstable_useStaticHermesModuleFactory?: boolean,
 ): string;
-export {WRAP_NAME, wrapJson, jsonToCommonJS, wrapModule, wrapPolyfill};
+export {wrapJson, jsonToCommonJS, wrapModule, wrapPolyfill};

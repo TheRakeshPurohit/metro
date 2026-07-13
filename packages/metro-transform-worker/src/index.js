@@ -112,8 +112,6 @@ export type JsTransformerConfig = Readonly<{
   unstable_memoizeInlineRequires?: boolean,
   /** With inlineRequires, do not memoize these module specifiers */
   unstable_nonMemoizedInlineRequires?: ReadonlyArray<string>,
-  /** Whether to rename scoped `require` functions to `_$$_REQUIRE`, usually an extraneous operation when serializing to iife (default). */
-  unstable_renameRequire?: boolean,
 }>;
 
 export type {CustomTransformOptions} from 'metro-babel-transformer';
@@ -427,10 +425,6 @@ async function transformJS(
         importAll,
         dependencyMapName,
         config.globalPrefix,
-        // TODO: This config is optional to allow its introduction in a minor
-        // release. It should be made non-optional in ConfigT or removed in
-        // future.
-        config.unstable_renameRequire === false,
         {
           unstable_useStaticHermesModuleFactory: Boolean(
             options.customTransformOptions

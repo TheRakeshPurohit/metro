@@ -43,7 +43,7 @@ const transformerContents = (() =>
   require('fs').readFileSync(babelTransformerPath))();
 
 const HEADER_DEV =
-  '__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {';
+  '__d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {';
 const HEADER_PROD = '__d(function (g, r, i, a, m, e, d) {';
 
 let fs: FSType;
@@ -159,11 +159,11 @@ test('transforms a module with dependencies', async () => {
       HEADER_DEV,
       '  "use strict";',
       '',
-      '  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");',
-      '  var _c = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "./c"));',
-      '  _$$_REQUIRE(_dependencyMap[2], "./a");',
+      '  var _interopRequireDefault = require(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");',
+      '  var _c = _interopRequireDefault(require(_dependencyMap[1], "./c"));',
+      '  require(_dependencyMap[2], "./a");',
       '  arbitrary(code);',
-      '  var b = _$$_REQUIRE(_dependencyMap[3], "b");',
+      '  var b = require(_dependencyMap[3], "b");',
       '});',
     ].join('\n'),
   );
@@ -482,7 +482,7 @@ test('allows disabling the normalizePseudoGlobals pass when minifying', async ()
     {...baseTransformOptions, dev: false, minify: true},
   );
   expect(result.output[0].data.code).toMatchInlineSnapshot(`
-    "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+    "__d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
       minified(code);
     });"
   `);
@@ -497,7 +497,7 @@ test('allows emitting compact code when not minifying', async () => {
     {...baseTransformOptions, dev: false, minify: false},
   );
   expect(result.output[0].data.code).toMatchInlineSnapshot(
-    `"__d(function(global,_$$_REQUIRE,_$$_IMPORT_DEFAULT,_$$_IMPORT_ALL,module,exports,_dependencyMap){arbitrary(code);});"`,
+    `"__d(function(global,require,_$$_IMPORT_DEFAULT,_$$_IMPORT_ALL,module,exports,_dependencyMap){arbitrary(code);});"`,
   );
 });
 
@@ -515,7 +515,7 @@ test('skips minification in Hermes stable transform profile', async () => {
     },
   );
   expect(result.output[0].data.code).toMatchInlineSnapshot(`
-    "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+    "__d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
       arbitrary(code);
     });"
   `);
@@ -535,7 +535,7 @@ test('skips minification in Hermes canary transform profile', async () => {
     },
   );
   expect(result.output[0].data.code).toMatchInlineSnapshot(`
-    "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+    "__d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
       arbitrary(code);
     });"
   `);
@@ -573,7 +573,7 @@ test('outputs comments when `minify: false`', async () => {
     {...baseTransformOptions, dev: false, minify: false},
   );
   expect(result.output[0].data.code).toMatchInlineSnapshot(`
-    "__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+    "__d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
       /*#__PURE__*/arbitrary(code);
     });"
   `);

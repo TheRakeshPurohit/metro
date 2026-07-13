@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<28342f12ccdb6543eff2ef94ebd19bbc>>
+ * @generated SignedSource<<a6d415d5755d0f486787ad1c3f266272>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-transform-worker/src/index.js
@@ -66,8 +66,6 @@ export type JsTransformerConfig = Readonly<{
   unstable_memoizeInlineRequires?: boolean;
   /** With inlineRequires, do not memoize these module specifiers */
   unstable_nonMemoizedInlineRequires?: ReadonlyArray<string>;
-  /** Whether to rename scoped `require` functions to `_$$_REQUIRE`, usually an extraneous operation when serializing to iife (default). */
-  unstable_renameRequire?: boolean;
 }>;
 export type {CustomTransformOptions} from 'metro-babel-transformer';
 export type JsTransformOptions = Readonly<{
