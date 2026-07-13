@@ -236,6 +236,9 @@ export class ModuleResolver {
         return {filePath: arbitrary, type: 'sourceFile'};
       case 'empty':
         return this._getEmptyModule();
+      case 'virtualModule':
+        // Reserved for future implementation.
+        throw new Error('Virtual modules are not yet implemented.');
       default:
         resolution.type as empty;
         throw new Error('invalid type');

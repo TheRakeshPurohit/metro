@@ -15,7 +15,10 @@ export type Result<out TResolution, out TCandidates> =
   | {readonly type: 'resolved', readonly resolution: TResolution}
   | {readonly type: 'failed', readonly candidates: TCandidates};
 
-export type Resolution = FileResolution | {readonly type: 'empty'};
+export type Resolution =
+  | FileResolution
+  | VirtualResolution
+  | {readonly type: 'empty'};
 
 export type SourceFileResolution = Readonly<{
   type: 'sourceFile',
@@ -27,6 +30,17 @@ export type AssetResolution = Readonly<{
   filePaths: AssetFileResolution,
 }>;
 export type FileResolution = AssetResolution | SourceFileResolution;
+
+/**
+ * A JS module whose contents are provided out-of-band rather than read from a file
+ * on disk.
+ *
+ * NOTE: Resolving to a virtual module is not yet implemented. This is a reservation.
+ */
+export type VirtualResolution = Readonly<{
+  type: 'virtualModule',
+  ...
+}>;
 
 export type FileAndDirCandidates = {
   readonly dir: ?FileCandidates,

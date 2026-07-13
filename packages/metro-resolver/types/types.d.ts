@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<dc003cf249ff458402c66f8295b5c361>>
+ * @generated SignedSource<<771e92888a5ac88992a2bea81426ad71>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-resolver/src/types.js
@@ -20,7 +20,10 @@ import type {TransformResultDependency} from 'metro/private/DeltaBundler/types';
 export type Result<TResolution, TCandidates> =
   | {readonly type: 'resolved'; readonly resolution: TResolution}
   | {readonly type: 'failed'; readonly candidates: TCandidates};
-export type Resolution = FileResolution | {readonly type: 'empty'};
+export type Resolution =
+  | FileResolution
+  | VirtualResolution
+  | {readonly type: 'empty'};
 export type SourceFileResolution = Readonly<{
   type: 'sourceFile';
   filePath: string;
@@ -31,6 +34,13 @@ export type AssetResolution = Readonly<{
   filePaths: AssetFileResolution;
 }>;
 export type FileResolution = AssetResolution | SourceFileResolution;
+/**
+ * A JS module whose contents are provided out-of-band rather than read from a file
+ * on disk.
+ *
+ * NOTE: Resolving to a virtual module is not yet implemented. This is a reservation.
+ */
+export type VirtualResolution = Readonly<{type: 'virtualModule'}>;
 export type FileAndDirCandidates = {
   readonly dir: null | undefined | FileCandidates;
   readonly file: null | undefined | FileCandidates;
