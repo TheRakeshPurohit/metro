@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<31593693c0cafcd55eaf4885efddc6be>>
+ * @generated SignedSource<<68aa72b3b69f606f780b2e6622430085>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/shared/types.js
@@ -31,8 +31,7 @@ import type {
 } from 'metro-transform-worker';
 
 type MetroSourceMapOrMappings =
-  | MixedSourceMap
-  | Array<MetroSourceMapSegmentTuple>;
+  MixedSourceMap | Array<MetroSourceMapSegmentTuple>;
 export declare enum SourcePathsMode {
   Absolute = 'absolute',
   ServerUrl = 'url-server',
@@ -60,9 +59,7 @@ export type BundleOptions = {
   minify: boolean;
   readonly modulesOnly: boolean;
   onProgress:
-    | null
-    | undefined
-    | ((doneCont: number, totalCount: number) => unknown);
+    null | undefined | ((doneCont: number, totalCount: number) => unknown);
   readonly platform: null | undefined | string;
   readonly runModule: boolean;
   readonly shallow: boolean;

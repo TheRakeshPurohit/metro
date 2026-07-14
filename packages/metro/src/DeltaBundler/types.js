@@ -139,8 +139,7 @@ export type AllowOptionalDependenciesWithOptions = {
   readonly exclude: Array<string>,
 };
 export type AllowOptionalDependencies =
-  | boolean
-  | AllowOptionalDependenciesWithOptions;
+  boolean | AllowOptionalDependenciesWithOptions;
 
 export type BundlerResolution = Readonly<{
   type: 'sourceFile',

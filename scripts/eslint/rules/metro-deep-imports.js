@@ -33,7 +33,8 @@ import type {StringLiteral} from 'hermes-estree';
 const METRO_DEEP_IMPORT_RE = /^(metro(?!-runtime)(?:-[a-z\-]+)?)\/src\//;
 const messageId = 'METRO_DEEP_IMPORT';
 
-module.exports = {
+// $FlowExpectedError[value-as-type] - eslint not typed in OSS
+const rule /*: RuleModule */ = {
   meta: {
     type: 'problem',
     docs: {
@@ -86,7 +87,9 @@ module.exports = {
       },
     };
   },
-} /*:: as RuleModule */;
+};
+
+module.exports = rule;
 
 function getFix(
   nodeToReplace /*: StringLiteral */,

@@ -12,8 +12,7 @@
 import type EventEmitter from 'events';
 
 export type FileEntry =
-  | string
-  | [string, {isSymlink?: boolean, modifiedTime?: number}];
+  string | [string, {isSymlink?: boolean, modifiedTime?: number}];
 
 export type ChangeEventInput = {
   addedFiles?: ReadonlyArray<FileEntry>,

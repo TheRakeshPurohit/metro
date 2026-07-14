@@ -16,9 +16,7 @@ export type Result<out TResolution, out TCandidates> =
   | {readonly type: 'failed', readonly candidates: TCandidates};
 
 export type Resolution =
-  | FileResolution
-  | VirtualResolution
-  | {readonly type: 'empty'};
+  FileResolution | VirtualResolution | {readonly type: 'empty'};
 
 export type SourceFileResolution = Readonly<{
   type: 'sourceFile',
