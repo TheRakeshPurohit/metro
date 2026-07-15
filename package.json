@@ -40,7 +40,6 @@
     "jsonc-eslint-parser": "^2.3.0",
     "metro-babel-register": "*",
     "prettier": "3.9.4",
-    "prettier-plugin-hermes-parser": "0.37.0",
     "progress": "^2.0.0",
     "signedsource": "^2.0.0",
     "typescript": "^6.0.3"
