@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<d9877b2ba27e8e3f279901c80c7ad895>>
+ * @generated SignedSource<<23a067ad2286faaebd0e8afbb6e6ba02>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/shared/output/bundle.flow.js
@@ -20,15 +20,7 @@ import type {BuildOptions, OutputOptions, RequestOptions} from '../types';
 
 import Server from '../../Server';
 
-export declare function build(
-  packagerClient: Server,
-  requestOptions: RequestOptions,
-  buildOptions?: BuildOptions,
-): Promise<{code: string; map: string; assets?: ReadonlyArray<AssetData>}>;
-export declare function save(
-  bundle: {code: string; map: string},
-  options: OutputOptions,
-  log: ($$PARAM_0$$: string) => void,
-): Promise<unknown>;
+export declare function build(packagerClient: Server, requestOptions: RequestOptions, buildOptions?: BuildOptions): Promise<{code: string; map: string; assets?: ReadonlyArray<AssetData>}>;
+export declare function save(bundle: {code: string; map: string}, options: OutputOptions, log: ($$PARAM_0$$: string) => void): Promise<unknown>;
 export declare const formatName: 'bundle';
 export declare type formatName = typeof formatName;

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<7e33ffd7eec05b9c9c072189d2ed3ec2>>
+ * @generated SignedSource<<264a91514e87b4d291030528067bc411>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/Watcher.js
@@ -14,13 +14,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  Console,
-  CrawlerOptions,
-  CrawlResult,
-  PerfLogger,
-  WatcherBackendChangeEvent,
-} from './flow-types';
+import type {Console, CrawlerOptions, CrawlResult, PerfLogger, WatcherBackendChangeEvent} from './flow-types';
 
 import EventEmitter from 'events';
 
@@ -63,10 +57,7 @@ export type HealthCheckResult =
 export declare class Watcher extends EventEmitter {
   constructor(options: WatcherOptions);
   crawl(): Promise<CrawlResult>;
-  recrawl(
-    subpath: string,
-    currentFileSystem: CrawlerOptions['previousState']['fileSystem'],
-  ): Promise<CrawlResult>;
+  recrawl(subpath: string, currentFileSystem: CrawlerOptions['previousState']['fileSystem']): Promise<CrawlResult>;
   watch(onChange: (change: WatcherBackendChangeEvent) => void): void;
   close(): void;
   checkHealth(timeout: number): Promise<HealthCheckResult>;

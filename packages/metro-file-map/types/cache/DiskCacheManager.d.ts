@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<9cdec2a3b7a46f0a893dd5dc392a5294>>
+ * @generated SignedSource<<bb073d7ad69485ff66b817caf5ac76c8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/cache/DiskCacheManager.js
@@ -15,13 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  BuildParameters,
-  CacheData,
-  CacheManager,
-  CacheManagerFactoryOptions,
-  CacheManagerWriteOptions,
-} from '../flow-types';
+import type {BuildParameters, CacheData, CacheManager, CacheManagerFactoryOptions, CacheManagerWriteOptions} from '../flow-types';
 
 type AutoSaveOptions = Readonly<{debounceMs: number}>;
 type DiskCacheConfig = Readonly<{
@@ -30,20 +24,10 @@ type DiskCacheConfig = Readonly<{
   cacheDirectory?: null | undefined | string;
 }>;
 export declare class DiskCacheManager implements CacheManager {
-  constructor(
-    $$PARAM_0$$: CacheManagerFactoryOptions,
-    $$PARAM_1$$: DiskCacheConfig,
-  );
-  static getCacheFilePath(
-    buildParameters: BuildParameters,
-    cacheFilePrefix?: null | undefined | string,
-    cacheDirectory?: null | undefined | string,
-  ): string;
+  constructor($$PARAM_0$$: CacheManagerFactoryOptions, $$PARAM_1$$: DiskCacheConfig);
+  static getCacheFilePath(buildParameters: BuildParameters, cacheFilePrefix?: null | undefined | string, cacheDirectory?: null | undefined | string): string;
   getCacheFilePath(): string;
   read(): Promise<null | undefined | CacheData>;
-  write(
-    getSnapshot: () => CacheData,
-    $$PARAM_1$$: CacheManagerWriteOptions,
-  ): Promise<void>;
+  write(getSnapshot: () => CacheData, $$PARAM_1$$: CacheManagerWriteOptions): Promise<void>;
   end(): Promise<void>;
 }

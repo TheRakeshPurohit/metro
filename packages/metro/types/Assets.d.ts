@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<a58b1d0332fe424196b6d106eacdc2fe>>
+ * @generated SignedSource<<0d3fc636e5d57caff49796f58ed58455>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/Assets.js
@@ -44,31 +44,16 @@ export type AssetDataFiltered = {
   readonly width: null | undefined | number;
 };
 export declare function isAssetTypeAnImage(type: string): boolean;
-export declare function getAssetSize(
-  type: string,
-  content: Buffer,
-  filePath: string,
-): null | undefined | {readonly width: number; readonly height: number};
+export declare function getAssetSize(type: string, content: Buffer, filePath: string): null | undefined | {readonly width: number; readonly height: number};
 export type AssetData = AssetDataWithoutFiles & {
   readonly files: Array<string>;
 };
-export type AssetDataPlugin = (
-  assetData: AssetData,
-) => AssetData | Promise<AssetData>;
-export declare function getAssetData(
-  assetPath: string,
-  localPath: string,
-  assetDataPlugins: ReadonlyArray<string>,
-  platform: null | undefined | string,
-  publicPath: string,
-): Promise<AssetData>;
+export type AssetDataPlugin = (assetData: AssetData) => AssetData | Promise<AssetData>;
+export declare function getAssetData(assetPath: string, localPath: string, assetDataPlugins: ReadonlyArray<string>, platform: null | undefined | string, publicPath: string): Promise<AssetData>;
 /**
  * Returns all the associated files (for different resolutions) of an asset.
  **/
-export declare function getAssetFiles(
-  assetPath: string,
-  platform?: null | undefined | string,
-): Promise<Array<string>>;
+export declare function getAssetFiles(assetPath: string, platform?: null | undefined | string): Promise<Array<string>>;
 /**
  * Return a buffer with the actual image given a request for an image by path.
  * The relativePath can contain a resolution postfix, in this case we need to

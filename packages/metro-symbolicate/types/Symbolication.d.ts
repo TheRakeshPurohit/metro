@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<40fba27c16f56e64009443e70283d3b3>>
+ * @generated SignedSource<<5f4d1981a4d319279ca64bcd7f24f02c>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-symbolicate/src/Symbolication.js
@@ -45,9 +45,7 @@ type SizeAttributionMap = {
   };
 };
 type HermesMinidumpCrashInfo = {
-  readonly callstack: ReadonlyArray<
-    HermesMinidumpStackFrame | NativeCodeStackFrame
-  >;
+  readonly callstack: ReadonlyArray<HermesMinidumpStackFrame | NativeCodeStackFrame>;
 };
 type HermesMinidumpStackFrame = Readonly<{
   ByteCodeOffset: number;
@@ -70,9 +68,7 @@ type NativeCodeStackFrame = Readonly<{
   NativeCode: true;
   StackFrameRegOffs: string;
 }>;
-type SymbolicatedStackTrace = ReadonlyArray<
-  SymbolicatedStackFrame | NativeCodeStackFrame
->;
+type SymbolicatedStackTrace = ReadonlyArray<SymbolicatedStackFrame | NativeCodeStackFrame>;
 type SymbolicatedStackFrame = Readonly<{
   line: null | undefined | number;
   column: null | undefined | number;
@@ -93,10 +89,7 @@ declare class SymbolicationContext<ModuleIdsT> {
   symbolicate(stackTrace: string): string;
   symbolicateProfilerMap(mapFile: string): string;
   symbolicateAttribution(obj: SizeAttributionMap): void;
-  symbolicateChromeTrace(
-    traceFile: string,
-    $$PARAM_1$$: {stdout: Writable; stderr: Writable},
-  ): void;
+  symbolicateChromeTrace(traceFile: string, $$PARAM_1$$: {stdout: Writable; stderr: Writable}): void;
   getOriginalPositionFor(
     lineNumber: null | undefined | number,
     columnNumber: null | undefined | number,
@@ -107,9 +100,7 @@ declare class SymbolicationContext<ModuleIdsT> {
     source: null | undefined | string;
     name: null | undefined | string;
   };
-  symbolicateHermesMinidumpTrace(
-    crashInfo: HermesMinidumpCrashInfo,
-  ): SymbolicatedStackTrace;
+  symbolicateHermesMinidumpTrace(crashInfo: HermesMinidumpCrashInfo): SymbolicatedStackTrace;
   /**
    * Symbolicates heap alloction stacks in a Chrome-formatted heap
    * snapshot/timeline.
@@ -117,62 +108,26 @@ declare class SymbolicationContext<ModuleIdsT> {
    * because this format has a well-defined convention (1-based lines and
    * columns).
    */
-  symbolicateHeapSnapshot(
-    snapshotContents: string | ChromeHeapSnapshot,
-  ): ChromeHeapSnapshot;
-  symbolicateHermesCoverageTrace(
-    coverageInfo: HermesCoverageInfo,
-  ): SymbolicatedStackTrace;
-  getOriginalPositionDetailsFor(
-    lineNumber: null | undefined | number,
-    columnNumber: null | undefined | number,
-    moduleIds: null | undefined | ModuleIdsT,
-  ): SymbolicatedStackFrame;
+  symbolicateHeapSnapshot(snapshotContents: string | ChromeHeapSnapshot): ChromeHeapSnapshot;
+  symbolicateHermesCoverageTrace(coverageInfo: HermesCoverageInfo): SymbolicatedStackTrace;
+  getOriginalPositionDetailsFor(lineNumber: null | undefined | number, columnNumber: null | undefined | number, moduleIds: null | undefined | ModuleIdsT): SymbolicatedStackFrame;
   parseFileName(str: string): ModuleIdsT;
 }
 declare class SingleMapSymbolicationContext extends SymbolicationContext<SingleMapModuleIds> {
-  constructor(
-    SourceMapConsumer: SourceMapConsumer,
-    sourceMapContent: string | MixedSourceMap,
-    options?: ContextOptionsInput,
-  );
-  symbolicateHermesMinidumpTrace(
-    crashInfo: HermesMinidumpCrashInfo,
-  ): SymbolicatedStackTrace;
-  symbolicateHermesCoverageTrace(
-    coverageInfo: HermesCoverageInfo,
-  ): SymbolicatedStackTrace;
-  getOriginalPositionDetailsFor(
-    lineNumber: null | undefined | number,
-    columnNumber: null | undefined | number,
-    moduleIds: null | undefined | SingleMapModuleIds,
-  ): SymbolicatedStackFrame;
+  constructor(SourceMapConsumer: SourceMapConsumer, sourceMapContent: string | MixedSourceMap, options?: ContextOptionsInput);
+  symbolicateHermesMinidumpTrace(crashInfo: HermesMinidumpCrashInfo): SymbolicatedStackTrace;
+  symbolicateHermesCoverageTrace(coverageInfo: HermesCoverageInfo): SymbolicatedStackTrace;
+  getOriginalPositionDetailsFor(lineNumber: null | undefined | number, columnNumber: null | undefined | number, moduleIds: null | undefined | SingleMapModuleIds): SymbolicatedStackFrame;
   parseFileName(str: string): SingleMapModuleIds;
 }
 declare class DirectorySymbolicationContext extends SymbolicationContext<string> {
-  constructor(
-    SourceMapConsumer: SourceMapConsumer,
-    rootDir: string,
-    options?: ContextOptionsInput,
-  );
-  getOriginalPositionDetailsFor(
-    lineNumber: null | undefined | number,
-    columnNumber: null | undefined | number,
-    filename: null | undefined | string,
-  ): SymbolicatedStackFrame;
+  constructor(SourceMapConsumer: SourceMapConsumer, rootDir: string, options?: ContextOptionsInput);
+  getOriginalPositionDetailsFor(lineNumber: null | undefined | number, columnNumber: null | undefined | number, filename: null | undefined | string): SymbolicatedStackFrame;
   parseFileName(str: string): string;
 }
 declare function parseSingleMapFileName(str: string): SingleMapModuleIds;
-declare function createContext(
-  SourceMapConsumer: SourceMapConsumer,
-  sourceMapContent: string | MixedSourceMap,
-  options?: ContextOptionsInput,
-): SingleMapSymbolicationContext;
-declare function unstable_createDirectoryContext(
-  SourceMapConsumer: SourceMapConsumer,
-  rootDir: string,
-  options?: ContextOptionsInput,
-): DirectorySymbolicationContext;
+declare function createContext(SourceMapConsumer: SourceMapConsumer, sourceMapContent: string | MixedSourceMap, options?: ContextOptionsInput): SingleMapSymbolicationContext;
+declare function unstable_createDirectoryContext(SourceMapConsumer: SourceMapConsumer, rootDir: string, options?: ContextOptionsInput): DirectorySymbolicationContext;
 declare function getOriginalPositionFor<ModuleIdsT>(
   lineNumber: null | undefined | number,
   columnNumber: null | undefined | number,
@@ -184,23 +139,10 @@ declare function getOriginalPositionFor<ModuleIdsT>(
   source: null | undefined | string;
   name: null | undefined | string;
 };
-declare function symbolicate<ModuleIdsT>(
-  stackTrace: string,
-  context: SymbolicationContext<ModuleIdsT>,
-): string;
-declare function symbolicateProfilerMap<ModuleIdsT>(
-  mapFile: string,
-  context: SymbolicationContext<ModuleIdsT>,
-): string;
-declare function symbolicateAttribution<ModuleIdsT>(
-  obj: SizeAttributionMap,
-  context: SymbolicationContext<ModuleIdsT>,
-): void;
-declare function symbolicateChromeTrace<ModuleIdsT>(
-  traceFile: string,
-  $$PARAM_1$$: {stdout: Writable; stderr: Writable},
-  context: SymbolicationContext<ModuleIdsT>,
-): void;
+declare function symbolicate<ModuleIdsT>(stackTrace: string, context: SymbolicationContext<ModuleIdsT>): string;
+declare function symbolicateProfilerMap<ModuleIdsT>(mapFile: string, context: SymbolicationContext<ModuleIdsT>): string;
+declare function symbolicateAttribution<ModuleIdsT>(obj: SizeAttributionMap, context: SymbolicationContext<ModuleIdsT>): void;
+declare function symbolicateChromeTrace<ModuleIdsT>(traceFile: string, $$PARAM_1$$: {stdout: Writable; stderr: Writable}, context: SymbolicationContext<ModuleIdsT>): void;
 export {
   createContext,
   unstable_createDirectoryContext,

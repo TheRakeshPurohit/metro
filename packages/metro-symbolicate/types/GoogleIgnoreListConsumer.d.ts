@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<ccc6201d24a5a5a58eb55d27f6e45e86>>
+ * @generated SignedSource<<51f38a91699e743332afd6cd89f52fb8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-symbolicate/src/GoogleIgnoreListConsumer.js
@@ -17,10 +17,7 @@
 
 import type {MixedSourceMap} from 'metro-source-map';
 
-type SourceNameNormalizer = (
-  $$PARAM_0$$: string,
-  $$PARAM_1$$: {readonly sourceRoot?: null | undefined | string},
-) => string;
+type SourceNameNormalizer = ($$PARAM_0$$: string, $$PARAM_1$$: {readonly sourceRoot?: null | undefined | string}) => string;
 /**
   * Consumes the `x_google_ignoreList` metadata field from a source map and
   * exposes various queries on it.

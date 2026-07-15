@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<20b836efd67d20258d429521857d8eab>>
+ * @generated SignedSource<<4a9146c2c7283c7a17d30b30025f1208>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-resolver/src/PackageResolve.js
@@ -22,11 +22,7 @@ import type {PackageInfo, PackageJson, ResolutionContext} from './types';
  * Implements legacy (non-exports) package resolution behaviour based on the
  * ["browser" field spec](https://github.com/defunctzombie/package-browser-field-spec).
  */
-export declare function getPackageEntryPoint(
-  context: ResolutionContext,
-  packageInfo: PackageInfo,
-  platform: string | null,
-): string;
+export declare function getPackageEntryPoint(context: ResolutionContext, packageInfo: PackageInfo, platform: string | null): string;
 /**
  * Get the resolved file path for the given import specifier based on any
  * `package.json` rules. Returns `false` if the module should be
@@ -55,8 +51,4 @@ export declare function redirectModulePath(
  * - `false`, indicating the module should be ignored.
  * - `null` when there is no entry for the subpath.
  */
-export declare function matchSubpathFromMainFields(
-  subpath: string | ReadonlyArray<string>,
-  pkg: PackageJson,
-  mainFields: ReadonlyArray<string>,
-): string | false | null;
+export declare function matchSubpathFromMainFields(subpath: string | ReadonlyArray<string>, pkg: PackageJson, mainFields: ReadonlyArray<string>): string | false | null;

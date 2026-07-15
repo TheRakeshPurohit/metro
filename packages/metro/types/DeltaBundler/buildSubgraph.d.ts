@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<1e334cd36bb429700b82654f1ddab0a0>>
+ * @generated SignedSource<<c0605bb7a036fbdd72f4a3ad5ae738c8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/buildSubgraph.js
@@ -15,12 +15,7 @@
  */
 
 import type {RequireContext} from '../lib/contextModule';
-import type {
-  ModuleData,
-  ResolvedDependency,
-  ResolveFn,
-  TransformFn,
-} from './types';
+import type {ModuleData, ResolvedDependency, ResolveFn, TransformFn} from './types';
 
 type Parameters<T> = Readonly<{
   resolve: ResolveFn;

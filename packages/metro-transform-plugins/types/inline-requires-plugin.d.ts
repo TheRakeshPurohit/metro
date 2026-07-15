@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<1f73acbbf5a206de52478c57c058ccb8>>
+ * @generated SignedSource<<b50b0228719fa132600486f30f9b1d93>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-transform-plugins/src/inline-requires-plugin.js
@@ -57,9 +57,6 @@ export type State = {
  * Is also successfully inlined into:
  *     g(require('foo').Baz);
  */
-declare const $$EXPORT_DEFAULT_DECLARATION$$: (
-  $$PARAM_0$$: Babel,
-) => PluginObj<State>;
-declare type $$EXPORT_DEFAULT_DECLARATION$$ =
-  typeof $$EXPORT_DEFAULT_DECLARATION$$;
+declare const $$EXPORT_DEFAULT_DECLARATION$$: ($$PARAM_0$$: Babel) => PluginObj<State>;
+declare type $$EXPORT_DEFAULT_DECLARATION$$ = typeof $$EXPORT_DEFAULT_DECLARATION$$;
 export default $$EXPORT_DEFAULT_DECLARATION$$;

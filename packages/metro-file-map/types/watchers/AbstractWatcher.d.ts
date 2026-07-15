@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<ba8a5de14ca08c751a87bea6b356a670>>
+ * @generated SignedSource<<e56bd86f3352ed9d60736ff1de980d95>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/watchers/AbstractWatcher.js
@@ -14,11 +14,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  WatcherBackend,
-  WatcherBackendChangeEvent,
-  WatcherBackendOptions,
-} from '../flow-types';
+import type {WatcherBackend, WatcherBackendChangeEvent, WatcherBackendOptions} from '../flow-types';
 
 export type Listeners = Readonly<{
   onFileEvent: (event: WatcherBackendChangeEvent) => void;

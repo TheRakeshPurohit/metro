@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<2ea213f753eef5de14cb8a27f68b9fa2>>
+ * @generated SignedSource<<779cf921a7602e7afade62e6938d1472>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/lib/FileProcessor.js
@@ -15,11 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  FileMapPluginWorker,
-  FileMetadata,
-  PerfLogger,
-} from '../flow-types';
+import type {FileMapPluginWorker, FileMetadata, PerfLogger} from '../flow-types';
 
 type ProcessFileRequest = Readonly<{
   /**
@@ -51,10 +47,6 @@ export declare class FileProcessor {
   ): Promise<{
     errors: Array<{normalFilePath: string; error: MaybeCodedError}>;
   }>;
-  processRegularFile(
-    normalPath: string,
-    fileMetadata: FileMetadata,
-    req: ProcessFileRequest,
-  ): null | undefined | {content: null | undefined | Buffer};
+  processRegularFile(normalPath: string, fileMetadata: FileMetadata, req: ProcessFileRequest): null | undefined | {content: null | undefined | Buffer};
   end(): Promise<void>;
 }

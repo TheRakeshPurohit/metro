@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<44408f85f4340c918786727e30822c20>>
+ * @generated SignedSource<<310bea2deb24a5861b0a2cc2f5a13424>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/lib/BatchProcessor.js
@@ -15,9 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-type ProcessBatch<TItem, TResult> = (
-  batch: Array<TItem>,
-) => Promise<Array<TResult>>;
+type ProcessBatch<TItem, TResult> = (batch: Array<TItem>) => Promise<Array<TResult>>;
 type BatchProcessorOptions = {
   maximumDelayMs: number;
   maximumItems: number;
@@ -31,10 +29,7 @@ type BatchProcessorOptions = {
  * processing right away.
  */
 declare class BatchProcessor<TItem, TResult> {
-  constructor(
-    options: BatchProcessorOptions,
-    processBatch: ProcessBatch<TItem, TResult>,
-  );
+  constructor(options: BatchProcessorOptions, processBatch: ProcessBatch<TItem, TResult>);
   queue(item: TItem): Promise<TResult>;
   getQueueLength(): number;
 }

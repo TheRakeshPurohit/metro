@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<b47b1c8f5d68be3fecc0c79b3922976c>>
+ * @generated SignedSource<<58467833638b1ab05fcf02a24738f4ab>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-resolver/src/types.js
@@ -17,11 +17,8 @@
 
 import type {TransformResultDependency} from 'metro/private/DeltaBundler/types';
 
-export type Result<TResolution, TCandidates> =
-  | {readonly type: 'resolved'; readonly resolution: TResolution}
-  | {readonly type: 'failed'; readonly candidates: TCandidates};
-export type Resolution =
-  FileResolution | VirtualResolution | {readonly type: 'empty'};
+export type Result<TResolution, TCandidates> = {readonly type: 'resolved'; readonly resolution: TResolution} | {readonly type: 'failed'; readonly candidates: TCandidates};
+export type Resolution = FileResolution | VirtualResolution | {readonly type: 'empty'};
 export type SourceFileResolution = Readonly<{
   type: 'sourceFile';
   filePath: string;
@@ -60,24 +57,13 @@ export type ExportsLikeMap = Readonly<{
 }>;
 /** "exports" mapping where values may be legacy Node.js <13.7 array format. */
 export type ExportMapWithFallbacks = Readonly<{
-  [subpath: string]:
-    ExportsLikeMap[keyof ExportsLikeMap] | ExportValueWithFallback;
+  [subpath: string]: ExportsLikeMap[keyof ExportsLikeMap] | ExportValueWithFallback;
 }>;
 /** "exports" subpath value when in legacy Node.js <13.7 array format. */
-export type ExportValueWithFallback =
-  | ReadonlyArray<ExportsLikeMap | string>
-  | ReadonlyArray<ReadonlyArray<unknown>>;
-export type ExportsField =
-  | string
-  | ReadonlyArray<string>
-  | ExportValueWithFallback
-  | ExportsLikeMap
-  | ExportMapWithFallbacks;
+export type ExportValueWithFallback = ReadonlyArray<ExportsLikeMap | string> | ReadonlyArray<ReadonlyArray<unknown>>;
+export type ExportsField = string | ReadonlyArray<string> | ExportValueWithFallback | ExportsLikeMap | ExportMapWithFallbacks;
 export type FlattenedExportMap = ReadonlyMap<string, string | null>;
-export type NormalizedExportsLikeMap = Map<
-  string,
-  null | string | ExportsLikeMap
->;
+export type NormalizedExportsLikeMap = Map<string, null | string | ExportsLikeMap>;
 export type PackageJson = Readonly<{
   name?: string;
   main?: string;
@@ -88,11 +74,7 @@ export type PackageInfo = Readonly<{
   packageJson: PackageJson;
   rootPath: string;
 }>;
-export type PackageForModule = Readonly<
-  Omit<PackageInfo, keyof {packageRelativePath: string}> & {
-    packageRelativePath: string;
-  }
->;
+export type PackageForModule = Readonly<Omit<PackageInfo, 'packageRelativePath'> & {packageRelativePath: string}>;
 /**
  * Check existence of a single file.
  */
@@ -102,20 +84,14 @@ export type DoesFileExist = (filePath: string) => boolean;
  * whether it exists as a file or directory. Follows any symlinks, and returns
  * a real absolute path on existence.
  */
-export type FileSystemLookup = (
-  absoluteOrProjectRelativePath: string,
-) => {exists: false} | {exists: true; type: 'f' | 'd'; realPath: string};
+export type FileSystemLookup = (absoluteOrProjectRelativePath: string) => {exists: false} | {exists: true; type: 'f' | 'd'; realPath: string};
 /**
  * Given a directory path and the base asset name, return a list of all the
  * asset file names that match the given base name in that directory. Return
  * null if there's no such named asset. `platform` is used to identify
  * platform-specific assets, ex. `foo.ios.js` instead of a generic `foo.js`.
  */
-export type ResolveAsset = (
-  dirPath: string,
-  assetName: string,
-  extension: string,
-) => null | undefined | ReadonlyArray<string>;
+export type ResolveAsset = (dirPath: string, assetName: string, extension: string) => null | undefined | ReadonlyArray<string>;
 export type ResolutionContext = Readonly<{
   allowHaste: boolean;
   assetExts: ReadonlySet<string>;
@@ -141,9 +117,7 @@ export type ResolutionContext = Readonly<{
    *
    * @deprecated See https://github.com/facebook/metro/commit/29c77bff31e2475a086bc3f04073f485da8f9ff0
    */
-  getPackageForModule: (
-    absoluteModulePath: string,
-  ) => null | undefined | PackageForModule;
+  getPackageForModule: (absoluteModulePath: string) => null | undefined | PackageForModule;
   /**
    * The dependency descriptor, within the origin module, corresponding to the
    * current resolution request. This is provided for diagnostic purposes ONLY
@@ -202,16 +176,8 @@ export type ResolutionContext = Readonly<{
   unstable_incrementalResolution: boolean;
   unstable_logWarning: (message: string) => void;
 }>;
-export type CustomResolutionContext = Readonly<
-  Omit<ResolutionContext, keyof {resolveRequest: CustomResolver}> & {
-    resolveRequest: CustomResolver;
-  }
->;
-export type CustomResolver = (
-  context: CustomResolutionContext,
-  moduleName: string,
-  platform: string | null,
-) => Resolution;
+export type CustomResolutionContext = Readonly<Omit<ResolutionContext, 'resolveRequest'> & {resolveRequest: CustomResolver}>;
+export type CustomResolver = (context: CustomResolutionContext, moduleName: string, platform: string | null) => Resolution;
 export type CustomResolverOptions = {
   readonly [$$Key$$: string]: unknown;
 };

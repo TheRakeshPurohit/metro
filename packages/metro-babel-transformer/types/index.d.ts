@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<3081ffd627e019f64266e1e753c9993c>>
+ * @generated SignedSource<<85fbaab46b394d6f88bab75eee343d36>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-babel-transformer/src/index.js
@@ -20,9 +20,7 @@ import type {File as BabelNodeFile} from '@babel/types';
 
 import {transformFromAstSync} from '@babel/core';
 
-type BabelTransformOptions = NonNullable<
-  Parameters<typeof transformFromAstSync>[2]
->;
+type BabelTransformOptions = NonNullable<Parameters<typeof transformFromAstSync>[2]>;
 export type CustomTransformOptions = {
   [$$Key$$: string]: unknown;
 };
@@ -54,26 +52,13 @@ export type BabelFileFunctionMapMetadata = Readonly<{
   mappings: string;
 }>;
 export type BabelFileImportLocsMetadata = ReadonlySet<string>;
-export type MetroBabelFileMetadata = Omit<
-  BabelFileMetadata,
-  keyof {
-    metro?:
-      | null
-      | undefined
-      | {
-          functionMap?: null | undefined | BabelFileFunctionMapMetadata;
-          unstable_importDeclarationLocs?:
-            null | undefined | BabelFileImportLocsMetadata;
-        };
-  }
-> & {
+export type MetroBabelFileMetadata = Omit<BabelFileMetadata, 'metro'> & {
   metro?:
     | null
     | undefined
     | {
         functionMap?: null | undefined | BabelFileFunctionMapMetadata;
-        unstable_importDeclarationLocs?:
-          null | undefined | BabelFileImportLocsMetadata;
+        unstable_importDeclarationLocs?: null | undefined | BabelFileImportLocsMetadata;
       };
 };
 export type BabelTransformerCacheKeyOptions = Readonly<{
@@ -88,9 +73,7 @@ export type BabelTransformer = Readonly<{
   }>;
   getCacheKey?: (options?: BabelTransformerCacheKeyOptions) => string;
 }>;
-declare function transform(
-  $$PARAM_0$$: BabelTransformerArgs,
-): ReturnType<BabelTransformer['transform']>;
+declare function transform($$PARAM_0$$: BabelTransformerArgs): ReturnType<BabelTransformer['transform']>;
 /**
  * Generates a cache key component based on the user's Babel configuration files.
  * This uses Babel's loadPartialConfigSync to resolve which config files apply

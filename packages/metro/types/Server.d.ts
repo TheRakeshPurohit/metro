@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<a4fd26fa84b68e8bc2b3c32bcf36e7bc>>
+ * @generated SignedSource<<a9ab51140db45fe3c6a3c015d4da3401>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/Server.js
@@ -47,23 +47,11 @@ declare class Server {
   end(): void;
   getBundler(): IncrementalBundler;
   getCreateModuleId(): (path: string) => number;
-  build(
-    bundleOptions: BundleOptions,
-    $$PARAM_1$$?: BuildOptions,
-  ): Promise<{code: string; map: string; assets?: ReadonlyArray<AssetData>}>;
+  build(bundleOptions: BundleOptions, $$PARAM_1$$?: BuildOptions): Promise<{code: string; map: string; assets?: ReadonlyArray<AssetData>}>;
   getRamBundleInfo(options: BundleOptions): Promise<RamBundleInfo>;
   getAssets(options: BundleOptions): Promise<ReadonlyArray<AssetData>>;
-  getOrderedDependencyPaths(options: {
-    readonly dev: boolean;
-    readonly entryFile: string;
-    readonly minify: boolean;
-    readonly platform: null | undefined | string;
-  }): Promise<Array<string>>;
-  processRequest: (
-    $$PARAM_0$$: IncomingMessage,
-    $$PARAM_1$$: ServerResponse,
-    $$PARAM_2$$: (e: null | undefined | Error) => void,
-  ) => void;
+  getOrderedDependencyPaths(options: {readonly dev: boolean; readonly entryFile: string; readonly minify: boolean; readonly platform: null | undefined | string}): Promise<Array<string>>;
+  processRequest: ($$PARAM_0$$: IncomingMessage, $$PARAM_1$$: ServerResponse, $$PARAM_2$$: (e: null | undefined | Error) => void) => void;
   getNewBuildNumber(): number;
   getPlatforms(): ReadonlyArray<string>;
   getWatchFolders(): ReadonlyArray<string>;
@@ -76,18 +64,7 @@ declare class Server {
   }>;
   static DEFAULT_BUNDLE_OPTIONS: Omit<
     typeof Server.DEFAULT_GRAPH_OPTIONS,
-    keyof {
-      excludeSource: false;
-      inlineSourceMap: false;
-      lazy: false;
-      modulesOnly: false;
-      onProgress: null;
-      runModule: true;
-      shallow: false;
-      sourceMapUrl: null;
-      sourceUrl: null;
-      sourcePaths: SourcePathsMode;
-    }
+    'excludeSource' | 'inlineSourceMap' | 'lazy' | 'modulesOnly' | 'onProgress' | 'runModule' | 'shallow' | 'sourceMapUrl' | 'sourceUrl' | 'sourcePaths'
   > & {
     excludeSource: false;
     inlineSourceMap: false;

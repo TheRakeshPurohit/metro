@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<a6d415d5755d0f486787ad1c3f266272>>
+ * @generated SignedSource<<deae12f8d0761ca201be29ff7720336d>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-transform-worker/src/index.js
@@ -15,15 +15,8 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  CustomTransformOptions,
-  TransformProfile,
-} from 'metro-babel-transformer';
-import type {
-  BasicSourceMap,
-  FBSourceFunctionMap,
-  VlqMap,
-} from 'metro-source-map';
+import type {CustomTransformOptions, TransformProfile} from 'metro-babel-transformer';
+import type {BasicSourceMap, FBSourceFunctionMap, VlqMap} from 'metro-source-map';
 import type {TransformResultDependency} from 'metro/private/DeltaBundler';
 import type {AllowOptionalDependencies} from 'metro/private/DeltaBundler/types';
 import type {DynamicRequiresBehavior} from 'metro/private/ModuleGraph/worker/collectDependencies';
@@ -37,9 +30,7 @@ export type MinifierOptions = {
   config: MinifierConfig;
 };
 export type MinifierResult = {code: string; map?: BasicSourceMap};
-export type Minifier = (
-  $$PARAM_0$$: MinifierOptions,
-) => MinifierResult | Promise<MinifierResult>;
+export type Minifier = ($$PARAM_0$$: MinifierOptions) => MinifierResult | Promise<MinifierResult>;
 export type Type = 'script' | 'module' | 'asset';
 export type JsTransformerConfig = Readonly<{
   assetPlugins: ReadonlyArray<string>;
@@ -97,16 +88,7 @@ type TransformResponse = Readonly<{
   dependencies: ReadonlyArray<TransformResultDependency>;
   output: ReadonlyArray<JsOutput>;
 }>;
-export declare const transform: (
-  config: JsTransformerConfig,
-  projectRoot: string,
-  filename: string,
-  data: Buffer,
-  options: JsTransformOptions,
-) => Promise<TransformResponse>;
+export declare const transform: (config: JsTransformerConfig, projectRoot: string, filename: string, data: Buffer, options: JsTransformOptions) => Promise<TransformResponse>;
 export declare type transform = typeof transform;
-export declare const getCacheKey: (
-  config: JsTransformerConfig,
-  opts?: Readonly<{projectRoot: string}>,
-) => string;
+export declare const getCacheKey: (config: JsTransformerConfig, opts?: Readonly<{projectRoot: string}>) => string;
 export declare type getCacheKey = typeof getCacheKey;

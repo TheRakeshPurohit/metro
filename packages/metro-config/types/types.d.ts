@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<18762e31a4c7cba0380ae82ec2a4911c>>
+ * @generated SignedSource<<3f0c3f9093e9a6eadd3a8885218f8f45>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-config/src/types.js
@@ -20,13 +20,7 @@ import type {CacheStore, MetroCache} from 'metro-cache';
 import type {CacheManagerFactory, InputFileMapPlugin} from 'metro-file-map';
 import type {CustomResolver} from 'metro-resolver';
 import type {JsTransformerConfig} from 'metro-transform-worker';
-import type {
-  DeltaResult,
-  Module,
-  ReadOnlyGraph,
-  SerializerOptions,
-  TransformResult,
-} from 'metro/private/DeltaBundler/types';
+import type {DeltaResult, Module, ReadOnlyGraph, SerializerOptions, TransformResult} from 'metro/private/DeltaBundler/types';
 import type {Reporter} from 'metro/private/lib/reporting';
 import type MetroServer from 'metro/private/Server';
 import type {IntermediateStackFrame} from 'metro/private/Server/symbolicate';
@@ -78,16 +72,10 @@ export interface PerfLogger {
 }
 export interface RootPerfLogger extends PerfLogger {
   start(opts?: PerfLoggerPointOptions): void;
-  end(
-    status: 'SUCCESS' | 'FAIL' | 'CANCEL',
-    opts?: PerfLoggerPointOptions,
-  ): void;
+  end(status: 'SUCCESS' | 'FAIL' | 'CANCEL', opts?: PerfLoggerPointOptions): void;
 }
 export type PerfLoggerFactoryOptions = Readonly<{key?: number}>;
-export type PerfLoggerFactory = (
-  type: 'START_UP' | 'BUNDLING_REQUEST' | 'HMR',
-  opts?: PerfLoggerFactoryOptions,
-) => RootPerfLogger;
+export type PerfLoggerFactory = (type: 'START_UP' | 'BUNDLING_REQUEST' | 'HMR', opts?: PerfLoggerFactoryOptions) => RootPerfLogger;
 type ResolverConfigT = {
   assetExts: ReadonlyArray<string>;
   assetResolutions: ReadonlyArray<string>;
@@ -115,42 +103,16 @@ type ResolverConfigT = {
 };
 type SerializerConfigT = {
   createModuleIdFactory: () => (path: string) => number;
-  customSerializer:
-    | null
-    | undefined
-    | ((
-        entryPoint: string,
-        preModules: ReadonlyArray<Module>,
-        graph: ReadOnlyGraph,
-        options: SerializerOptions,
-      ) => Promise<string | {code: string; map: string}>);
-  experimentalSerializerHook: (
-    graph: ReadOnlyGraph,
-    delta: DeltaResult,
-  ) => unknown;
+  customSerializer: null | undefined | ((entryPoint: string, preModules: ReadonlyArray<Module>, graph: ReadOnlyGraph, options: SerializerOptions) => Promise<string | {code: string; map: string}>);
+  experimentalSerializerHook: (graph: ReadOnlyGraph, delta: DeltaResult) => unknown;
   getModulesRunBeforeMainModule: (entryFilePath: string) => Array<string>;
-  getPolyfills: ($$PARAM_0$$: {
-    platform: null | undefined | string;
-  }) => ReadonlyArray<string>;
-  getRunModuleStatement: (
-    moduleId: number | string,
-    globalPrefix: string,
-  ) => string;
+  getPolyfills: ($$PARAM_0$$: {platform: null | undefined | string}) => ReadonlyArray<string>;
+  getRunModuleStatement: (moduleId: number | string, globalPrefix: string) => string;
   polyfillModuleNames: ReadonlyArray<string>;
   processModuleFilter: (modules: Module) => boolean;
   isThirdPartyModule: (module: Readonly<{path: string}>) => boolean;
 };
-type TransformerConfigT = Omit<
-  JsTransformerConfig,
-  keyof {
-    getTransformOptions: GetTransformOptions;
-    transformVariants: {
-      readonly [name: string]: Partial<ExtraTransformOptions>;
-    };
-    publicPath: string;
-    unstable_workerThreads: boolean;
-  }
-> & {
+type TransformerConfigT = Omit<JsTransformerConfig, 'getTransformOptions' | 'transformVariants' | 'publicPath' | 'unstable_workerThreads'> & {
   getTransformOptions: GetTransformOptions;
   transformVariants: {
     readonly [name: string]: Partial<ExtraTransformOptions>;
@@ -176,10 +138,7 @@ type MetalConfigT = {
 type CacheStoresConfigT = ReadonlyArray<CacheStore<TransformResult>>;
 type ServerConfigT = {
   /** @deprecated */
-  enhanceMiddleware: (
-    $$PARAM_0$$: Middleware,
-    $$PARAM_1$$: MetroServer,
-  ) => Middleware | Server;
+  enhanceMiddleware: ($$PARAM_0$$: Middleware, $$PARAM_1$$: MetroServer) => Middleware | Server;
   forwardClientLogs: boolean;
   port: number;
   rewriteRequestUrl: ($$PARAM_0$$: string) => string;
@@ -201,13 +160,8 @@ type SymbolicatorConfigT = {
     readonly lineNumber: null | undefined | number;
     readonly column: null | undefined | number;
     readonly methodName: null | undefined | string;
-  }) =>
-    | (null | undefined | {readonly collapse?: boolean})
-    | Promise<null | undefined | {readonly collapse?: boolean}>;
-  customizeStack: (
-    $$PARAM_0$$: Array<IntermediateStackFrame>,
-    $$PARAM_1$$: unknown,
-  ) => Array<IntermediateStackFrame> | Promise<Array<IntermediateStackFrame>>;
+  }) => (null | undefined | {readonly collapse?: boolean}) | Promise<null | undefined | {readonly collapse?: boolean}>;
+  customizeStack: ($$PARAM_0$$: Array<IntermediateStackFrame>, $$PARAM_1$$: unknown) => Array<IntermediateStackFrame> | Promise<Array<IntermediateStackFrame>>;
 };
 type WatcherConfigT = {
   additionalExts: ReadonlyArray<string>;
@@ -224,8 +178,7 @@ type WatcherConfigT = {
 export type InputConfigT = Partial<
   Readonly<
     MetalConfigT & {
-      cacheStores:
-        CacheStoresConfigT | (($$PARAM_0$$: MetroCache) => CacheStoresConfigT);
+      cacheStores: CacheStoresConfigT | (($$PARAM_0$$: MetroCache) => CacheStoresConfigT);
       resolver: Readonly<Partial<ResolverConfigT>>;
       server: Readonly<Partial<ServerConfigT>>;
       serializer: Readonly<Partial<SerializerConfigT>>;
@@ -233,14 +186,9 @@ export type InputConfigT = Partial<
       transformer: Readonly<Partial<TransformerConfigT>>;
       watcher: Partial<
         Readonly<
-          Omit<
-            WatcherConfigT,
-            'healthCheck' | 'unstable_autoSaveCache' | 'watchman'
-          > & {
+          Omit<WatcherConfigT, 'healthCheck' | 'unstable_autoSaveCache' | 'watchman'> & {
             healthCheck: Partial<Readonly<WatcherConfigT['healthCheck']>>;
-            unstable_autoSaveCache: Partial<
-              Readonly<WatcherConfigT['unstable_autoSaveCache']>
-            >;
+            unstable_autoSaveCache: Partial<Readonly<WatcherConfigT['unstable_autoSaveCache']>>;
             watchman: Partial<Readonly<WatcherConfigT['watchman']>>;
           }
         >

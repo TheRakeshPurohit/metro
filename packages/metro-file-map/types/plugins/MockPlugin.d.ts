@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<d9402d4670982b1e675e1edd9201cf75>>
+ * @generated SignedSource<<142fc6ca2a635d19ecda81bd8b6d64c8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/plugins/MockPlugin.js
@@ -15,15 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  FileMapPlugin,
-  FileMapPluginInitOptions,
-  FileMapPluginWorker,
-  MockMap as IMockMap,
-  Path,
-  RawMockMap,
-  ReadonlyFileSystemChanges,
-} from '../flow-types';
+import type {FileMapPlugin, FileMapPluginInitOptions, FileMapPluginWorker, MockMap as IMockMap, Path, RawMockMap, ReadonlyFileSystemChanges} from '../flow-types';
 
 export declare const CACHE_VERSION: 2;
 export declare type CACHE_VERSION = typeof CACHE_VERSION;

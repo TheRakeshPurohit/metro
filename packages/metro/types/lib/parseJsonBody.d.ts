@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<cd5e7346556814416374b8c8e79a8674>>
+ * @generated SignedSource<<5a1c2735728a43c6b899b683a08aea0e>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/lib/parseJsonBody.js
@@ -17,18 +17,9 @@
 
 import type {IncomingMessage} from 'http';
 
-export type JsonData =
-  | {[$$Key$$: string]: JsonData}
-  | Array<JsonData>
-  | string
-  | number
-  | boolean
-  | null;
+export type JsonData = {[$$Key$$: string]: JsonData} | Array<JsonData> | string | number | boolean | null;
 /**
  * Attempt to parse a request body as JSON.
  */
-declare function parseJsonBody(
-  req: IncomingMessage,
-  options?: {strict?: boolean},
-): Promise<JsonData>;
+declare function parseJsonBody(req: IncomingMessage, options?: {strict?: boolean}): Promise<JsonData>;
 export default parseJsonBody;

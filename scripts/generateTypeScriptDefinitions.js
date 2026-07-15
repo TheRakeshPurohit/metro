@@ -27,6 +27,13 @@ const WORKSPACE_ROOT = path.resolve(__dirname, '..');
 const TYPES_DIR = 'types';
 const SRC_DIR = 'src';
 
+type LintMessage = {
+  readonly ruleId: ?string,
+  readonly message: string,
+  readonly line: number,
+  ...
+};
+
 export const AUTO_GENERATED_PATTERNS: ReadonlyArray<string> = ['packages/**'];
 
 // Globs of paths for which we do not generate TypeScript definitions,
@@ -125,18 +132,26 @@ export async function generateTsDefsForJsGlobs(
     sourceFile: string,
   ) {
     // Lint and fix the generated output
-    const [lintResult] = await linter.lintText(sourceContent, {
+    let [lintResult] = await linter.lintText(sourceContent, {
       filePath: absoluteTsFile,
     });
+    let lintedOutput = lintResult.output ?? sourceContent;
+
+    const withoutUnusedGeneratedDeclarations =
+      removeUnusedGeneratedDeclarations(lintedOutput, lintResult.messages);
+
+    if (withoutUnusedGeneratedDeclarations !== lintedOutput) {
+      [lintResult] = await linter.lintText(withoutUnusedGeneratedDeclarations, {
+        filePath: absoluteTsFile,
+      });
+      lintedOutput = lintResult.output ?? withoutUnusedGeneratedDeclarations;
+    }
 
     if (lintResult.messages.length > 0) {
       console.warn(sourceFile, lintResult.messages);
     }
 
-    const formattedOutput = await prettier.format(
-      lintResult.output ?? sourceContent,
-      prettierConfig,
-    );
+    const formattedOutput = await prettier.format(lintedOutput, prettierConfig);
 
     // Add signedsource (generated) token to the header
     const withToken = formattedOutput
@@ -254,6 +269,124 @@ export async function generateTsDefsForJsGlobs(
   }
 }
 
+function removeUnusedGeneratedDeclarations(
+  sourceContent: string,
+  messages: ReadonlyArray<LintMessage>,
+): string {
+  const lines = sourceContent.split('\n');
+
+  for (const message of messages) {
+    if (message.ruleId !== '@typescript-eslint/no-unused-vars') {
+      continue;
+    }
+
+    const name = message.message.match(
+      /^'([^']+)' is defined but never used/,
+    )?.[1];
+    if (name == null || message.line == null) {
+      continue;
+    }
+
+    const lineIndex = message.line - 1;
+
+    if (
+      removeSingleBindingImportAtLine(lines, lineIndex, name) ||
+      removeDeclareConstAtLine(lines, lineIndex, name)
+    ) {
+      continue;
+    }
+  }
+
+  return lines.join('\n');
+}
+
+function removeSingleBindingImportAtLine(
+  lines: Array<string>,
+  lineIndex: number,
+  name: string,
+): boolean {
+  const start = findBlockStart(lines, lineIndex, line =>
+    /^\s*import\s/.test(line),
+  );
+  if (start == null) {
+    return false;
+  }
+
+  const end = findBlockEnd(lines, start);
+  if (end == null) {
+    return false;
+  }
+
+  const statement = lines.slice(start, end + 1).join('\n');
+  if (!isSingleBindingImport(statement, name)) {
+    return false;
+  }
+
+  lines.splice(start, end - start + 1);
+  return true;
+}
+
+function removeDeclareConstAtLine(
+  lines: Array<string>,
+  lineIndex: number,
+  name: string,
+): boolean {
+  const declarationPattern = new RegExp(
+    `^\\s*declare const ${escapeRegExp(name)}\\b`,
+  );
+  const start = findBlockStart(lines, lineIndex, line =>
+    declarationPattern.test(line),
+  );
+  if (start == null) {
+    return false;
+  }
+
+  const end = findBlockEnd(lines, start);
+  if (end == null) {
+    return false;
+  }
+
+  lines.splice(start, end - start + 1);
+  return true;
+}
+
+function findBlockStart(
+  lines: ReadonlyArray<string>,
+  lineIndex: number,
+  predicate: string => boolean,
+): ?number {
+  for (let i = lineIndex; i >= 0; i--) {
+    if (predicate(lines[i])) {
+      return i;
+    }
+  }
+  return null;
+}
+
+function findBlockEnd(lines: ReadonlyArray<string>, start: number): ?number {
+  for (let i = start; i < lines.length; i++) {
+    if (/;\s*$/.test(lines[i])) {
+      return i;
+    }
+  }
+  return null;
+}
+
+function isSingleBindingImport(statement: string, name: string): boolean {
+  const escapedName = escapeRegExp(name);
+  const compact = statement.replace(/\s+/g, ' ').trim();
+  return (
+    new RegExp(`^import ${escapedName} from `).test(compact) ||
+    new RegExp(`^import \\* as ${escapedName} from `).test(compact) ||
+    new RegExp(`^import \\{ ${escapedName} \\} from `).test(compact) ||
+    new RegExp(`^import \\{${escapedName}\\} from `).test(compact)
+  );
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function getTSDeclAbsolutePath(jsRelativePath: string) {
   const parts = jsRelativePath.split(path.sep);
   if (parts[2] !== 'src') {
@@ -272,6 +405,7 @@ async function resolvePrettierConfig() {
   return {
     ...(await prettier.resolveConfig(fakeTsDecl)),
     filepath: fakeTsDecl,
+    printWidth: 200,
   };
 }
 

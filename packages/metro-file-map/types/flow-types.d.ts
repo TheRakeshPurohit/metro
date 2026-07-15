@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<025143e35fec82a72904b125f7ebdd1e>>
+ * @generated SignedSource<<a934c741b0b84adfccc10e8e30cc68ce>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/flow-types.js
@@ -49,10 +49,7 @@ export interface CacheManager {
    * getSnapshot may be retained and called at any time before end(), such as
    * in response to eventSource 'change' events.
    */
-  write(
-    getSnapshot: () => CacheData,
-    opts: CacheManagerWriteOptions,
-  ): Promise<void>;
+  write(getSnapshot: () => CacheData, opts: CacheManagerWriteOptions): Promise<void>;
   /**
    * The last call that will be made to this CacheManager. Any handles should
    * be closed by the time this settles.
@@ -62,9 +59,7 @@ export interface CacheManager {
 export interface CacheManagerEventSource {
   onChange(listener: () => void): () => void;
 }
-export type CacheManagerFactory = (
-  options: CacheManagerFactoryOptions,
-) => CacheManager;
+export type CacheManagerFactory = (options: CacheManagerFactoryOptions) => CacheManager;
 export type CacheManagerFactoryOptions = Readonly<{
   buildParameters: BuildParameters;
 }>;
@@ -106,15 +101,9 @@ export type CrawlerOptions = {
   onStatus: (status: WatcherStatus) => void;
   subpath?: string;
 };
-export type CrawlResult =
-  | {changedFiles: FileData; removedFiles: Set<Path>; clocks: WatchmanClocks}
-  | {changedFiles: FileData; removedFiles: Set<Path>};
+export type CrawlResult = {changedFiles: FileData; removedFiles: Set<Path>; clocks: WatchmanClocks} | {changedFiles: FileData; removedFiles: Set<Path>};
 export type DependencyExtractor = {
-  extract: (
-    content: string,
-    absoluteFilePath: string,
-    defaultExtractor?: DependencyExtractor['extract'],
-  ) => Set<string>;
+  extract: (content: string, absoluteFilePath: string, defaultExtractor?: DependencyExtractor['extract']) => Set<string>;
   getCacheKey: () => string;
 };
 export type WatcherStatus =
@@ -135,55 +124,29 @@ export type WatcherStatus =
     };
 export type DuplicatesSet = Map<string, number>;
 export type DuplicatesIndex = Map<string, Map<string, DuplicatesSet>>;
-export type FileMapPluginInitOptions<
-  SerializableState,
-  PerFileData = void,
-> = Readonly<{
+export type FileMapPluginInitOptions<SerializableState, PerFileData = void> = Readonly<{
   files: Readonly<{
-    fileIterator(
-      opts: Readonly<{includeNodeModules: boolean; includeSymlinks: boolean}>,
-    ): Iterable<{
+    fileIterator(opts: Readonly<{includeNodeModules: boolean; includeSymlinks: boolean}>): Iterable<{
       baseName: string;
       canonicalPath: string;
       readonly pluginData: null | undefined | PerFileData;
     }>;
-    lookup(
-      mixedPath: string,
-    ):
-      | {exists: false}
-      | {exists: true; type: 'f'; readonly pluginData: PerFileData}
-      | {exists: true; type: 'd'};
+    lookup(mixedPath: string): {exists: false} | {exists: true; type: 'f'; readonly pluginData: PerFileData} | {exists: true; type: 'd'};
   }>;
   pluginState: null | undefined | SerializableState;
 }>;
 export type FileMapPluginWorker = Readonly<{
   worker: Readonly<{modulePath: string; setupArgs: JsonData}>;
-  filter: ($$PARAM_0$$: {
-    normalPath: string;
-    isNodeModules: boolean;
-  }) => boolean;
+  filter: ($$PARAM_0$$: {normalPath: string; isNodeModules: boolean}) => boolean;
 }>;
-export type V8Serializable =
-  | string
-  | number
-  | boolean
-  | null
-  | ReadonlyArray<V8Serializable>
-  | ReadonlySet<V8Serializable>
-  | ReadonlyMap<string, V8Serializable>
-  | Readonly<{[key: string]: V8Serializable}>;
-export interface FileMapPlugin<
-  SerializableState extends void | V8Serializable = void | V8Serializable,
-  PerFileData extends void | V8Serializable = void | V8Serializable,
-> {
+type V8SerializablePrimitive = string | number | boolean | null;
+type V8SerializableCollection = ReadonlyArray<V8Serializable> | ReadonlySet<V8Serializable> | ReadonlyMap<string, V8Serializable> | Readonly<{[key: string]: V8Serializable}>;
+export type V8Serializable = V8SerializablePrimitive | V8SerializableCollection;
+export interface FileMapPlugin<SerializableState extends void | V8Serializable = void | V8Serializable, PerFileData extends void | V8Serializable = void | V8Serializable> {
   readonly name: string;
-  initialize(
-    initOptions: FileMapPluginInitOptions<SerializableState, PerFileData>,
-  ): Promise<void>;
+  initialize(initOptions: FileMapPluginInitOptions<SerializableState, PerFileData>): Promise<void>;
   assertValid(): void;
-  onChanged(
-    changes: ReadonlyFileSystemChanges<null | undefined | PerFileData>,
-  ): void;
+  onChanged(changes: ReadonlyFileSystemChanges<null | undefined | PerFileData>): void;
   getSerializableSnapshot(): void | V8Serializable;
   getCacheKey(): string;
   getWorker(): null | undefined | FileMapPluginWorker;
@@ -201,10 +164,7 @@ export type InputFileMapPlugin = FileMapPlugin<
   any
 >;
 export interface MetadataWorker {
-  processFile(
-    $$PARAM_0$$: WorkerMessage,
-    $$PARAM_1$$: Readonly<{getContent: () => Buffer}>,
-  ): V8Serializable;
+  processFile($$PARAM_0$$: WorkerMessage, $$PARAM_1$$: Readonly<{getContent: () => Buffer}>): V8Serializable;
 }
 export type HType = {
   MTIME: 0;
@@ -223,14 +183,7 @@ export type HType = {
 export type HTypeValue = HType[keyof HType];
 export type IgnoreMatcher = (item: string) => boolean;
 export type FileData = Map<CanonicalPath, FileMetadata>;
-export type FileMetadata = [
-  null | undefined | number,
-  number,
-  0 | 1,
-  null | undefined | string,
-  0 | 1 | string,
-  ...unknown[],
-];
+export type FileMetadata = [null | undefined | number, number, 0 | 1, null | undefined | string, 0 | 1 | string, ...unknown[]];
 export type FileStats = Readonly<{
   fileType: 'f' | 'l';
   modifiedTime: null | undefined | number;
@@ -257,9 +210,7 @@ export interface FileSystem {
   ): {changedFiles: FileData; removedFiles: Set<string>};
   getSerializableSnapshot(): CacheData['fileSystemData'];
   getSha1(file: Path): null | undefined | string;
-  getOrComputeSha1(
-    file: Path,
-  ): Promise<null | undefined | {sha1: string; content?: Buffer}>;
+  getOrComputeSha1(file: Path): Promise<null | undefined | {sha1: string; content?: Buffer}>;
   /**
    * Given a start path (which need not exist), a subpath and type, and
    * optionally a 'breakOnSegment', performs the following:
@@ -302,23 +253,10 @@ export interface FileSystem {
    * Always follow symlinks, and return a real path if it exists.
    */
   lookup(mixedPath: Path): LookupResult;
-  matchFiles(opts: {
-    filter?: RegExp | null;
-    filterCompareAbsolute?: boolean;
-    filterComparePosix?: boolean;
-    follow?: boolean;
-    recursive?: boolean;
-    rootDir?: Path | null;
-  }): Iterable<Path>;
+  matchFiles(opts: {filter?: RegExp | null; filterCompareAbsolute?: boolean; filterComparePosix?: boolean; follow?: boolean; recursive?: boolean; rootDir?: Path | null}): Iterable<Path>;
 }
 export type Glob = string;
-export type JsonData =
-  | string
-  | number
-  | boolean
-  | null
-  | Array<JsonData>
-  | {[key: string]: JsonData};
+export type JsonData = string | number | boolean | null | Array<JsonData> | {[key: string]: JsonData};
 export type LookupResult =
   | {exists: false; links: ReadonlySet<string>; missing: string}
   | {exists: true; links: ReadonlySet<string>; realPath: string; type: 'd'}
@@ -339,18 +277,9 @@ export type HasteConflict = {
   type: 'duplicate' | 'shadowing';
 };
 export interface HasteMap {
-  getModule(
-    name: string,
-    platform?: null | undefined | string,
-    supportsNativePlatform?: null | undefined | boolean,
-    type?: null | undefined | HTypeValue,
-  ): null | undefined | Path;
+  getModule(name: string, platform?: null | undefined | string, supportsNativePlatform?: null | undefined | boolean, type?: null | undefined | HTypeValue): null | undefined | Path;
   getModuleNameByPath(file: Path): null | undefined | string;
-  getPackage(
-    name: string,
-    platform: null | undefined | string,
-    _supportsNativePlatform: null | undefined | boolean,
-  ): null | undefined | Path;
+  getPackage(name: string, platform: null | undefined | string, _supportsNativePlatform: null | undefined | boolean): null | undefined | Path;
   computeConflicts(): Array<HasteConflict>;
 }
 export type HasteMapData = Map<string, HasteMapItem>;
@@ -362,11 +291,7 @@ export interface FileSystemListener {
   directoryAdded(canonicalPath: CanonicalPath): void;
   directoryRemoved(canonicalPath: CanonicalPath): void;
   fileAdded(canonicalPath: CanonicalPath, data: FileMetadata): void;
-  fileModified(
-    canonicalPath: CanonicalPath,
-    oldData: FileMetadata,
-    newData: FileMetadata,
-  ): void;
+  fileModified(canonicalPath: CanonicalPath, oldData: FileMetadata, newData: FileMetadata): void;
   fileRemoved(canonicalPath: CanonicalPath, data: FileMetadata): void;
 }
 export interface ReadonlyFileSystemChanges<T = FileMetadata> {
@@ -378,22 +303,11 @@ export interface ReadonlyFileSystemChanges<T = FileMetadata> {
 }
 export interface MutableFileSystem extends FileSystem {
   remove(filePath: Path, listener?: FileSystemListener): void;
-  addOrModify(
-    filePath: Path,
-    fileMetadata: FileMetadata,
-    listener?: FileSystemListener,
-  ): void;
-  bulkAddOrModify(
-    addedOrModifiedFiles: FileData,
-    listener?: FileSystemListener,
-  ): void;
+  addOrModify(filePath: Path, fileMetadata: FileMetadata, listener?: FileSystemListener): void;
+  bulkAddOrModify(addedOrModifiedFiles: FileData, listener?: FileSystemListener): void;
 }
 export type Path = string;
-export type ProcessFileFunction = (
-  normalPath: string,
-  metadata: FileMetadata,
-  request: Readonly<{computeSha1: boolean}>,
-) => null | undefined | Buffer;
+export type ProcessFileFunction = (normalPath: string, metadata: FileMetadata, request: Readonly<{computeSha1: boolean}>) => null | undefined | Buffer;
 export type RawMockMap = Readonly<{
   duplicates: Map<string, Set<string>>;
   mocks: Map<string, Path>;
@@ -438,8 +352,7 @@ export type WatcherBackendOptions = Readonly<{
   globs: ReadonlyArray<string>;
   dot: boolean;
 }>;
-export type WatchmanClockSpec =
-  string | Readonly<{scm: Readonly<{'mergebase-with': string}>}>;
+export type WatchmanClockSpec = string | Readonly<{scm: Readonly<{'mergebase-with': string}>}>;
 export type WatchmanClocks = Map<Path, WatchmanClockSpec>;
 export type WorkerMessage = Readonly<{
   computeSha1: boolean;

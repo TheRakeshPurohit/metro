@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<fe2c52b16f1a3036429ec004623d3603>>
+ * @generated SignedSource<<e960172db9c9ad9a32bc3bf30ebe2bc1>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/Bundler.js
@@ -31,11 +31,7 @@ declare class Bundler {
   getWatcher(): EventEmitter;
   end(): Promise<void>;
   getDependencyGraph(): Promise<DependencyGraph>;
-  transformFile(
-    filePath: string,
-    transformOptions: TransformOptions,
-    fileBuffer?: Buffer,
-  ): Promise<TransformResultWithSource>;
+  transformFile(filePath: string, transformOptions: TransformOptions, fileBuffer?: Buffer): Promise<TransformResultWithSource>;
   ready(): Promise<void>;
 }
 export default Bundler;

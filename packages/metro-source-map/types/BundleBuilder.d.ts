@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<a3b673eadec9c804b8a10df9d304100e>>
+ * @generated SignedSource<<7caf8a64a8942cfe2f54a1f82faa1a9b>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/BundleBuilder.js
@@ -36,7 +36,4 @@ export declare class BundleBuilder {
   getMap(): MixedSourceMap;
   getCode(): string;
 }
-export declare function createIndexMap(
-  file: null | undefined | string,
-  sections: Array<IndexMapSection>,
-): IndexMap;
+export declare function createIndexMap(file: null | undefined | string, sections: Array<IndexMapSection>): IndexMap;

@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<af4dc08fc7e742357f7e2c12d3c89662>>
+ * @generated SignedSource<<eef0ec8b8f4d1ea61246204b6adaa3e8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/Serializers/helpers/getSourceMapInfo.js
@@ -16,11 +16,7 @@
  */
 
 import type {Module} from '../../types';
-import type {
-  FBSourceFunctionMap,
-  MetroSourceMapSegmentTuple,
-  VlqMap,
-} from 'metro-source-map';
+import type {FBSourceFunctionMap, MetroSourceMapSegmentTuple, VlqMap} from 'metro-source-map';
 
 declare function getSourceMapInfo(
   module: Module,

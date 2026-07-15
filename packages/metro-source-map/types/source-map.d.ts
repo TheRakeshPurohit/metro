@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<fb542fb95c8411d277b0af7e6f17c436>>
+ * @generated SignedSource<<f9b86daff91845e586de130fd70e32f3>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/source-map.js
@@ -21,22 +21,15 @@ import {BundleBuilder, createIndexMap} from './BundleBuilder';
 import composeSourceMaps from './composeSourceMaps';
 import Consumer from './Consumer';
 import normalizeSourcePath from './Consumer/normalizeSourcePath';
-import {
-  functionMapBabelPlugin,
-  generateFunctionMap,
-} from './generateFunctionMap';
+import {functionMapBabelPlugin, generateFunctionMap} from './generateFunctionMap';
 import Generator from './Generator';
 
 export type {IConsumer};
 type GeneratedCodeMapping = [number, number];
 type SourceMapping = [number, number, number, number];
 type SourceMappingWithName = [number, number, number, number, string];
-export type MetroSourceMapSegmentTuple =
-  SourceMappingWithName | SourceMapping | GeneratedCodeMapping;
-type BabelDecodedMapSegment =
-  | [number]
-  | [number, number, number, number]
-  | [number, number, number, number, number];
+export type MetroSourceMapSegmentTuple = SourceMappingWithName | SourceMapping | GeneratedCodeMapping;
+type BabelDecodedMapSegment = [number] | [number, number, number, number] | [number, number, number, number, number];
 export type BabelDecodedMap = {
   readonly mappings: ReadonlyArray<ReadonlyArray<BabelDecodedMapSegment>>;
   readonly names: ReadonlyArray<string>;
@@ -95,8 +88,7 @@ export type IndexMap = {
 };
 export type MixedSourceMap = IndexMap | BasicSourceMap;
 export type RawMappingsModule = {
-  readonly map:
-    (null | undefined | ReadonlyArray<MetroSourceMapSegmentTuple>) | VlqMap;
+  readonly map: (null | undefined | ReadonlyArray<MetroSourceMapSegmentTuple>) | VlqMap;
   readonly functionMap: null | undefined | FBSourceFunctionMap;
   readonly path: string;
   readonly source: string;
@@ -118,9 +110,7 @@ declare class IndexedSourceMapResult implements SourceMapGenerator {
   toMap(file?: string, options?: {excludeSource?: boolean}): MixedSourceMap;
   toString(file?: string, options?: {excludeSource?: boolean}): string;
 }
-declare function isVlqMap(
-  map: (null | undefined | ReadonlyArray<MetroSourceMapSegmentTuple>) | VlqMap,
-): map is VlqMap;
+declare function isVlqMap(map: (null | undefined | ReadonlyArray<MetroSourceMapSegmentTuple>) | VlqMap): map is VlqMap;
 /**
  * Creates a source map from modules with "raw mappings", i.e. an array of
  * tuples with either 2, 4, or 5 elements:
@@ -128,14 +118,8 @@ declare function isVlqMap(
  * Accepts an `offsetLines` argument in case modules' code is to be offset in
  * the resulting bundle, e.g. by some prefix code.
  */
-declare function fromRawMappings(
-  modules: ReadonlyArray<RawMappingsModule>,
-  offsetLines?: number,
-): Generator;
-declare function fromRawMappingsNonBlocking(
-  modules: ReadonlyArray<RawMappingsModule>,
-  offsetLines?: number,
-): Promise<Generator>;
+declare function fromRawMappings(modules: ReadonlyArray<RawMappingsModule>, offsetLines?: number): Generator;
+declare function fromRawMappingsNonBlocking(modules: ReadonlyArray<RawMappingsModule>, offsetLines?: number): Promise<Generator>;
 /**
  * Like `fromRawMappings`, but produces an indexed (sectioned) source map with
  * one section per module. VLQ-stored modules pass through verbatim — no
@@ -143,20 +127,13 @@ declare function fromRawMappingsNonBlocking(
  * than the flat path, at the cost of emitting an indexed map that consumers must
  * understand. Per-module work is trivial, so this runs synchronously.
  */
-declare function fromRawMappingsIndexed(
-  modules: ReadonlyArray<RawMappingsModule>,
-  offsetLines?: number,
-): IndexedSourceMapResult;
+declare function fromRawMappingsIndexed(modules: ReadonlyArray<RawMappingsModule>, offsetLines?: number): IndexedSourceMapResult;
 /**
  * Transforms a standard source map object into a Raw Mappings object, to be
  * used across the bundler.
  */
-declare function toBabelSegments(
-  sourceMap: BasicSourceMap,
-): Array<BabelSourceMapSegment>;
-declare function toSegmentTuple(
-  mapping: BabelSourceMapSegment,
-): MetroSourceMapSegmentTuple;
+declare function toBabelSegments(sourceMap: BasicSourceMap): Array<BabelSourceMapSegment>;
+declare function toSegmentTuple(mapping: BabelSourceMapSegment): MetroSourceMapSegmentTuple;
 /**
  * Converts a Babel/gen-mapping "decoded" source map (`result.decodedMap` from
  * `@babel/generator`) into raw mapping tuples, byte-identical to
@@ -167,18 +144,14 @@ declare function toSegmentTuple(
  * (`allMappings`) that allocates ~4-5 objects per segment. No terminating
  * mapping is appended (callers that need one use `countLinesAndTerminateMap`).
  */
-declare function tuplesFromBabelDecodedMap(
-  decodedMap: BabelDecodedMap,
-): Array<MetroSourceMapSegmentTuple>;
+declare function tuplesFromBabelDecodedMap(decodedMap: BabelDecodedMap): Array<MetroSourceMapSegmentTuple>;
 /**
  * Encodes raw mapping tuples into a compact VLQ `mappings` string + `names`
  * table. Decode the inverse via `decodeVlqMap` (or `toBabelSegments` +
  * `toSegmentTuple`). Storing maps in this form uses far less memory than the
  * equivalent decoded tuple arrays.
  */
-declare function vlqMapFromTuples(
-  mappings: ReadonlyArray<MetroSourceMapSegmentTuple>,
-): VlqMap;
+declare function vlqMapFromTuples(mappings: ReadonlyArray<MetroSourceMapSegmentTuple>): VlqMap;
 /**
  * Encodes a `VlqMap` directly from a Babel/gen-mapping "decoded" source map
  * (`result.decodedMap` from `@babel/generator`), without ever materialising the
@@ -194,10 +167,7 @@ declare function vlqMapFromTuples(
  * generated-only mapping appended at the end (matching the transform worker's
  * `countLinesAndTerminateMap`) unless the last real mapping already sits there.
  */
-declare function vlqMapFromBabelDecodedMap(
-  decodedMap: BabelDecodedMap,
-  terminatingMapping: [number, number],
-): VlqMap;
+declare function vlqMapFromBabelDecodedMap(decodedMap: BabelDecodedMap, terminatingMapping: [number, number]): VlqMap;
 export {
   BundleBuilder,
   composeSourceMaps,

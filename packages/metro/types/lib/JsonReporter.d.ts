@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<bfc4caf223ec55afbed87fbd905607ea>>
+ * @generated SignedSource<<a6f3db4f608d926c8320368a79e63fc3>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/lib/JsonReporter.js
@@ -23,16 +23,8 @@ export type SerializedError = {
   errors?: ReadonlyArray<SerializedError>;
   cause?: SerializedError;
 };
-export type SerializedEvent<
-  TEvent extends {readonly [$$Key$$: string]: unknown},
-> = TEvent extends {error: Error}
-  ? Omit<Omit<TEvent, 'error'>, keyof {error: SerializedError}> & {
-      error: SerializedError;
-    }
-  : TEvent;
-declare class JsonReporter<
-  TEvent extends {readonly [$$Key$$: string]: unknown},
-> {
+export type SerializedEvent<TEvent extends {readonly [$$Key$$: string]: unknown}> = TEvent extends {error: Error} ? Omit<Omit<TEvent, 'error'>, 'error'> & {error: SerializedError} : TEvent;
+declare class JsonReporter<TEvent extends {readonly [$$Key$$: string]: unknown}> {
   constructor(stream: Writable);
   /**
    * There is a special case for errors because they have non-enumerable fields.

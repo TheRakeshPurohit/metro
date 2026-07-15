@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<1cc985f3869f7db49aca7daeca848b82>>
+ * @generated SignedSource<<55a0e038f230fd92a5284a87b111235f>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/node-haste/DependencyGraph.js
@@ -15,10 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  BundlerResolution,
-  TransformResultDependency,
-} from '../DeltaBundler/types';
+import type {BundlerResolution, TransformResultDependency} from '../DeltaBundler/types';
 import type {ResolverInputOptions} from '../shared/types';
 import type {ConfigT} from 'metro-config';
 
@@ -37,16 +34,11 @@ declare class DependencyGraph extends EventEmitter {
   /**
    * Used when watcher.unstable_lazySha1 is true
    */
-  getOrComputeSha1(
-    mixedPath: string,
-  ): Promise<{content?: Buffer; sha1: string}>;
+  getOrComputeSha1(mixedPath: string): Promise<{content?: Buffer; sha1: string}>;
   getWatcher(): EventEmitter;
   end(): void;
   /** Given a search context, return a list of file paths matching the query. */
-  matchFilesWithContext(
-    from: string,
-    context: Readonly<{recursive: boolean; filter: RegExp}>,
-  ): Iterable<string>;
+  matchFilesWithContext(from: string, context: Readonly<{recursive: boolean; filter: RegExp}>): Iterable<string>;
   resolveDependency(
     originModulePath: string,
     dependency: TransformResultDependency,

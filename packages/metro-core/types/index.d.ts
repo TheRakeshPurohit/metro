@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<7bae6aff5277ac3c20ebc15002863e29>>
+ * @generated SignedSource<<107b718ee07231601b3a90baea076156>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-core/src/index.js
@@ -20,9 +20,4 @@ import PackageResolutionError from './errors/PackageResolutionError';
 import * as Logger from './Logger';
 import Terminal from './Terminal';
 
-export {
-  AmbiguousModuleResolutionError,
-  Logger,
-  PackageResolutionError,
-  Terminal,
-};
+export {AmbiguousModuleResolutionError, Logger, PackageResolutionError, Terminal};

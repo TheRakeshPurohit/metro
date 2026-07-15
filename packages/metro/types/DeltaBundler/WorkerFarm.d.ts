@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<d9d13bcad23924cbcf706b93e621e91c>>
+ * @generated SignedSource<<de88a16a283b7173f134411a443e1672>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/WorkerFarm.js
@@ -23,10 +23,6 @@ type TransformerResult = Readonly<{result: TransformResult; sha1: string}>;
 declare class WorkerFarm {
   constructor(config: ConfigT, transformerConfig: TransformerConfig);
   kill(): Promise<void>;
-  transform(
-    filename: string,
-    options: TransformOptions,
-    fileBuffer?: Buffer,
-  ): Promise<TransformerResult>;
+  transform(filename: string, options: TransformOptions, fileBuffer?: Buffer): Promise<TransformerResult>;
 }
 export default WorkerFarm;

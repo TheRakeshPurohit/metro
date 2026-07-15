@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<0fccda5d7f0eb38539316fa1fedae97b>>
+ * @generated SignedSource<<1577f522f8120f35ec9ced81388166fe>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/lib/CountingSet.js
@@ -19,15 +19,7 @@ export interface ReadOnlyCountingSet<T> extends Iterable<T> {
   has(item: T): boolean;
   readonly size: number;
   count(item: T): number;
-  forEach<ThisT>(
-    callbackFn: (
-      this: ThisT,
-      value: T,
-      key: T,
-      set: ReadOnlyCountingSet<T>,
-    ) => unknown,
-    thisArg: ThisT,
-  ): void;
+  forEach<ThisT>(callbackFn: (this: ThisT, value: T, key: T, set: ReadOnlyCountingSet<T>) => unknown, thisArg: ThisT): void;
 }
 /**
  * A Set that only deletes a given item when the number of delete(item) calls
@@ -46,10 +38,7 @@ declare class CountingSet<T> implements ReadOnlyCountingSet<T> {
   get size(): number;
   count(item: T): number;
   clear(): void;
-  forEach<ThisT>(
-    callbackFn: (this: ThisT, value: T, key: T, set: CountingSet<T>) => unknown,
-    thisArg: ThisT,
-  ): void;
+  forEach<ThisT>(callbackFn: (this: ThisT, value: T, key: T, set: CountingSet<T>) => unknown, thisArg: ThisT): void;
   toJSON(): unknown;
 }
 export default CountingSet;

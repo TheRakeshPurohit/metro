@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<ca5c64de15e1eb58ec8f523741b89502>>
+ * @generated SignedSource<<046b1ebdcd5495851f662a80cd152192>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-symbolicate/src/SourceMetadataMapConsumer.js
@@ -18,10 +18,7 @@
 import type {FBSourcesArray, MixedSourceMap} from 'metro-source-map';
 
 type Position = {readonly line: number; readonly column: number};
-type SourceNameNormalizer = (
-  $$PARAM_0$$: string,
-  $$PARAM_1$$: {readonly sourceRoot?: null | undefined | string},
-) => string;
+type SourceNameNormalizer = ($$PARAM_0$$: string, $$PARAM_1$$: {readonly sourceRoot?: null | undefined | string}) => string;
 /**
  * Consumes the `x_facebook_sources` metadata field from a source map and
  * exposes various queries on it.
@@ -46,9 +43,7 @@ declare class SourceMetadataMapConsumer {
    * `SourceMapConsumer#originalPositionFor` to retrieve a source location,
    * then pass that location to `functionNameFor`.
    */
-  functionNameFor(
-    $$PARAM_0$$: Position & {readonly source: null | undefined | string},
-  ): null | undefined | string;
+  functionNameFor($$PARAM_0$$: Position & {readonly source: null | undefined | string}): null | undefined | string;
   /**
    * Returns this map's source metadata as a new array with the same order as
    * `sources`.

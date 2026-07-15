@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<36640ae81894592fbdc160fac081bdbf>>
+ * @generated SignedSource<<3509dc5c33a636571839c79c026dbfa0>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/Worker.flow.js
@@ -17,10 +17,7 @@
 
 import type {TransformResult} from './types';
 import type {LogEntry} from 'metro-core/private/Logger';
-import type {
-  JsTransformerConfig,
-  JsTransformOptions,
-} from 'metro-transform-worker';
+import type {JsTransformerConfig, JsTransformOptions} from 'metro-transform-worker';
 
 export type {JsTransformOptions as TransformOptions} from 'metro-transform-worker';
 export type TransformerConfig = {
@@ -33,12 +30,6 @@ type Data = Readonly<{
   transformFileStartLogEntry: LogEntry;
   transformFileEndLogEntry: LogEntry;
 }>;
-export declare const transform: (
-  filename: string,
-  transformOptions: JsTransformOptions,
-  projectRoot: string,
-  transformerConfig: TransformerConfig,
-  fileBuffer?: Buffer,
-) => Promise<Data>;
+export declare const transform: (filename: string, transformOptions: JsTransformOptions, projectRoot: string, transformerConfig: TransformerConfig, fileBuffer?: Buffer) => Promise<Data>;
 export declare type transform = typeof transform;
 export type Worker = {readonly transform: typeof transform};

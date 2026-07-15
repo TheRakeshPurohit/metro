@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<7b35f4001b105ee1f3612e8a0027a482>>
+ * @generated SignedSource<<b2c0fbc1b44742624881d562e64edae5>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-transform-plugins/src/addParamsToDefineCall.js
@@ -21,8 +21,5 @@
  * This is used to add extra information to the generaic compiled modules (like
  * the dependencyMap object or the list of inverse dependencies).
  */
-declare function addParamsToDefineCall(
-  code: string,
-  ...paramsToAdd: Array<unknown>
-): string;
+declare function addParamsToDefineCall(code: string, ...paramsToAdd: Array<unknown>): string;
 export default addParamsToDefineCall;

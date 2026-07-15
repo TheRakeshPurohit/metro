@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<2e845e8720ef0522a5d4c30c30402f20>>
+ * @generated SignedSource<<e8810d88728339cff05145932ad8b263>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/plugins/dependencies/worker.js
@@ -15,17 +15,10 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  MetadataWorker,
-  V8Serializable,
-  WorkerMessage,
-} from '../../flow-types';
+import type {MetadataWorker, V8Serializable, WorkerMessage} from '../../flow-types';
 
 declare class DependencyExtractorWorker implements MetadataWorker {
   constructor(opts: Readonly<{dependencyExtractor: null | undefined | string}>);
-  processFile(
-    data: WorkerMessage,
-    utils: Readonly<{getContent: () => Buffer}>,
-  ): V8Serializable;
+  processFile(data: WorkerMessage, utils: Readonly<{getContent: () => Buffer}>): V8Serializable;
 }
 export = DependencyExtractorWorker;

@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<4bb214316528dcf37b5f3a2aeef672ff>>
+ * @generated SignedSource<<e6b807564fe323f8c3d741404cbb86a1>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-symbolicate/src/ChromeHeapSnapshot.js
@@ -56,10 +56,7 @@ declare class ChromeHeapSnapshotRecordAccessor {
   constructor(
     buffer: RawBuffer,
     recordFields: Array<string>,
-    recordTypes:
-      | Array<ChromeHeapSnapshotFieldType>
-      | Readonly<{[$$Key$$: string]: ChromeHeapSnapshotFieldType}>
-      | null,
+    recordTypes: Array<ChromeHeapSnapshotFieldType> | Readonly<{[$$Key$$: string]: ChromeHeapSnapshotFieldType}> | null,
     globalStringTable: ChromeHeapSnapshotStringTable,
     position: number,
     parent?: ChromeHeapSnapshotRecordAccessor,
@@ -79,17 +76,11 @@ declare class ChromeHeapSnapshotRecordAccessor {
   protectedHasNext(): boolean;
   protectedTryMoveNext(): void;
 }
-declare class ChromeHeapSnapshotRecordIterator
-  extends ChromeHeapSnapshotRecordAccessor
-  implements Iterable<ChromeHeapSnapshotRecordAccessor>
-{
+declare class ChromeHeapSnapshotRecordIterator extends ChromeHeapSnapshotRecordAccessor implements Iterable<ChromeHeapSnapshotRecordAccessor> {
   constructor(
     buffer: RawBuffer,
     recordFields: Array<string>,
-    recordTypes:
-      | Array<ChromeHeapSnapshotFieldType>
-      | Readonly<{[$$Key$$: string]: ChromeHeapSnapshotFieldType}>
-      | null,
+    recordTypes: Array<ChromeHeapSnapshotFieldType> | Readonly<{[$$Key$$: string]: ChromeHeapSnapshotFieldType}> | null,
     globalStringTable: ChromeHeapSnapshotStringTable,
     position?: number,
     parent?: ChromeHeapSnapshotRecordAccessor,

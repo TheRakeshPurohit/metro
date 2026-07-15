@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<40f8f3a5c3f7effaaada900336673157>>
+ * @generated SignedSource<<46f7fcdbc9bc42d023f3102962f959ee>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/worker.js
@@ -14,11 +14,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  WorkerMessage,
-  WorkerMetadata,
-  WorkerSetupArgs,
-} from './flow-types';
+import type {WorkerMessage, WorkerMetadata, WorkerSetupArgs} from './flow-types';
 
 declare const worker: {
   /**

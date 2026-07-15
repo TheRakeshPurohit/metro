@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<cc8010b98646f8cfd713ae5505f71ef1>>
+ * @generated SignedSource<<ec7f8c5971386bdd6ee25fe9113d79ac>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/lib/createWebsocketServer.js
@@ -18,17 +18,10 @@
 import ws from 'ws';
 
 type WebsocketServiceInterface<T> = {
-  readonly onClientConnect: (
-    url: string,
-    sendFn: (data: string) => void,
-  ) => Promise<null | undefined | T>;
+  readonly onClientConnect: (url: string, sendFn: (data: string) => void) => Promise<null | undefined | T>;
   readonly onClientDisconnect?: (client: T) => unknown;
   readonly onClientError?: (client: T, e: Error) => unknown;
-  readonly onClientMessage?: (
-    client: T,
-    message: string | Buffer | ArrayBuffer | Array<Buffer>,
-    sendFn: (data: string) => void,
-  ) => unknown;
+  readonly onClientMessage?: (client: T, message: string | Buffer | ArrayBuffer | Array<Buffer>, sendFn: (data: string) => void) => unknown;
 };
 type HMROptions<TClient> = {
   websocketServer: WebsocketServiceInterface<TClient>;
@@ -44,7 +37,5 @@ type HMROptions<TClient> = {
  *   - onClientDisconnect
  */
 
-declare function createWebsocketServer<TClient>(
-  $$PARAM_0$$: HMROptions<TClient>,
-): ws.Server;
+declare function createWebsocketServer<TClient>($$PARAM_0$$: HMROptions<TClient>): ws.Server;
 export default createWebsocketServer;

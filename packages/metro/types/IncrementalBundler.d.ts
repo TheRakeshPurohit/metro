@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<7ce634e158aa8f2ac74e32940e9e97c1>>
+ * @generated SignedSource<<e28e7b29350731cdc321bba8eeaa27f1>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/IncrementalBundler.js
@@ -16,11 +16,7 @@
  */
 
 import type {DeltaResult, Graph, Module} from './DeltaBundler';
-import type {
-  Options as DeltaBundlerOptions,
-  ReadOnlyDependencies,
-  TransformInputOptions,
-} from './DeltaBundler/types';
+import type {Options as DeltaBundlerOptions, ReadOnlyDependencies, TransformInputOptions} from './DeltaBundler/types';
 import type {GraphId} from './lib/getGraphId';
 import type {ResolverInputOptions} from './shared/types';
 import type {ConfigT} from 'metro-config';
@@ -52,24 +48,10 @@ declare class IncrementalBundler {
   end(): Promise<void>;
   getBundler(): Bundler;
   getDeltaBundler(): DeltaBundler;
-  getRevision(
-    revisionId: RevisionId,
-  ): null | undefined | Promise<GraphRevision>;
-  getRevisionByGraphId(
-    graphId: GraphId,
-  ): null | undefined | Promise<GraphRevision>;
-  buildGraphForEntries(
-    entryFiles: ReadonlyArray<string>,
-    transformOptions: TransformInputOptions,
-    resolverOptions: ResolverInputOptions,
-    otherOptions?: OtherOptions,
-  ): Promise<OutputGraph>;
-  getDependencies(
-    entryFiles: ReadonlyArray<string>,
-    transformOptions: TransformInputOptions,
-    resolverOptions: ResolverInputOptions,
-    otherOptions?: OtherOptions,
-  ): Promise<ReadOnlyDependencies>;
+  getRevision(revisionId: RevisionId): null | undefined | Promise<GraphRevision>;
+  getRevisionByGraphId(graphId: GraphId): null | undefined | Promise<GraphRevision>;
+  buildGraphForEntries(entryFiles: ReadonlyArray<string>, transformOptions: TransformInputOptions, resolverOptions: ResolverInputOptions, otherOptions?: OtherOptions): Promise<OutputGraph>;
+  getDependencies(entryFiles: ReadonlyArray<string>, transformOptions: TransformInputOptions, resolverOptions: ResolverInputOptions, otherOptions?: OtherOptions): Promise<ReadOnlyDependencies>;
   buildGraph(
     entryFile: string,
     transformOptions: TransformInputOptions,
@@ -85,10 +67,7 @@ declare class IncrementalBundler {
     resolverOptions: ResolverInputOptions,
     otherOptions?: OtherOptions,
   ): Promise<{delta: DeltaResult; revision: GraphRevision}>;
-  updateGraph(
-    revision: GraphRevision,
-    reset: boolean,
-  ): Promise<{delta: DeltaResult; revision: GraphRevision}>;
+  updateGraph(revision: GraphRevision, reset: boolean): Promise<{delta: DeltaResult; revision: GraphRevision}>;
   endGraph(graphId: GraphId): Promise<void>;
   ready(): Promise<void>;
 }

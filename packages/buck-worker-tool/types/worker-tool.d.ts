@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<1155614c83550da2ee3328fd45cb59b5>>
+ * @generated SignedSource<<a2ba9ab7d2f4ec16efe9d5fae9bbab44>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/buck-worker-tool/src/worker-tool.js
@@ -19,11 +19,7 @@ import type {Duplex} from 'stream';
 
 import {Console} from 'console';
 
-export type Command = (
-  argv: Array<string>,
-  structuredArgs: unknown,
-  console: Console,
-) => Promise<void> | void;
+export type Command = (argv: Array<string>, structuredArgs: unknown, console: Console) => Promise<void> | void;
 export type Commands = {[key: string]: Command};
 declare function buckWorker(commands: Commands): Duplex;
 export {buckWorker};

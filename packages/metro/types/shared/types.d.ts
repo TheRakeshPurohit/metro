@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<68aa72b3b69f606f780b2e6622430085>>
+ * @generated SignedSource<<6d2429c6b34b624881402caa12117d34>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/shared/types.js
@@ -15,32 +15,20 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  Options as DeltaBundlerOptions,
-  TransformInputOptions,
-} from '../DeltaBundler/types';
+import type {Options as DeltaBundlerOptions, TransformInputOptions} from '../DeltaBundler/types';
 import type {TransformProfile} from 'metro-babel-transformer';
 import type {CustomResolverOptions} from 'metro-resolver';
-import type {
-  MetroSourceMapSegmentTuple,
-  MixedSourceMap,
-} from 'metro-source-map';
-import type {
-  CustomTransformOptions,
-  MinifierOptions,
-} from 'metro-transform-worker';
+import type {MetroSourceMapSegmentTuple, MixedSourceMap} from 'metro-source-map';
+import type {CustomTransformOptions, MinifierOptions} from 'metro-transform-worker';
 
-type MetroSourceMapOrMappings =
-  MixedSourceMap | Array<MetroSourceMapSegmentTuple>;
+type MetroSourceMapOrMappings = MixedSourceMap | Array<MetroSourceMapSegmentTuple>;
 export declare enum SourcePathsMode {
   Absolute = 'absolute',
   ServerUrl = 'url-server',
 }
 export declare namespace SourcePathsMode {
   export function cast(value: string | null | undefined): SourcePathsMode;
-  export function isValid(
-    value: string | null | undefined,
-  ): value is SourcePathsMode;
+  export function isValid(value: string | null | undefined): value is SourcePathsMode;
   export function members(): IterableIterator<SourcePathsMode>;
   export function getName(value: SourcePathsMode): string;
 }
@@ -58,8 +46,7 @@ export type BundleOptions = {
   readonly lazy: boolean;
   minify: boolean;
   readonly modulesOnly: boolean;
-  onProgress:
-    null | undefined | ((doneCont: number, totalCount: number) => unknown);
+  onProgress: null | undefined | ((doneCont: number, totalCount: number) => unknown);
   readonly platform: null | undefined | string;
   readonly runModule: boolean;
   readonly shallow: boolean;
@@ -114,10 +101,7 @@ export type ModuleTransportLikeStrict = {
   readonly name?: string;
   readonly sourcePath: string;
 };
-export type RamModuleTransport = Omit<
-  ModuleTransportLikeStrict,
-  keyof {readonly source: string; readonly type: string}
-> & {readonly source: string; readonly type: string};
+export type RamModuleTransport = Omit<ModuleTransportLikeStrict, 'source' | 'type'> & {readonly source: string; readonly type: string};
 export type OutputOptions = {
   bundleOutput: string;
   bundleEncoding?: 'utf8' | 'utf16le' | 'ascii';

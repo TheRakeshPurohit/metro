@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<768dba0958b531c8edd43c2df24e25f6>>
+ * @generated SignedSource<<afa2ba013bd426c93e6820de56ae388a>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/node-haste/PackageCache.js
@@ -17,9 +17,7 @@
 
 import type {PackageJson} from 'metro-resolver/private/types';
 
-type GetClosestPackageFn = (
-  absoluteFilePath: string,
-) => null | undefined | {packageJsonPath: string; packageRelativePath: string};
+type GetClosestPackageFn = (absoluteFilePath: string) => null | undefined | {packageJsonPath: string; packageRelativePath: string};
 type PackageForModule = Readonly<{
   packageJson: PackageJson;
   rootPath: string;
@@ -27,11 +25,7 @@ type PackageForModule = Readonly<{
 }>;
 export declare class PackageCache {
   constructor(options: {getClosestPackage: GetClosestPackageFn});
-  getPackage(
-    filePath: string,
-  ): Readonly<{rootPath: string; packageJson: PackageJson}>;
-  getPackageForModule(
-    absoluteModulePath: string,
-  ): null | undefined | PackageForModule;
+  getPackage(filePath: string): Readonly<{rootPath: string; packageJson: PackageJson}>;
+  getPackageForModule(absoluteModulePath: string): null | undefined | PackageForModule;
   invalidate(filePath: string): void;
 }

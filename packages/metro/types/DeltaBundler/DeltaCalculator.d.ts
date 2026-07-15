@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<1fbdc1ddc3526c8742b8c22d02311d38>>
+ * @generated SignedSource<<973161c2431719eaa4e5f3a5414b31bb>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/DeltaCalculator.js
@@ -26,11 +26,7 @@ import EventEmitter from 'events';
  * traverse the whole dependency tree for trivial small changes.
  */
 declare class DeltaCalculator<T> extends EventEmitter {
-  constructor(
-    entryPoints: ReadonlySet<string>,
-    changeEventSource: EventEmitter,
-    options: Options<T>,
-  );
+  constructor(entryPoints: ReadonlySet<string>, changeEventSource: EventEmitter, options: Options<T>);
   /**
    * Stops listening for file changes and clears all the caches.
    */
@@ -39,10 +35,7 @@ declare class DeltaCalculator<T> extends EventEmitter {
    * Main method to calculate the delta of modules. It returns a DeltaResult,
    * which contain the modified/added modules and the removed modules.
    */
-  getDelta($$PARAM_0$$: {
-    reset: boolean;
-    shallow: boolean;
-  }): Promise<DeltaResult<T>>;
+  getDelta($$PARAM_0$$: {reset: boolean; shallow: boolean}): Promise<DeltaResult<T>>;
   /**
    * Returns the graph with all the dependencies. Each module contains the
    * needed information to do the traversing (dependencies, inverseDependencies)

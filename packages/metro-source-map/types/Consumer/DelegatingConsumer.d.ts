@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<4e6d6a38a375f6430761b6ae0220e309>>
+ * @generated SignedSource<<b108c1e6fe8e5aab295015f72c69c2a9>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/Consumer/DelegatingConsumer.js
@@ -17,13 +17,7 @@
 
 import type {MixedSourceMap} from '../source-map';
 import type {LookupBias} from './constants.js';
-import type {
-  GeneratedPositionLookup,
-  IConsumer,
-  IterationOrder,
-  Mapping,
-  SourcePosition,
-} from './types';
+import type {GeneratedPositionLookup, IConsumer, IterationOrder, Mapping, SourcePosition} from './types';
 /**
  * A source map consumer that supports both "basic" and "indexed" source maps.
  * Uses `MappingsConsumer` and `SectionsConsumer` under the hood (via
@@ -35,19 +29,10 @@ declare class DelegatingConsumer implements IConsumer {
   static readonly GREATEST_LOWER_BOUND: LookupBias;
   static readonly LEAST_UPPER_BOUND: LookupBias;
   constructor(sourceMap: MixedSourceMap);
-  originalPositionFor(
-    generatedPosition: GeneratedPositionLookup,
-  ): SourcePosition;
+  originalPositionFor(generatedPosition: GeneratedPositionLookup): SourcePosition;
   generatedMappings(): Iterable<Mapping>;
-  eachMapping(
-    callback: (mapping: Mapping) => unknown,
-    context?: unknown,
-    order?: IterationOrder,
-  ): void;
+  eachMapping(callback: (mapping: Mapping) => unknown, context?: unknown, order?: IterationOrder): void;
   get file(): null | undefined | string;
-  sourceContentFor(
-    source: string,
-    nullOnMissing: true,
-  ): null | undefined | string;
+  sourceContentFor(source: string, nullOnMissing: true): null | undefined | string;
 }
 export default DelegatingConsumer;

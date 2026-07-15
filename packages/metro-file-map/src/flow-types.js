@@ -201,15 +201,15 @@ export type FileMapPluginWorker = Readonly<{
   filter: ({normalPath: string, isNodeModules: boolean}) => boolean,
 }>;
 
-export type V8Serializable =
-  | string
-  | number
-  | boolean
-  | null
+type V8SerializablePrimitive = string | number | boolean | null;
+
+type V8SerializableCollection =
   | ReadonlyArray<V8Serializable>
   | ReadonlySet<V8Serializable>
   | ReadonlyMap<string, V8Serializable>
   | Readonly<{[key: string]: V8Serializable}>;
+
+export type V8Serializable = V8SerializablePrimitive | V8SerializableCollection;
 
 export interface FileMapPlugin<
   in SerializableState extends void | V8Serializable = void | V8Serializable,

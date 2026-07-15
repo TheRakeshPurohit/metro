@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<730f440d8875cfd344bcc54a629cc016>>
+ * @generated SignedSource<<54f6248424a42ea2eb7966fc06105eb3>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/plugins/FileDataPlugin.js
@@ -15,16 +15,10 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  FileMapPlugin,
-  FileMapPluginInitOptions,
-  FileMapPluginWorker,
-  ReadonlyFileSystemChanges,
-  V8Serializable,
-} from '../flow-types';
+import type {FileMapPlugin, FileMapPluginInitOptions, FileMapPluginWorker, ReadonlyFileSystemChanges, V8Serializable} from '../flow-types';
 
 export type FileDataPluginOptions = Readonly<
-  Omit<FileMapPluginWorker, keyof {name: string; cacheKey: string}> & {
+  Omit<FileMapPluginWorker, 'name' | 'cacheKey'> & {
     name: string;
     cacheKey: string;
   }
@@ -34,18 +28,12 @@ export type FileDataPluginOptions = Readonly<
  * have no separate serializable state. Provides default no-op implementations
  * of lifecycle methods that subclasses can override as needed.
  */
-declare class FileDataPlugin<
-  PerFileData extends void | V8Serializable = void | V8Serializable,
-> implements FileMapPlugin<null, PerFileData> {
+declare class FileDataPlugin<PerFileData extends void | V8Serializable = void | V8Serializable> implements FileMapPlugin<null, PerFileData> {
   readonly name: string;
   constructor($$PARAM_0$$: FileDataPluginOptions);
-  initialize(
-    initOptions: FileMapPluginInitOptions<null, PerFileData>,
-  ): Promise<void>;
+  initialize(initOptions: FileMapPluginInitOptions<null, PerFileData>): Promise<void>;
   getFileSystem(): FileMapPluginInitOptions<null, PerFileData>['files'];
-  onChanged(
-    _changes: ReadonlyFileSystemChanges<null | undefined | PerFileData>,
-  ): void;
+  onChanged(_changes: ReadonlyFileSystemChanges<null | undefined | PerFileData>): void;
   assertValid(): void;
   getSerializableSnapshot(): null;
   getCacheKey(): string;

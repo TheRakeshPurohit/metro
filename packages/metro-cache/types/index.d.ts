@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<804f03bb7635d27850a096a40e46de0c>>
+ * @generated SignedSource<<cbca00b90d31c52cdbde9fffe8d15736>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-cache/src/index.js
@@ -25,14 +25,7 @@ import HttpStore from './stores/HttpStore';
 export type {Options as FileOptions} from './stores/FileStore';
 export type {Options as HttpOptions} from './stores/HttpStore';
 export type {CacheStore} from './types';
-export {
-  AutoCleanFileStore,
-  Cache,
-  FileStore,
-  HttpGetStore,
-  HttpStore,
-  stableHash,
-};
+export {AutoCleanFileStore, Cache, FileStore, HttpGetStore, HttpStore, stableHash};
 export interface MetroCache {
   readonly AutoCleanFileStore: typeof AutoCleanFileStore;
   readonly Cache: typeof Cache;

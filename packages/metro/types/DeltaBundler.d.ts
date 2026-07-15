@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<4392a52adb92ee60889197cf5c38516d>>
+ * @generated SignedSource<<9fb6b7178cc917f17b839e36feb87ee8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler.js
@@ -15,27 +15,10 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  DeltaResult,
-  Graph,
-  MixedOutput,
-  Options,
-  ReadOnlyGraph,
-} from './DeltaBundler/types';
+import type {DeltaResult, Graph, MixedOutput, Options, ReadOnlyGraph} from './DeltaBundler/types';
 import type EventEmitter from 'events';
 
-export type {
-  DeltaResult,
-  Graph,
-  Dependencies,
-  MixedOutput,
-  Module,
-  ReadOnlyGraph,
-  TransformFn,
-  TransformResult,
-  TransformResultDependency,
-  TransformResultWithSource,
-} from './DeltaBundler/types';
+export type {DeltaResult, Graph, Dependencies, MixedOutput, Module, ReadOnlyGraph, TransformFn, TransformResult, TransformResultDependency, TransformResultWithSource} from './DeltaBundler/types';
 /**
  * `DeltaBundler` uses the `DeltaTransformer` to build bundle deltas. This
  * module handles all the transformer instances so it can support multiple
@@ -45,18 +28,9 @@ export type {
 declare class DeltaBundler<T = MixedOutput> {
   constructor(changeEventSource: EventEmitter);
   end(): void;
-  getDependencies(
-    entryPoints: ReadonlyArray<string>,
-    options: Options<T>,
-  ): Promise<ReadOnlyGraph<T>['dependencies']>;
-  buildGraph(
-    entryPoints: ReadonlyArray<string>,
-    options: Options<T>,
-  ): Promise<Graph<T>>;
-  getDelta(
-    graph: Graph<T>,
-    $$PARAM_1$$: {reset: boolean; shallow: boolean},
-  ): Promise<DeltaResult<T>>;
+  getDependencies(entryPoints: ReadonlyArray<string>, options: Options<T>): Promise<ReadOnlyGraph<T>['dependencies']>;
+  buildGraph(entryPoints: ReadonlyArray<string>, options: Options<T>): Promise<Graph<T>>;
+  getDelta(graph: Graph<T>, $$PARAM_1$$: {reset: boolean; shallow: boolean}): Promise<DeltaResult<T>>;
   listen(graph: Graph<T>, callback: () => Promise<void>): () => void;
   endGraph(graph: Graph<T>): void;
 }

@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<2948a6737474a8f5bd55952246f500d3>>
+ * @generated SignedSource<<43a17be6ce381d721fd182d335d64e84>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/node-haste/DependencyGraph/ModuleResolution.js
@@ -15,18 +15,10 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  BundlerResolution,
-  TransformResultDependency,
-} from '../../DeltaBundler/types';
+import type {BundlerResolution, TransformResultDependency} from '../../DeltaBundler/types';
 import type {Reporter} from '../../lib/reporting';
 import type {ResolverInputOptions} from '../../shared/types';
-import type {
-  CustomResolver,
-  DoesFileExist,
-  FileSystemLookup,
-  ResolveAsset,
-} from 'metro-resolver';
+import type {CustomResolver, DoesFileExist, FileSystemLookup, ResolveAsset} from 'metro-resolver';
 import type {PackageForModule, PackageJson} from 'metro-resolver/private/types';
 
 export type DirExistsFn = (filePath: string) => boolean;
@@ -38,19 +30,11 @@ type Options = Readonly<{
   emptyModulePath: string;
   extraNodeModules: null | undefined | object;
   fileSystemLookup: FileSystemLookup;
-  getHasteModulePath: (
-    name: string,
-    platform: null | undefined | string,
-  ) => null | undefined | string;
-  getHastePackagePath: (
-    name: string,
-    platform: null | undefined | string,
-  ) => null | undefined | string;
+  getHasteModulePath: (name: string, platform: null | undefined | string) => null | undefined | string;
+  getHastePackagePath: (name: string, platform: null | undefined | string) => null | undefined | string;
   mainFields: ReadonlyArray<string>;
   getPackage: (packageJsonPath: string) => null | undefined | PackageJson;
-  getPackageForModule: (
-    absolutePath: string,
-  ) => null | undefined | PackageForModule;
+  getPackageForModule: (absolutePath: string) => null | undefined | PackageForModule;
   nodeModulesPaths: ReadonlyArray<string>;
   preferNativePlatform: boolean;
   projectRoot: string;
@@ -67,13 +51,7 @@ type Options = Readonly<{
 }>;
 export declare class ModuleResolver {
   constructor(options: Options);
-  resolveDependency(
-    originModulePath: string,
-    dependency: TransformResultDependency,
-    allowHaste: boolean,
-    platform: string | null,
-    resolverOptions: ResolverInputOptions,
-  ): BundlerResolution;
+  resolveDependency(originModulePath: string, dependency: TransformResultDependency, allowHaste: boolean, platform: string | null, resolverOptions: ResolverInputOptions): BundlerResolution;
 }
 export declare class UnableToResolveError extends Error {
   /**
@@ -102,7 +80,5 @@ export declare class UnableToResolveError extends Error {
       cause?: Error;
     }>,
   );
-  buildCodeFrameMessage(
-    dependency: null | undefined | TransformResultDependency,
-  ): null | undefined | string;
+  buildCodeFrameMessage(dependency: null | undefined | TransformResultDependency): null | undefined | string;
 }

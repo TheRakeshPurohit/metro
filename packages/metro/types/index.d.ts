@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<8cfd5068558051749a42bc72eb4b915f>>
+ * @generated SignedSource<<4b2bbfa101b60fd30d555640425678d8>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/index.flow.js
@@ -21,17 +21,9 @@ import type {ServerOptions} from './Server';
 import type {BuildOptions, OutputOptions, RequestOptions} from './shared/types';
 import type {HandleFunction} from 'connect';
 import type {Server as HttpServer} from 'http';
-import type {
-  Server as HttpsServer,
-  ServerOptions as HttpsServerOptions,
-} from 'https';
+import type {Server as HttpsServer, ServerOptions as HttpsServerOptions} from 'https';
 import type {TransformProfile} from 'metro-babel-transformer';
-import type {
-  ConfigT,
-  InputConfigT,
-  MetroConfig,
-  Middleware,
-} from 'metro-config';
+import type {ConfigT, InputConfigT, MetroConfig, Middleware} from 'metro-config';
 import type {CustomResolverOptions} from 'metro-resolver';
 import type {CustomTransformOptions} from 'metro-transform-worker';
 import type {Server as WebSocketServer} from 'ws';
@@ -50,10 +42,9 @@ type MetroMiddleWare = {
   metroServer: MetroServer;
   middleware: Middleware;
 };
-export type RunMetroOptions = Omit<
-  ServerOptions,
-  keyof {waitForBundler?: boolean}
-> & {waitForBundler?: boolean};
+export type RunMetroOptions = Omit<ServerOptions, 'waitForBundler'> & {
+  waitForBundler?: boolean;
+};
 export type RunServerOptions = Readonly<{
   hasReducedPerformance?: boolean;
   host?: string;
@@ -100,11 +91,7 @@ export type RunBuildOptions = {
       map: string;
       assets?: ReadonlyArray<AssetData>;
     }>;
-    save: (
-      $$PARAM_0$$: {code: string; map: string},
-      $$PARAM_1$$: OutputOptions,
-      $$PARAM_2$$: (logMessage: string) => void,
-    ) => Promise<unknown>;
+    save: ($$PARAM_0$$: {code: string; map: string}, $$PARAM_1$$: OutputOptions, $$PARAM_2$$: (logMessage: string) => void) => Promise<unknown>;
   }>;
   platform?: string;
   sourceMap?: boolean;
@@ -141,44 +128,23 @@ export type {
 export type {default as DependencyGraph} from './node-haste/DependencyGraph';
 export type {BundleDetails, Reporter, ReportableEvent} from './lib/reporting';
 export type {TerminalReportableEvent} from './lib/TerminalReporter';
-export type {
-  ContextMode,
-  RequireContextParams,
-} from './ModuleGraph/worker/collectDependencies';
+export type {ContextMode, RequireContextParams} from './ModuleGraph/worker/collectDependencies';
 export type {ServerOptions} from './Server';
 export type {MetroConfig, MetroServer};
-export declare function runMetro(
-  config: InputConfigT,
-  options?: RunMetroOptions,
-): Promise<MetroServer>;
+export declare function runMetro(config: InputConfigT, options?: RunMetroOptions): Promise<MetroServer>;
 export {loadConfig, mergeConfig, resolveConfig};
-export declare const createConnectMiddleware: (
-  config: ConfigT,
-  options?: RunMetroOptions,
-) => Promise<MetroMiddleWare>;
+export declare const createConnectMiddleware: (config: ConfigT, options?: RunMetroOptions) => Promise<MetroMiddleWare>;
 export declare type createConnectMiddleware = typeof createConnectMiddleware;
-export declare const runServer: (
-  config: ConfigT,
-  $$PARAM_1$$?: RunServerOptions,
-) => Promise<RunServerResult>;
+export declare const runServer: (config: ConfigT, $$PARAM_1$$?: RunServerOptions) => Promise<RunServerResult>;
 export declare type runServer = typeof runServer;
-export declare const runBuild: (
-  config: ConfigT,
-  $$PARAM_1$$: RunBuildOptions,
-) => Promise<RunBuildResult>;
+export declare const runBuild: (config: ConfigT, $$PARAM_1$$: RunBuildOptions) => Promise<RunBuildResult>;
 export declare type runBuild = typeof runBuild;
-export declare const buildGraph: (
-  config: InputConfigT,
-  $$PARAM_1$$: BuildGraphOptions,
-) => Promise<ReadOnlyGraph>;
+export declare const buildGraph: (config: InputConfigT, $$PARAM_1$$: BuildGraphOptions) => Promise<ReadOnlyGraph>;
 export declare type buildGraph = typeof buildGraph;
 type AttachMetroCLIOptions = {
   build?: BuildCommandOptions;
   serve?: ServeCommandOptions;
   dependencies?: DependenciesCommandOptions;
 };
-export declare const attachMetroCli: (
-  yargs: Yargs,
-  options?: AttachMetroCLIOptions,
-) => Yargs;
+export declare const attachMetroCli: (yargs: Yargs, options?: AttachMetroCLIOptions) => Yargs;
 export declare type attachMetroCli = typeof attachMetroCli;

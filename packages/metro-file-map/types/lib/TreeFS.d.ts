@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<65a3c4140d459a56b8c949e52b32ea1b>>
+ * @generated SignedSource<<7860a226378b2fb3793a3586501c28ed>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/lib/TreeFS.js
@@ -14,17 +14,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  CacheData,
-  FileData,
-  FileMetadata,
-  FileStats,
-  FileSystemListener,
-  LookupResult,
-  MutableFileSystem,
-  Path,
-  ProcessFileFunction,
-} from '../flow-types';
+import type {CacheData, FileData, FileMetadata, FileStats, FileSystemListener, LookupResult, MutableFileSystem, Path, ProcessFileFunction} from '../flow-types';
 
 type DirectoryNode = Map<string, MixedNode>;
 type FileNode = FileMetadata;
@@ -105,14 +95,9 @@ declare class TreeFS implements MutableFileSystem {
   getSerializableSnapshot(): CacheData['fileSystemData'];
   static fromDeserializedSnapshot(args: DeserializedSnapshotInput): TreeFS;
   getSize(mixedPath: Path): null | undefined | number;
-  getDifference(
-    files: FileData,
-    options?: Readonly<{subpath?: string}>,
-  ): {changedFiles: FileData; removedFiles: Set<string>};
+  getDifference(files: FileData, options?: Readonly<{subpath?: string}>): {changedFiles: FileData; removedFiles: Set<string>};
   getSha1(mixedPath: Path): null | undefined | string;
-  getOrComputeSha1(
-    mixedPath: Path,
-  ): Promise<null | undefined | {sha1: string; content?: Buffer}>;
+  getOrComputeSha1(mixedPath: Path): Promise<null | undefined | {sha1: string; content?: Buffer}>;
   exists(mixedPath: Path): boolean;
   lookup(mixedPath: Path): LookupResult;
   getAllFiles(): Array<Path>;
@@ -123,15 +108,8 @@ declare class TreeFS implements MutableFileSystem {
    * for example: `a/b.js` -> `./a/b.js`
    */
   matchFiles(opts: MatchFilesOptions): Iterable<Path>;
-  addOrModify(
-    mixedPath: Path,
-    metadata: FileMetadata,
-    changeListener?: FileSystemListener,
-  ): void;
-  bulkAddOrModify(
-    addedOrModifiedFiles: FileData,
-    changeListener?: FileSystemListener,
-  ): void;
+  addOrModify(mixedPath: Path, metadata: FileMetadata, changeListener?: FileSystemListener): void;
+  bulkAddOrModify(addedOrModifiedFiles: FileData, changeListener?: FileSystemListener): void;
   remove(mixedPath: Path, changeListener?: FileSystemListener): void;
   /**
    * Given a start path (which need not exist), a subpath and type, and

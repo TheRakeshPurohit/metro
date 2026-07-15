@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<ebebfbca9d43e034fde8489e1d9f2dbb>>
+ * @generated SignedSource<<56a5351ea6e2e4904e17953a832baea1>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/watchers/common.js
@@ -44,12 +44,7 @@ export type WatcherOptions = Readonly<{
 /**
  * Checks a file relative path against the globs array.
  */
-export declare function includedByGlob(
-  type: null | undefined | ('f' | 'l' | 'd'),
-  globs: ReadonlyArray<string>,
-  dot: boolean,
-  relativePath: string,
-): boolean;
+export declare function includedByGlob(type: null | undefined | ('f' | 'l' | 'd'), globs: ReadonlyArray<string>, dot: boolean, relativePath: string): boolean;
 /**
  * Whether the given filePath matches the given RegExp, after converting
  * (on Windows only) system separators to posix separators.
@@ -60,11 +55,6 @@ export declare function includedByGlob(
  *
  * [1]: https://github.com/micromatch/anymatch/blob/3.1.1/index.js#L50
  */
-export declare const posixPathMatchesPattern: (
-  pattern: RegExp,
-  filePath: string,
-) => boolean;
+export declare const posixPathMatchesPattern: (pattern: RegExp, filePath: string) => boolean;
 export declare type posixPathMatchesPattern = typeof posixPathMatchesPattern;
-export declare function typeFromStat(
-  stat: Stats,
-): null | undefined | ChangeEventMetadata['type'];
+export declare function typeFromStat(stat: Stats): null | undefined | ChangeEventMetadata['type'];

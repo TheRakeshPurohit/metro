@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<029e6f78b37b3e313b3026a478ba5065>>
+ * @generated SignedSource<<780e521123ff9528911d3a6307815dee>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/ModuleGraph/worker/collectDependencies.js
@@ -16,16 +16,8 @@
 
 import type {ReadonlySourceLocation} from '../../shared/types';
 import type {NodePath} from '@babel/traverse';
-import type {
-  CallExpression,
-  File as BabelNodeFile,
-  Identifier,
-  StringLiteral,
-} from '@babel/types';
-import type {
-  AllowOptionalDependencies,
-  AsyncDependencyType,
-} from 'metro/private/DeltaBundler/types';
+import type {CallExpression, File as BabelNodeFile, Identifier, StringLiteral} from '@babel/types';
+import type {AllowOptionalDependencies, AsyncDependencyType} from 'metro/private/DeltaBundler/types';
 
 export type Dependency = Readonly<{data: DependencyData; name: string}>;
 export type ContextMode = 'sync' | 'eager' | 'lazy' | 'lazy-once';
@@ -45,10 +37,7 @@ type DependencyData = Readonly<{
   /** Context for requiring a collection of modules. */
   contextParams?: RequireContextParams;
 }>;
-export type MutableInternalDependency = Omit<
-  DependencyData,
-  keyof {locs: Array<ReadonlySourceLocation>; index: number; name: string}
-> & {locs: Array<ReadonlySourceLocation>; index: number; name: string};
+export type MutableInternalDependency = Omit<DependencyData, 'locs' | 'index' | 'name'> & {locs: Array<ReadonlySourceLocation>; index: number; name: string};
 export type InternalDependency = Readonly<MutableInternalDependency>;
 export type State = {
   asyncRequireModulePathStringLiteral: null | undefined | StringLiteral;
@@ -61,8 +50,7 @@ export type State = {
   allowOptionalDependencies: AllowOptionalDependencies;
   /** Enable `require.context` statements which can be used to import multiple files in a directory. */
   unstable_allowRequireContext: boolean;
-  unstable_isESMImportAtSource:
-    null | undefined | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
+  unstable_isESMImportAtSource: null | undefined | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
 };
 export type Options = Readonly<{
   asyncRequireModulePath: string;
@@ -74,8 +62,7 @@ export type Options = Readonly<{
   dependencyTransformer?: DependencyTransformer;
   /** Enable `require.context` statements which can be used to import multiple files in a directory. */
   unstable_allowRequireContext: boolean;
-  unstable_isESMImportAtSource?:
-    null | undefined | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
+  unstable_isESMImportAtSource?: null | undefined | (($$PARAM_0$$: ReadonlySourceLocation) => boolean);
 }>;
 export type CollectedDependencies = Readonly<{
   ast: BabelNodeFile;
@@ -83,26 +70,10 @@ export type CollectedDependencies = Readonly<{
   dependencies: ReadonlyArray<Dependency>;
 }>;
 export interface DependencyTransformer {
-  transformSyncRequire(
-    path: NodePath<CallExpression>,
-    dependency: InternalDependency,
-    state: State,
-  ): void;
-  transformImportCall(
-    path: NodePath,
-    dependency: InternalDependency,
-    state: State,
-  ): void;
-  transformImportMaybeSyncCall(
-    path: NodePath,
-    dependency: InternalDependency,
-    state: State,
-  ): void;
-  transformPrefetch(
-    path: NodePath,
-    dependency: InternalDependency,
-    state: State,
-  ): void;
+  transformSyncRequire(path: NodePath<CallExpression>, dependency: InternalDependency, state: State): void;
+  transformImportCall(path: NodePath, dependency: InternalDependency, state: State): void;
+  transformImportMaybeSyncCall(path: NodePath, dependency: InternalDependency, state: State): void;
+  transformPrefetch(path: NodePath, dependency: InternalDependency, state: State): void;
   transformIllegalDynamicRequire(path: NodePath, state: State): void;
 }
 export type DynamicRequiresBehavior = 'throwAtRuntime' | 'reject';
@@ -115,10 +86,7 @@ export type DynamicRequiresBehavior = 'throwAtRuntime' | 'reject';
  *
  * The second argument is only provided for debugging purposes.
  */
-declare function collectDependencies(
-  ast: BabelNodeFile,
-  options: Options,
-): CollectedDependencies;
+declare function collectDependencies(ast: BabelNodeFile, options: Options): CollectedDependencies;
 export default collectDependencies;
 export type ImportQualifier = Readonly<{
   name: string;

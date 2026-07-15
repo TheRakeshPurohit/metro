@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<644d25f2f9682a306271d052d09b1d2d>>
+ * @generated SignedSource<<94bbcd69e891c414b64147d5203c39b7>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/ModuleGraph/worker/importLocationsPlugin.js
@@ -26,8 +26,6 @@ type State = {
   importDeclarationLocs: ImportDeclarationLocs;
   file: {metadata?: MetroBabelFileMetadata};
 };
-declare function importLocationsPlugin($$PARAM_0$$: {
-  types: Types;
-}): PluginObj<State>;
+declare function importLocationsPlugin($$PARAM_0$$: {types: Types}): PluginObj<State>;
 declare function locToKey(loc: ReadonlySourceLocation): string;
 export {importLocationsPlugin, locToKey};

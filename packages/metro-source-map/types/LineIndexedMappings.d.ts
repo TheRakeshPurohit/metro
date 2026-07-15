@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<b3f5bf11c317fcd72b08780359fb893c>>
+ * @generated SignedSource<<605428f0d829e437efe1190f78927609>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/LineIndexedMappings.js
@@ -32,9 +32,6 @@
  */
 declare class LineIndexedMappings {
   constructor(mappings: string);
-  originalPositionFor(
-    generatedLine1Based: number,
-    generatedColumn0Based: number,
-  ): null | undefined | {line1Based: number; column0Based: number};
+  originalPositionFor(generatedLine1Based: number, generatedColumn0Based: number): null | undefined | {line1Based: number; column0Based: number};
 }
 export default LineIndexedMappings;

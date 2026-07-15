@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<fc329765599e313b7d0cb6b45b7bbbdc>>
+ * @generated SignedSource<<0724c8d6103d602f036e44226e786cfe>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/Graph.js
@@ -15,14 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  Dependencies,
-  GraphInputOptions,
-  MixedOutput,
-  Module,
-  Options,
-  TransformInputOptions,
-} from './types';
+import type {Dependencies, GraphInputOptions, MixedOutput, Module, Options, TransformInputOptions} from './types';
 
 import CountingSet from '../lib/CountingSet';
 
@@ -47,18 +40,12 @@ export declare class Graph<T = MixedOutput> {
    * method should traverse. Normally, these paths should be the modified files
    * since the last traversal.
    */
-  traverseDependencies(
-    paths: ReadonlyArray<string>,
-    options: Options<T>,
-  ): Promise<Result<T>>;
+  traverseDependencies(paths: ReadonlyArray<string>, options: Options<T>): Promise<Result<T>>;
   initialTraverseDependencies(options: Options<T>): Promise<Result<T>>;
   /**
    * Collect a list of context modules which include a given file.
    */
-  markModifiedContextModules(
-    filePath: string,
-    modifiedPaths: Set<string> | CountingSet<string>,
-  ): void;
+  markModifiedContextModules(filePath: string, modifiedPaths: Set<string> | CountingSet<string>): void;
   /**
    * Gets the list of modules affected by the deletion of a given file. The
    * caller is expected to mark these modules as modified in the next call to

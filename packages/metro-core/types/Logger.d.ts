@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<0395426536120e217377b6f3cde40ebc>>
+ * @generated SignedSource<<9b4123ff13bd1c4aa6bd7f398de068e2>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-core/src/Logger.js
@@ -48,12 +48,7 @@ export type LogEntry = {
 };
 declare function on(event: string, handler: (logEntry: LogEntry) => void): void;
 declare function createEntry(data: LogEntry | string): LogEntry;
-declare function createActionStartEntry(
-  data: ActionLogEntryData | string,
-): LogEntry;
-declare function createActionEndEntry(
-  logEntry: ActionStartLogEntry,
-  error?: null | undefined | Error,
-): LogEntry;
+declare function createActionStartEntry(data: ActionLogEntryData | string): LogEntry;
+declare function createActionEndEntry(logEntry: ActionStartLogEntry, error?: null | undefined | Error): LogEntry;
 declare function log(logEntry: LogEntry): LogEntry;
 export {on, createEntry, createActionStartEntry, createActionEndEntry, log};

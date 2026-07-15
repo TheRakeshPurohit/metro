@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<5fbef54d757c6130889a1889f7d71255>>
+ * @generated SignedSource<<6c36a6277aa100c3e644e201ed5f0cea>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/Consumer/types.js
@@ -47,18 +47,9 @@ export type Mapping = Readonly<{
   name: null | undefined | string;
 }>;
 export interface IConsumer {
-  originalPositionFor(
-    generatedPosition: GeneratedPositionLookup,
-  ): SourcePosition;
+  originalPositionFor(generatedPosition: GeneratedPositionLookup): SourcePosition;
   generatedMappings(): Iterable<Mapping>;
-  eachMapping(
-    callback: (mapping: Mapping) => unknown,
-    context?: unknown,
-    order?: IterationOrder,
-  ): void;
+  eachMapping(callback: (mapping: Mapping) => unknown, context?: unknown, order?: IterationOrder): void;
   get file(): null | undefined | string;
-  sourceContentFor(
-    source: string,
-    nullOnMissing: true,
-  ): null | undefined | string;
+  sourceContentFor(source: string, nullOnMissing: true): null | undefined | string;
 }

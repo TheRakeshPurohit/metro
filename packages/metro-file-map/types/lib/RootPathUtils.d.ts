@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<5ecdb559fce5f5c6ed50df6e4eaebf20>>
+ * @generated SignedSource<<3f5cec7a825e191667892d7c3602ca6b>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/lib/RootPathUtils.js
@@ -22,9 +22,6 @@ export declare class RootPathUtils {
   normalToAbsolute(normalPath: string): string;
   relativeToNormal(relativePath: string): string;
   getAncestorOfRootIdx(normalPath: string): null | undefined | number;
-  joinNormalToRelative(
-    normalPath: string,
-    relativePath: string,
-  ): {normalPath: string; collapsedSegments: number};
+  joinNormalToRelative(normalPath: string, relativePath: string): {normalPath: string; collapsedSegments: number};
   relative(from: string, to: string): string;
 }

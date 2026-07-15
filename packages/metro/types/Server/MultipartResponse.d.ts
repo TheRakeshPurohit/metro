@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<355f5514464c4989f90a211782db41e7>>
+ * @generated SignedSource<<5a0b37c39c07c685f750eb9419dc5b5b>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/Server/MultipartResponse.js
@@ -20,10 +20,7 @@ import type {IncomingMessage, ServerResponse} from 'http';
 type Data = string | Buffer | Uint8Array;
 type Headers = {[$$Key$$: string]: string | number};
 declare class MultipartResponse {
-  static wrapIfSupported(
-    req: IncomingMessage,
-    res: ServerResponse,
-  ): MultipartResponse | ServerResponse;
+  static wrapIfSupported(req: IncomingMessage, res: ServerResponse): MultipartResponse | ServerResponse;
   static serializeHeaders(headers: Headers): string;
   res: ServerResponse;
   headers: Headers;

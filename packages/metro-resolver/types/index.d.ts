@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<ff5d24a27b09aefdeb721ffcce936372>>
+ * @generated SignedSource<<788c74a2982d6f2a21f8a1bc8182e0a4>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-resolver/src/index.js
@@ -37,11 +37,4 @@ import formatFileCandidates from './errors/formatFileCandidates';
 import InvalidPackageError from './errors/InvalidPackageError';
 import resolve from './resolve';
 
-export {
-  FailedToResolveNameError,
-  FailedToResolvePathError,
-  FailedToResolveUnsupportedError,
-  formatFileCandidates,
-  InvalidPackageError,
-  resolve,
-};
+export {FailedToResolveNameError, FailedToResolvePathError, FailedToResolveUnsupportedError, formatFileCandidates, InvalidPackageError, resolve};

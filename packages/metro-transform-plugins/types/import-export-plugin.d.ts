@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<587cbe7792cfd21ce4abb4bfb5bac2f8>>
+ * @generated SignedSource<<e6bae9de79e5f2dc06b7c86d9e832e9e>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-transform-plugins/src/import-export-plugin.js
@@ -42,7 +42,5 @@ type State = {
   importAll: Node;
   opts: Options;
 };
-declare function importExportPlugin($$PARAM_0$$: {
-  types: Types;
-}): PluginObj<State>;
+declare function importExportPlugin($$PARAM_0$$: {types: Types}): PluginObj<State>;
 export default importExportPlugin;

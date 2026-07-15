@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<1ff95f1ad6bb911f3d2c2bc41d59bc1a>>
+ * @generated SignedSource<<c98cbf3da3810b36143efb69d8a9d4f7>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/lib/reporting.js
@@ -63,15 +63,7 @@ export type ReportableEvent =
   | {type: 'hmr_client_error'; error: Error}
   | {
       type: 'client_log';
-      level:
-        | 'trace'
-        | 'info'
-        | 'warn'
-        | 'log'
-        | 'group'
-        | 'groupCollapsed'
-        | 'groupEnd'
-        | 'debug';
+      level: 'trace' | 'info' | 'warn' | 'log' | 'group' | 'groupCollapsed' | 'groupEnd' | 'debug';
       data: Array<unknown>;
     }
   | {type: 'resolver_warning'; message: string}
@@ -106,27 +98,15 @@ export type Reporter = {update(event: ReportableEvent): void};
  * calling this, add a new type of ReportableEvent instead, and implement a
  * proper handler in the reporter(s).
  */
-export declare function logWarning(
-  terminal: Terminal,
-  format: string,
-  ...args: Array<unknown>
-): void;
+export declare function logWarning(terminal: Terminal, format: string, ...args: Array<unknown>): void;
 /**
  * Similar to `logWarning`, but for messages that require the user to act.
  */
-export declare function logError(
-  terminal: Terminal,
-  format: string,
-  ...args: Array<unknown>
-): void;
+export declare function logError(terminal: Terminal, format: string, ...args: Array<unknown>): void;
 /**
  * Similar to `logWarning`, but for informational messages.
  */
-export declare function logInfo(
-  terminal: Terminal,
-  format: string,
-  ...args: Array<unknown>
-): void;
+export declare function logInfo(terminal: Terminal, format: string, ...args: Array<unknown>): void;
 /**
  * A reporter that does nothing. Errors and warnings will be swallowed, that
  * is generally not what you want.

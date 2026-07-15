@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<02d7f6eec9c93d02612c9b2fdef18cef>>
+ * @generated SignedSource<<478ab7a9604901ec14e354b95c670a01>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/shared/output/RamBundle/as-assets.js
@@ -24,9 +24,5 @@ import type {OutputOptions} from '../../types';
  * All other modules go into a 'js-modules' folder that in the same parent
  * directory as the startup file.
  */
-declare function saveAsAssets(
-  bundle: RamBundleInfo,
-  options: OutputOptions,
-  log: (...args: Array<string>) => void,
-): Promise<unknown>;
+declare function saveAsAssets(bundle: RamBundleInfo, options: OutputOptions, log: (...args: Array<string>) => void): Promise<unknown>;
 export default saveAsAssets;

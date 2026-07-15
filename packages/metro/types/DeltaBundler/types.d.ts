@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<c7dc27c87dd93b6c07980e669cc74d03>>
+ * @generated SignedSource<<295faf3dbcdeffd6b15b9fa949b501cb>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/DeltaBundler/types.js
@@ -61,8 +61,7 @@ export type ResolvedDependency = Readonly<{
   absolutePath: string;
   data: TransformResultDependency;
 }>;
-export type Dependency =
-  ResolvedDependency | Readonly<{data: TransformResultDependency}>;
+export type Dependency = ResolvedDependency | Readonly<{data: TransformResultDependency}>;
 export type Module<T = MixedOutput> = Readonly<{
   dependencies: Map<string, Dependency>;
   inverseDependencies: CountingSet<string>;
@@ -79,14 +78,8 @@ export type ModuleData<T = MixedOutput> = Readonly<{
   unstable_transformResultKey?: null | undefined | string;
 }>;
 export type Dependencies<T = MixedOutput> = Map<string, Module<T>>;
-export type ReadOnlyDependencies<T = MixedOutput> = ReadonlyMap<
-  string,
-  Module<T>
->;
-export type TransformInputOptions = Omit<
-  JsTransformOptions,
-  'inlinePlatform' | 'inlineRequires'
->;
+export type ReadOnlyDependencies<T = MixedOutput> = ReadonlyMap<string, Module<T>>;
+export type TransformInputOptions = Omit<JsTransformOptions, 'inlinePlatform' | 'inlineRequires'>;
 export type GraphInputOptions = Readonly<{
   entryPoints: ReadonlySet<string>;
   transformOptions: TransformInputOptions;
@@ -102,24 +95,13 @@ export type TransformResult<T = MixedOutput> = Readonly<{
   output: ReadonlyArray<T>;
   unstable_transformResultKey?: null | undefined | string;
 }>;
-export type TransformResultWithSource<T = MixedOutput> = Readonly<
-  Omit<TransformResult<T>, keyof {getSource: () => Buffer}> & {
-    getSource: () => Buffer;
-  }
->;
-export type TransformFn<T = MixedOutput> = (
-  $$PARAM_0$$: string,
-  $$PARAM_1$$: null | undefined | RequireContext,
-) => Promise<TransformResultWithSource<T>>;
-export type ResolveFn = (
-  from: string,
-  dependency: TransformResultDependency,
-) => BundlerResolution;
+export type TransformResultWithSource<T = MixedOutput> = Readonly<Omit<TransformResult<T>, 'getSource'> & {getSource: () => Buffer}>;
+export type TransformFn<T = MixedOutput> = ($$PARAM_0$$: string, $$PARAM_1$$: null | undefined | RequireContext) => Promise<TransformResultWithSource<T>>;
+export type ResolveFn = (from: string, dependency: TransformResultDependency) => BundlerResolution;
 export type AllowOptionalDependenciesWithOptions = {
   readonly exclude: Array<string>;
 };
-export type AllowOptionalDependencies =
-  boolean | AllowOptionalDependenciesWithOptions;
+export type AllowOptionalDependencies = boolean | AllowOptionalDependenciesWithOptions;
 export type BundlerResolution = Readonly<{
   type: 'sourceFile';
   filePath: string;
@@ -128,8 +110,7 @@ export type Options<T = MixedOutput> = Readonly<{
   resolve: ResolveFn;
   transform: TransformFn<T>;
   transformOptions: TransformInputOptions;
-  onProgress:
-    null | undefined | ((numProcessed: number, total: number) => unknown);
+  onProgress: null | undefined | ((numProcessed: number, total: number) => unknown);
   lazy: boolean;
   unstable_allowRequireContext: boolean;
   unstable_enablePackageExports: boolean;
@@ -146,10 +127,7 @@ export type SerializerOptions = Readonly<{
   asyncRequireModulePath: string;
   createModuleId: ($$PARAM_0$$: string) => number;
   dev: boolean;
-  getRunModuleStatement: (
-    moduleId: number | string,
-    globalPrefix: string,
-  ) => string;
+  getRunModuleStatement: (moduleId: number | string, globalPrefix: string) => string;
   globalPrefix: string;
   includeAsyncPaths: boolean;
   inlineSourceMap: null | undefined | boolean;

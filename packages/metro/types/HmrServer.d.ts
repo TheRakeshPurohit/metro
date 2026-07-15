@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @noformat
- * @generated SignedSource<<48bfe42125bd22a8329f95a30fa90b64>>
+ * @generated SignedSource<<4dfa20563fc3b5d03ab821ba998ef739>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro/src/HmrServer.js
@@ -14,10 +14,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  RevisionId,
-  default as IncrementalBundler,
-} from './IncrementalBundler';
+import type {RevisionId, default as IncrementalBundler} from './IncrementalBundler';
 import type {ConfigT} from 'metro-config';
 
 export type Client = {
@@ -35,20 +32,9 @@ export type Client = {
  * `onClientConnect`, `onClientDisconnect` and `onClientError` methods).
  */
 declare class HmrServer<TClient extends Client> {
-  constructor(
-    bundler: IncrementalBundler,
-    createModuleId: (path: string) => number,
-    config: ConfigT,
-  );
-  onClientConnect: (
-    requestUrl: string,
-    sendFn: (data: string) => void,
-  ) => Promise<Client>;
-  onClientMessage: (
-    client: TClient,
-    message: string | Buffer | ArrayBuffer | Array<Buffer>,
-    sendFn: (data: string) => void,
-  ) => Promise<void>;
+  constructor(bundler: IncrementalBundler, createModuleId: (path: string) => number, config: ConfigT);
+  onClientConnect: (requestUrl: string, sendFn: (data: string) => void) => Promise<Client>;
+  onClientMessage: (client: TClient, message: string | Buffer | ArrayBuffer | Array<Buffer>, sendFn: (data: string) => void) => Promise<void>;
   onClientError: (client: TClient, e: Error) => void;
   onClientDisconnect: (client: TClient) => void;
 }

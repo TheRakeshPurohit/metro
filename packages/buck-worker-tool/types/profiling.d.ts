@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<ae98ee20cb59420ad8aa343e7ce31e8d>>
+ * @generated SignedSource<<aeedad3a3a93ea8c041ea15f80203fcc>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/buck-worker-tool/src/profiling.js
@@ -16,6 +16,4 @@
  */
 
 export declare function startProfiling(): void;
-export declare function stopProfilingAndWrite(
-  workerName: null | undefined | string,
-): void;
+export declare function stopProfilingAndWrite(workerName: null | undefined | string): void;

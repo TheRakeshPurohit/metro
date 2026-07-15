@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<5259e3d63b2758ed2f65c5a097b974ba>>
+ * @generated SignedSource<<5bfdb114e852f7bac9037b3c668cb267>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-cache/src/stores/HttpStore.js
@@ -18,8 +18,7 @@
 import HttpError from './HttpError';
 import NetworkError from './NetworkError';
 
-export type Options =
-  EndpointOptions | {getOptions: EndpointOptions; setOptions: EndpointOptions};
+export type Options = EndpointOptions | {getOptions: EndpointOptions; setOptions: EndpointOptions};
 type EndpointOptions = {
   endpoint: string;
   family?: 4 | 6;

@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<c584261d0556139618e3485bed0b3348>>
+ * @generated SignedSource<<1faf6a56f194e521c6e8f8a62a0b2754>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-source-map/src/Generator.js
@@ -15,11 +15,7 @@
  *   yarn run build-ts-defs (OSS) 
  */
 
-import type {
-  BasicSourceMap,
-  FBSourceFunctionMap,
-  FBSourceMetadata,
-} from './source-map';
+import type {BasicSourceMap, FBSourceFunctionMap, FBSourceMetadata} from './source-map';
 
 import B64Builder from './B64Builder';
 
@@ -55,12 +51,7 @@ declare class Generator {
   /**
    * Mark the beginning of a new source file.
    */
-  startFile(
-    file: string,
-    code: string,
-    functionMap: null | undefined | FBSourceFunctionMap,
-    flags?: FileFlags,
-  ): void;
+  startFile(file: string, code: string, functionMap: null | undefined | FBSourceFunctionMap, flags?: FileFlags): void;
   /**
    * Mark the end of the current source file
    */
@@ -72,22 +63,11 @@ declare class Generator {
   /**
    * Adds a mapping for generated code with a corresponding source location.
    */
-  addSourceMapping(
-    generatedLine: number,
-    generatedColumn: number,
-    sourceLine: number,
-    sourceColumn: number,
-  ): void;
+  addSourceMapping(generatedLine: number, generatedColumn: number, sourceLine: number, sourceColumn: number): void;
   /**
    * Adds a mapping for code with a corresponding source location + symbol name.
    */
-  addNamedSourceMapping(
-    generatedLine: number,
-    generatedColumn: number,
-    sourceLine: number,
-    sourceColumn: number,
-    name: string,
-  ): void;
+  addNamedSourceMapping(generatedLine: number, generatedColumn: number, sourceLine: number, sourceColumn: number, name: string): void;
   /**
    * Return the source map as object.
    */

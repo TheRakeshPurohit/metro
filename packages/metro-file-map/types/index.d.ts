@@ -6,7 +6,7 @@
  *
  * @noformat
  * @oncall react_native
- * @generated SignedSource<<220686ad19cc94bec3b8d89f49fa6304>>
+ * @generated SignedSource<<280eebdbd2507969e4b6df9e48a4495c>>
  *
  * This file was translated from Flow by scripts/generateTypeScriptDefinitions.js
  * Original file: packages/metro-file-map/src/index.js
@@ -33,18 +33,7 @@ import type {
 
 import EventEmitter from 'events';
 
-export type {
-  BuildParameters,
-  BuildResult,
-  CacheData,
-  ChangeEventMetadata,
-  FileData,
-  FileMap,
-  FileSystem,
-  HasteMapData,
-  HasteMapItem,
-  InputFileMapPlugin,
-};
+export type {BuildParameters, BuildResult, CacheData, ChangeEventMetadata, FileData, FileMap, FileSystem, HasteMapData, HasteMapItem, InputFileMapPlugin};
 export type InputOptions = Readonly<{
   computeSha1?: null | undefined | boolean;
   enableSymlinks?: null | undefined | boolean;
@@ -79,15 +68,7 @@ export {HasteConflictsError} from './plugins/haste/HasteConflictsError';
 export {default as HastePlugin} from './plugins/HastePlugin';
 export type {HasteMap} from './flow-types';
 export type {HealthCheckResult} from './Watcher';
-export type {
-  CacheManager,
-  CacheManagerFactory,
-  CacheManagerFactoryOptions,
-  CacheManagerWriteOptions,
-  ChangeEvent,
-  DependencyExtractor,
-  WatcherStatus,
-} from './flow-types';
+export type {CacheManager, CacheManagerFactory, CacheManagerFactoryOptions, CacheManagerWriteOptions, ChangeEvent, DependencyExtractor, WatcherStatus} from './flow-types';
 /**
  * FileMap includes a JavaScript implementation of Facebook's haste module system.
  *
