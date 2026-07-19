@@ -18,12 +18,12 @@ import getTransformCacheKey from './getTransformCacheKey';
 import WorkerFarm from './WorkerFarm';
 import assert from 'assert';
 import crypto from 'crypto';
+import debugModule from 'debug';
 import fs from 'fs';
 import {Cache, stableHash} from 'metro-cache';
 import path from 'path';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:Transformer');
+const debug = debugModule('Metro:Transformer');
 
 type GetOrComputeSha1Fn = string => Promise<
   Readonly<{content?: Buffer, sha1: string}>,

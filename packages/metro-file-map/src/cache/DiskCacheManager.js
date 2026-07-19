@@ -18,14 +18,14 @@ import type {
 } from '../flow-types';
 
 import rootRelativeCacheKeys from '../lib/rootRelativeCacheKeys';
+import debugModule from 'debug';
 import {promises as fsPromises} from 'fs';
 import {tmpdir} from 'os';
 import path from 'path';
 import {Timeout, clearTimeout, setTimeout} from 'timers';
 import {deserialize, serialize} from 'v8';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:FileMapCache');
+const debug = debugModule('Metro:FileMapCache');
 
 type AutoSaveOptions = Readonly<{
   debounceMs: number,

@@ -21,11 +21,11 @@ import type {
 import H from '../constants';
 import {Worker} from '../worker';
 import {RootPathUtils} from './RootPathUtils';
+import debugModule from 'debug';
 import {Worker as JestWorker} from 'jest-worker';
 import {sep} from 'path';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:FileMap');
+const debug = debugModule('Metro:FileMap');
 
 type ProcessFileRequest = Readonly<{
   /**

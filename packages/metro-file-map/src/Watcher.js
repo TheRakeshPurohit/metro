@@ -25,14 +25,14 @@ import {TOUCH_EVENT} from './watchers/common';
 import FallbackWatcher from './watchers/FallbackWatcher';
 import NativeWatcher from './watchers/NativeWatcher';
 import WatchmanWatcher from './watchers/WatchmanWatcher';
+import debugModule from 'debug';
 import EventEmitter from 'events';
 import * as fs from 'fs';
 import nullthrows from 'nullthrows';
 import * as path from 'path';
 import {performance} from 'perf_hooks';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:Watcher');
+const debug = debugModule('Metro:Watcher');
 
 const MAX_WAIT_TIME = 240000;
 

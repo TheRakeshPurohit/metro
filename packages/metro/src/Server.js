@@ -66,6 +66,7 @@ import MultipartResponse from './Server/MultipartResponse';
 import symbolicate from './Server/symbolicate';
 import {SourcePathsMode} from './shared/types';
 import {codeFrameColumns} from '@babel/code-frame';
+import debugModule from 'debug';
 import * as fs from 'graceful-fs';
 import * as jscSafeUrl from 'jsc-safe-url';
 import {Logger} from 'metro-core';
@@ -75,8 +76,7 @@ import path from 'path';
 import {performance} from 'perf_hooks';
 import querystring from 'querystring';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:Server');
+const debug = debugModule('Metro:Server');
 
 const {createActionStartEntry, createActionEndEntry, log} = Logger;
 

@@ -26,11 +26,11 @@ import * as common from './common';
 import RecrawlWarning from './RecrawlWarning';
 import assert from 'assert';
 import {createHash} from 'crypto';
+import debugModule from 'debug';
 import watchman from 'fb-watchman';
 import invariant from 'invariant';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:WatchmanWatcher');
+const debug = debugModule('Metro:WatchmanWatcher');
 
 const DELETE_EVENT = common.DELETE_EVENT;
 const TOUCH_EVENT = common.TOUCH_EVENT;

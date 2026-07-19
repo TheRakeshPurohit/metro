@@ -30,11 +30,11 @@ import getGraphId from './lib/getGraphId';
 import parseBundleOptionsFromBundleRequestUrl from './lib/parseBundleOptionsFromBundleRequestUrl';
 import splitBundleOptions from './lib/splitBundleOptions';
 import * as transformHelpers from './lib/transformHelpers';
+import debugModule from 'debug';
 import {Logger} from 'metro-core';
 import nullthrows from 'nullthrows';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:HMR');
+const debug = debugModule('Metro:HMR');
 
 const {createActionStartEntry, createActionEndEntry, log} = Logger;
 

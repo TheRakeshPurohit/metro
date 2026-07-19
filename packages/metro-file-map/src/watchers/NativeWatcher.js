@@ -12,12 +12,12 @@ import type {FSWatcher} from 'fs';
 
 import {AbstractWatcher} from './AbstractWatcher';
 import {includedByGlob, typeFromStat} from './common';
+import debugModule from 'debug';
 import {promises as fsPromises, watch} from 'fs';
 import {platform} from 'os';
 import * as path from 'path';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:NativeWatcher');
+const debug = debugModule('Metro:NativeWatcher');
 
 const TOUCH_EVENT = 'touch';
 const DELETE_EVENT = 'delete';

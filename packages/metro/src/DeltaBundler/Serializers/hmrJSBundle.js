@@ -13,12 +13,12 @@ import type {DeltaResult, Module, ReadOnlyGraph} from '../types';
 import type {HmrModule} from 'metro-runtime/src/modules/types';
 
 import {isJsModule, wrapModule} from './helpers/js';
+import debugModule from 'debug';
 import * as jscSafeUrl from 'jsc-safe-url';
 import {addParamsToDefineCall} from 'metro-transform-plugins';
 import path from 'path';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:HMR');
+const debug = debugModule('Metro:HMR');
 
 type Options = Readonly<{
   clientUrl: URL,

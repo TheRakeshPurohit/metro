@@ -52,14 +52,14 @@ import normalizePathSeparatorsToSystem from './lib/normalizePathSeparatorsToSyst
 import {RootPathUtils} from './lib/RootPathUtils';
 import TreeFS from './lib/TreeFS';
 import {Watcher} from './Watcher';
+import debugModule from 'debug';
 import EventEmitter from 'events';
 import {promises as fsPromises} from 'fs';
 import invariant from 'invariant';
 import * as path from 'path';
 import {performance} from 'perf_hooks';
 
-// eslint-disable-next-line import/no-commonjs
-const debug = require('debug')('Metro:FileMap');
+const debug = debugModule('Metro:FileMap');
 
 export type {
   BuildParameters,
