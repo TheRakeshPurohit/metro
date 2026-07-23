@@ -133,6 +133,75 @@ test('wraps a JSON file correctly', () => {
   );
 });
 
+test('wraps a module with the static Hermes module factory', () => {
+  const dependencyMapName = '_dependencyMapName';
+
+  const originalAst = astFromCode(`
+    const a = require('b/lib/a');
+  `);
+  const {ast, requireName} = JsFileWrapping.wrapModule(
+    originalAst,
+    '_$$_IMPORT_DEFAULT',
+    '_$$_IMPORT_ALL',
+    dependencyMapName,
+    defaultGlobalPrefix,
+    {unstable_useStaticHermesModuleFactory: true},
+  );
+
+  expect(requireName).toBe('require');
+  expect(codeFromAst(ast)).toEqual(
+    comparableCode(`
+      __d($SHBuiltin.moduleFactory(_$$_METRO_MODULE_ID, function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMapName) {
+        const a = require('b/lib/a');
+      }));`),
+  );
+});
+
+test('wraps a module with the static Hermes module factory and a global prefix', () => {
+  const dependencyMapName = '_dependencyMapName';
+
+  const originalAst = astFromCode(`
+    const a = require('b/lib/a');
+  `);
+  const globalPrefix = '__metro';
+  const {ast} = JsFileWrapping.wrapModule(
+    originalAst,
+    '_$$_IMPORT_DEFAULT',
+    '_$$_IMPORT_ALL',
+    dependencyMapName,
+    globalPrefix,
+    {unstable_useStaticHermesModuleFactory: true},
+  );
+
+  expect(codeFromAst(ast)).toEqual(
+    comparableCode(`
+      ${globalPrefix}__d($SHBuiltin.moduleFactory(_$$_METRO_MODULE_ID, function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMapName) {
+        const a = require('b/lib/a');
+      }));`),
+  );
+});
+
+test('wraps a JSON file with the static Hermes module factory', () => {
+  const source = JSON.stringify({foo: 'foo', baz: true}, null, 2);
+
+  const wrappedJson = JsFileWrapping.wrapJson(
+    source,
+    defaultGlobalPrefix,
+    /* unstable_useStaticHermesModuleFactory */ true,
+  );
+
+  expect(comparableCode(wrappedJson)).toEqual(
+    comparableCode(
+      `__d($SHBuiltin.moduleFactory(_$$_METRO_MODULE_ID, function(global, require, _importDefaultUnused, _importAllUnused, module, exports, _dependencyMapUnused) {
+      module.exports = {
+        "foo": "foo",
+        "baz": true
+      };
+    }));`,
+    ),
+  );
+});
+
 function astFromCode(code: string) {
   return babylon.parse(code, {
     plugins: ['dynamicImport'],
