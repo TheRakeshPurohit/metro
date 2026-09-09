@@ -424,6 +424,20 @@ describe('inline constants', () => {
     });
   });
 
+  test('does not mutate ObjectMethod when bailing out on impure initializers', () => {
+    const code = `
+      var value = Platform.select({
+        ios() { return 1; },
+        android: sideEffect(),
+      });
+    `;
+
+    compare([inlinePlugin], code, code, {
+      inlinePlatform: true,
+      platform: 'ios',
+    });
+  });
+
   test('inlines Platform.select in the code when using an ObjectMethod', () => {
     const code = `
       function a() {
