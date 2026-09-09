@@ -138,9 +138,7 @@ export default function inlinePlugin(
         if (isObjectProperty(p)) {
           return p.value;
         } else if (isObjectMethod(p)) {
-          // Clone: toExpression mutates in place, e.g. `ios() {}` would be
-          // left mutated if the purity check below bails out.
-          return t.toExpression(t.cloneNode(p));
+          return t.toExpression(p);
         }
       }
     }
