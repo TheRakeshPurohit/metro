@@ -1,4 +1,4 @@
-name: facebook/metro/build-test-and-deploy
+name: react/metro/build-test-and-deploy
 on:
   pull_request:
     types: [opened, synchronize]

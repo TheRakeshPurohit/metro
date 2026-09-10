@@ -53,7 +53,7 @@ The request is resolved to a built-in empty module, namely the one specified in 
 
 :::note
 
-These are the rules that Metro's default resolver follows. Refer to [`metro-resolver`'s source code](https://github.com/facebook/metro/blob/main/packages/metro-resolver/src/resolve.js) for more details.
+These are the rules that Metro's default resolver follows. Refer to [`metro-resolver`'s source code](https://github.com/react/metro/blob/main/packages/metro-resolver/src/resolve.js) for more details.
 
 :::
 

@@ -23,7 +23,7 @@ The core team will be monitoring for pull requests. When we get one, we'll run s
 1. Fork the repo and create your branch from `main`.
 
    ```sh
-   git clone https://github.com/facebook/metro
+   git clone https://github.com/react/metro
    cd metro
    git checkout -b my_branch
    ```
